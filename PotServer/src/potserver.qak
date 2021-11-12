@@ -1,0 +1,56 @@
+System potserver
+Event loadcompletevent : loadcompletevent(X)
+Event sensorError : sensorError(SENSOR_ID, DESC)
+
+Context ctxpotserver ip[host="localhost" port=9000]
+
+QActor manageractor context ctxpotserver {
+	State s0 initial {
+		[# 
+			`it.greengers`.potserver.core.CurrentPlant.loadCurrentPlant()
+		#]
+		emit loadcompletevent:loadcompletevent(OK)
+	}
+}
+
+QActor temperatureactor context ctxpotserver {
+	[# 
+		val currentPlant = `it.greengers`.potserver.core.CurrentPlant.currentPlant
+		var tempSensor : InputSensor<Double>
+	#]
+	
+	State s0 initial {
+		println("TemperatureActor: started")
+	}
+	
+}
+
+QActor humidityactor context ctxpotserver {
+	[# 
+		val currentPlant = `it.greengers`.potserver.core.CurrentPlant.currentPlant
+	#]
+	
+	State s0 initial {
+		println("HumidityActor: started")
+	}
+	
+}
+
+QActor brightnessactor context ctxpotserver {
+	[# 
+		val currentPlant = `it.greengers`.potserver.core.CurrentPlant.currentPlant
+	#]
+	
+	State s0 initial {
+		println("BrightnessActor: started")
+	}
+	
+}
+
+QActor batteryactor context ctxpotserver {
+	
+	State s0 initial {
+		println("BatteryActor: started")
+	}
+	
+}
