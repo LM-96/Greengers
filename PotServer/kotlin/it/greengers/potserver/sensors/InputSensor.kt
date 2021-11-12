@@ -1,12 +1,18 @@
 package it.greengers.potserver.sensors
 
-interface InputSensor<T> {
+import java.io.IOException
+import kotlin.jvm.Throws
 
-    val sensorName : String
-    val id : String
+abstract class InputSensor<T>(id : String, name : String, enabled : Boolean = true) : Sensor(id, name, enabled) {
 
-    fun start()
-    fun stop()
+    @Throws(IOException::class)
+    protected abstract fun handleReadRequest() : T
 
-    fun read() : T
+    @Throws(IllegalStateException::class, IOException::class)
+    fun read() : T {
+        if(enabled) {
+            return handleReadRequest()
+        }
+        throw IllegalStateException("Sensor [${toString()}] is disabled. Cannot read.")
+    }
 }

@@ -18,7 +18,7 @@ class Temperatureactor ( name: String, scope: CoroutineScope  ) : ActorBasicFsm(
 	override fun getBody() : (ActorBasicFsm.() -> Unit){
 		 
 				val currentPlant = `it.greengers`.potserver.core.CurrentPlant.currentPlant
-				var tempSensor : InputSensor<Double>
+				var tempSensor : `it.greengers`.potserver.sensors.InputSensor<Double>
 		return { //this:ActionBasciFsm
 				state("s0") { //this:State
 					action { //it:State

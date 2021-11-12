@@ -16,7 +16,7 @@ QActor manageractor context ctxpotserver {
 QActor temperatureactor context ctxpotserver {
 	[# 
 		val currentPlant = `it.greengers`.potserver.core.CurrentPlant.currentPlant
-		var tempSensor : InputSensor<Double>
+		var tempSensor : `it.greengers`.potserver.sensors.InputSensor<Double>
 	#]
 	
 	State s0 initial {

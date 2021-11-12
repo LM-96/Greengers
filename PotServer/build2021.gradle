@@ -84,6 +84,7 @@ compileTestKotlin {
 
 sourceSets {
     main.java.srcDirs += 'src'
+    main.java.srcDirs += 'kotlin'
     main.java.srcDirs += 'resources'
     test.java.srcDirs += 'test'		//test is specific
 }
@@ -94,7 +95,7 @@ eclipse {
     }	
  }
  
-mainClassName ='it.unibo.ctxbasicrobot.MainCtxbasicrobotKt' //'robotNano.SonarHCSR04SupportActorKt'  
+mainClassName ='it.unibo.ctxpotserver.MainCtxpotserver' //'robotNano.SonarHCSR04SupportActorKt'
 
 jar {
     println("building jar")

@@ -11,4 +11,8 @@ object SensorFactory {
         }
     }
 
+    fun getInputSensors() : List<InputSensor<Any>> {
+        return listOf()
+    }
+
 }
