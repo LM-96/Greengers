@@ -16,12 +16,60 @@ class Manageractor ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( nam
 	@kotlinx.coroutines.ObsoleteCoroutinesApi
 	@kotlinx.coroutines.ExperimentalCoroutinesApi			
 	override fun getBody() : (ActorBasicFsm.() -> Unit){
+		
+				val sensors = it.greengers.potserver.sensors.SensorFactory.getSensors()
+				val loadcount = it.greengers.potserver.utils.LoadCounter(sensors.map{it.id})
 		return { //this:ActionBasciFsm
 				state("s0") { //this:State
 					action { //it:State
 						 
 									`it.greengers`.potserver.core.CurrentPlant.loadCurrentPlant()
-						emit("loadcompletevent", "loadcompletevent(OK)" ) 
+									val err = `it.greengers`.potserver.core.Settings.load()
+									if(err != null) {
+										
+									}
+						println("$name | Started")
+						emit("loadComplete", "loadComplete(OK)" ) 
+					}
+					 transition( edgeName="goto",targetState="waitsensors", cond=doswitchGuarded({ loadcount.unloadedElements() > 0  
+					}) )
+					transition( edgeName="goto",targetState="work", cond=doswitchGuarded({! ( loadcount.unloadedElements() > 0  
+					) }) )
+				}	 
+				state("waitsensors") { //this:State
+					action { //it:State
+						println("$name | Waiting for sensor start [${loadcount.unloadedElements()} / ${loadcount.loadedElements()} remaining]")
+					}
+					 transition(edgeName="t0",targetState="sensorstarted",cond=whenDispatch("sensorStarted"))
+					transition(edgeName="t1",targetState="sensorerror",cond=whenDispatch("sensorError"))
+				}	 
+				state("sensorstarted") { //this:State
+					action { //it:State
+						if( checkMsgContent( Term.createTerm("sensorStarted(SENSOR_ID)"), Term.createTerm("sensorStarted"), 
+						                        currentMsg.msgContent()) ) { //set msgArgList
+								println("$name in ${currentState.stateName} | $currentMsg")
+								 loadcount.setLoaded(payloadArg(0))  
+						}
+					}
+					 transition( edgeName="goto",targetState="waitsensors", cond=doswitchGuarded({ loadcount.unloadedElements() > 0  
+					}) )
+					transition( edgeName="goto",targetState="work", cond=doswitchGuarded({! ( loadcount.unloadedElements() > 0  
+					) }) )
+				}	 
+				state("sensorerror") { //this:State
+					action { //it:State
+						emit("criticalErr", "criticalErr(SHUTDOWN)" ) 
+					}
+					 transition( edgeName="goto",targetState="exit", cond=doswitch() )
+				}	 
+				state("work") { //this:State
+					action { //it:State
+						println("$name | Waiting...")
+					}
+				}	 
+				state("exit") { //this:State
+					action { //it:State
+						println("$name | Terminate")
 					}
 				}	 
 			}

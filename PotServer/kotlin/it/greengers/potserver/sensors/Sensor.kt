@@ -30,4 +30,25 @@ abstract class Sensor(
         return Error("Sensor already disabled")
     }
 
+    override fun toString(): String {
+        return "Sensor(sensorName='$sensorName', id='$id', enabled=$enabled)"
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is Sensor) return false
+
+        if (sensorName != other.sensorName) return false
+        if (id != other.id) return false
+        if (enabled != other.enabled) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = sensorName.hashCode()
+        result = 31 * result + id.hashCode()
+        return result
+    }
+
 }

@@ -1,5 +1,6 @@
 package it.greengers.potserver.plants
 
+import it.greengers.potserver.sensors.SensorType
 import it.greengers.potserver.sensors.ValueRange
 
 class OptimalPlantCondition(

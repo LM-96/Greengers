@@ -1,54 +1,286 @@
 System potserver
-Event loadcompletevent : loadcompletevent(X)
-Event sensorError : sensorError(SENSOR_ID, DESC)
 
+//EVENTS *****************************************************************
+Event loadComplete : loadComplete(X)
+Event criticalErr : criticalErr(X)
+Event valueOutOfRange : valueOutOfRange(SENSOR_ID, CURR_VALUE)
+
+//DISPATCH ***************************************************************
+Dispatch sensorError : sensorError(SENSOR_ID, DESC)
+Dispatch sensorStarted : sensorStarted(SENSOR_ID)
+
+//REQUEST/REPLY **********************************************************
+Request sensorRead : sensorRead(SENSOR_ID)
+Reply readedValue : readedValue(SENSOR_ID, VALUE)
+
+//CONTEXT ****************************************************************
 Context ctxpotserver ip[host="localhost" port=9000]
 
 QActor manageractor context ctxpotserver {
+	[#
+		val sensors = it.greengers.potserver.sensors.SensorFactory.getSensors()
+		val loadcount = it.greengers.potserver.utils.LoadCounter(sensors.map{it.id})
+	#]
+	
 	State s0 initial {
 		[# 
 			`it.greengers`.potserver.core.CurrentPlant.loadCurrentPlant()
+			val err = `it.greengers`.potserver.core.Settings.load()
+			if(err != null) {
+				
+			}
 		#]
-		emit loadcompletevent:loadcompletevent(OK)
+		println("$name | Started")
+		emit loadComplete:loadComplete(OK)
+	} Goto waitsensors if [# loadcount.unloadedElements() > 0 #] else work
+	
+	State waitsensors {
+		println("$name | Waiting for sensor start [${loadcount.unloadedElements()} / ${loadcount.loadedElements()} remaining]")
+	} Transition t 
+		whenMsg sensorStarted -> sensorstarted
+		whenMsg sensorError -> sensorerror
+	
+	State sensorstarted {
+		onMsg(sensorStarted:sensorStarted) {
+			printCurrentMessage
+			[# loadcount.setLoaded(payloadArg(0)) #]
+		}
+	} Goto waitsensors if [# loadcount.unloadedElements() > 0 #] else work
+	
+	State sensorerror {
+		emit criticalErr : criticalErr(SHUTDOWN)
+	} Goto exit
+	
+	State work {
+		println("$name | Waiting...")
+	}
+	
+	State exit {
+		println("$name | Terminate")
 	}
 }
 
 QActor temperatureactor context ctxpotserver {
 	[# 
-		val currentPlant = `it.greengers`.potserver.core.CurrentPlant.currentPlant
-		var tempSensor : `it.greengers`.potserver.sensors.InputSensor<Double>
+		lateinit var SENSOR_ID : String
+		val CURRENT_PLANT = `it.greengers`.potserver.core.CurrentPlant.currentPlant
+		lateinit var SENSOR : `it.greengers`.potserver.sensors.InputSensor<Double>
+		var CURR_VALUE : Double = 0.0
+		var POLLING_TIME : Long = 5000
+		var ERROR_FOUND = false
 	#]
 	
 	State s0 initial {
 		println("TemperatureActor: started")
+	} Transition t whenEvent loadComplete -> getSensor
+	
+	State getSensor {
+		[# 
+			ERROR_FOUND = false
+			val loadId = `it.greengers`.potserver.sensors.SensorFactory.getMainId(`it.greengers`.potserver.sensors.SensorType.TEMPERATURE)
+			if(loadId == null) {
+				ERROR_FOUND = true
+		#]
+				forward manageractor -m sensorError : sensorError(TEMPERATUREACTOR, NO_ID_FOUND)
+		[#
+			} else {
+				SENSOR_ID = loadId!!
+			
+				val loadSensor = `it.greengers`.potserver.sensors.SensorFactory.getInputSensor<Double>(SENSOR_ID)
+				if(loadSensor == null) {
+		#]
+					forward manageractor -m sensorError : sensorError($SENSOR_ID, ERROR_LOADING)
+		[#
+				}  else {
+					SENSOR = loadSensor!!
+				}
+		#]
+		
+			forward manageractor -m sensorStarted : sensorStarted($SENSOR_ID) [# } #]
+	} Goto work if [# ERROR_FOUND == false #] else exit
+	
+	State work {
+		println("$name | Working")
+	} Transition t0
+		whenTimeVar POLLING_TIME -> polling
+		whenRequest sensorRead -> handleReadRequest
+		whenEvent criticalErr -> exit
+		
+	State polling {
+		[# CURR_VALUE = SENSOR.read() #]
+		println("$name | Read temperature from sensor [$CURR_VALUE]")
+		
+		[# if(CURRENT_PLANT.optimalPlantCondition.temperatureRange.isOutOfRange(CURR_VALUE)) { #]
+				emit valueOutOfRange : valueOutOfRange($SENSOR_ID, $CURR_VALUE)
+		[# } #]
+	} Goto work
+	
+	State handleReadRequest {
+		onMsg(sensorRead : sensorRead(SENSOR_ID)) {
+			printCurrentMessage
+			[# if(payloadArg(0) == SENSOR_ID) {
+					CURR_VALUE = SENSOR.read()
+			#]
+					println("$name | Read temperature from sensor [$CURR_VALUE]")
+					replyTo sensorRead with readedValue : readedValue($SENSOR_ID, $CURR_VALUE)
+			[# } #]
+		}		
+	} Goto work
+	
+	State exit {
+		println("$name | exit")
 	}
 	
 }
 
 QActor humidityactor context ctxpotserver {
 	[# 
-		val currentPlant = `it.greengers`.potserver.core.CurrentPlant.currentPlant
+		lateinit var SENSOR_ID : String
+		val CURRENT_PLANT = `it.greengers`.potserver.core.CurrentPlant.currentPlant
+		lateinit var SENSOR : `it.greengers`.potserver.sensors.InputSensor<Double>
+		var CURR_VALUE : Double = 0.0
+		var POLLING_TIME : Long = 5000
+		var ERROR_FOUND = false
 	#]
 	
 	State s0 initial {
-		println("HumidityActor: started")
+		println("TemperatureActor: started")
+	} Transition t whenEvent loadComplete -> getSensor
+	
+	State getSensor {
+		[# 
+			ERROR_FOUND = false
+			val loadId = `it.greengers`.potserver.sensors.SensorFactory.getMainId(`it.greengers`.potserver.sensors.SensorType.HUMIDITY)
+			if(loadId == null) {
+				ERROR_FOUND = true
+		#]
+				forward manageractor -m sensorError : sensorError(HUMIDITYACTOR, NO_ID_FOUND)
+		[#
+			} else {
+				SENSOR_ID = loadId!!
+			
+				val loadSensor = `it.greengers`.potserver.sensors.SensorFactory.getInputSensor<Double>(SENSOR_ID)
+				if(loadSensor == null) {
+		#]
+					forward manageractor -m sensorError : sensorError($SENSOR_ID, ERROR_LOADING)
+		[#
+				}  else {
+					SENSOR = loadSensor!!
+				}
+		#]
+		
+			forward manageractor -m sensorStarted : sensorStarted($SENSOR_ID) [# } #]
+	} Goto work if [# ERROR_FOUND == false #] else exit
+	
+	State work {
+		println("$name | Working")
+	} Transition t0
+		whenTimeVar POLLING_TIME -> polling
+		whenRequest sensorRead -> handleReadRequest
+		whenEvent criticalErr -> exit
+		
+	State polling {
+		[# CURR_VALUE = SENSOR.read() #]
+		println("$name | Read humidity from sensor [$CURR_VALUE]")
+		
+		[# if(CURRENT_PLANT.optimalPlantCondition.humidityRange.isOutOfRange(CURR_VALUE)) { #]
+				emit valueOutOfRange : valueOutOfRange($SENSOR_ID, $CURR_VALUE)
+		[# } #]
+	} Goto work
+	
+	State handleReadRequest {
+		onMsg(sensorRead : sensorRead(SENSOR_ID)) {
+			printCurrentMessage
+			[# if(payloadArg(0) == SENSOR_ID) {
+					CURR_VALUE = SENSOR.read()
+			#]
+					println("$name | Read humidity from sensor [$CURR_VALUE]")
+					replyTo sensorRead with readedValue : readedValue($SENSOR_ID, $CURR_VALUE)
+			[# } #]
+		}		
+	} Goto work
+	
+	State exit {
+		println("$name | exit")
 	}
 	
 }
 
 QActor brightnessactor context ctxpotserver {
 	[# 
-		val currentPlant = `it.greengers`.potserver.core.CurrentPlant.currentPlant
+		lateinit var SENSOR_ID : String
+		val CURRENT_PLANT = `it.greengers`.potserver.core.CurrentPlant.currentPlant
+		lateinit var SENSOR : `it.greengers`.potserver.sensors.InputSensor<Double>
+		var CURR_VALUE : Double = 0.0
+		var POLLING_TIME : Long = 5000
+		var ERROR_FOUND = false
 	#]
 	
 	State s0 initial {
-		println("BrightnessActor: started")
+		println("TemperatureActor: started")
+	} Transition t whenEvent loadComplete -> getSensor
+	
+	State getSensor {
+		[# 
+			ERROR_FOUND = false
+			val loadId = `it.greengers`.potserver.sensors.SensorFactory.getMainId(`it.greengers`.potserver.sensors.SensorType.BRIGHTNESS)
+			if(loadId == null) {
+				ERROR_FOUND = true
+		#]
+				forward manageractor -m sensorError : sensorError(BRIGHTNESSACTOR, NO_ID_FOUND)
+		[#
+			} else {
+				SENSOR_ID = loadId!!
+			
+				val loadSensor = `it.greengers`.potserver.sensors.SensorFactory.getInputSensor<Double>(SENSOR_ID)
+				if(loadSensor == null) {
+		#]
+					forward manageractor -m sensorError : sensorError($SENSOR_ID, ERROR_LOADING)
+		[#
+				}  else {
+					SENSOR = loadSensor!!
+				}
+		#]
+		
+			forward manageractor -m sensorStarted : sensorStarted($SENSOR_ID) [# } #]
+	} Goto work if [# ERROR_FOUND == false #] else exit
+	
+	State work {
+		println("$name | Working")
+	} Transition t0
+		whenTimeVar POLLING_TIME -> polling
+		whenRequest sensorRead -> handleReadRequest
+		whenEvent criticalErr -> exit
+		
+	State polling {
+		[# CURR_VALUE = SENSOR.read() #]
+		println("$name | Read brightness from sensor [$CURR_VALUE]")
+		
+		[# if(CURRENT_PLANT.optimalPlantCondition.brightnessRange.isOutOfRange(CURR_VALUE)) { #]
+				emit valueOutOfRange : valueOutOfRange($SENSOR_ID, $CURR_VALUE)
+		[# } #]
+	} Goto work
+	
+	State handleReadRequest {
+		onMsg(sensorRead : sensorRead(SENSOR_ID)) {
+			printCurrentMessage
+			[# if(payloadArg(0) == SENSOR_ID) {
+					CURR_VALUE = SENSOR.read()
+			#]
+					println("$name | Read brightness from sensor [$CURR_VALUE]")
+					replyTo sensorRead with readedValue : readedValue($SENSOR_ID, $CURR_VALUE)
+			[# } #]
+		}		
+	} Goto work
+	
+	State exit {
+		println("$name | exit")
 	}
 	
 }
 
 QActor batteryactor context ctxpotserver {
-	
+
 	State s0 initial {
 		println("BatteryActor: started")
 	}
