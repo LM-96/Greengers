@@ -7,18 +7,19 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.coroutineScope
 import java.net.SocketAddress
 import kotlin.coroutines.EmptyCoroutineContext
+import kotlin.reflect.KSuspendFunction1
 
 interface PotConnection {
 
     val destinationName : String
-
-    var onMessage : ((PotMessage) -> Unit)
 
     suspend fun connect(ip : String, port : Int) : Error?
     suspend fun connect(address : SocketAddress) : Error?
     suspend fun isConnected() : Boolean
     suspend fun getConnectedAdress() : SocketAddress?
     suspend fun disconnect() : Error?
+    suspend fun addCallbackOnMessage(callback: KSuspendFunction1<PotMessage, Unit>)
+    suspend fun removeCallbackOnMessage(callback: KSuspendFunction1<PotMessage, Unit>)
 
     suspend fun sendAsyncMessage(msg : PotMessage) : Error?
     suspend fun sendAsyncCommunication(communicationType : String, communication : String) : Error?

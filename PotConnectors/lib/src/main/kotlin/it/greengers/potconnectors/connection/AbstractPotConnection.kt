@@ -7,11 +7,12 @@ import it.unibo.kactor.ApplMessageType
 import it.unibo.kactor.MsgUtil
 import java.net.InetSocketAddress
 import java.net.SocketAddress
+import kotlin.reflect.KSuspendFunction1
 
 abstract class AbstractPotConnection : PotConnection {
 
-    private var connectedAddress : SocketAddress? = null
-    override var onMessage: ((PotMessage) -> Unit) = {}
+    protected var connectedAddress : SocketAddress? = null
+    val onMessage: MutableList<KSuspendFunction1<PotMessage, Unit>> = mutableListOf()
 
     abstract suspend fun doConnect(address: SocketAddress) : Error?
     abstract suspend fun doDisconnect() : Error?
@@ -22,6 +23,14 @@ abstract class AbstractPotConnection : PotConnection {
         } catch (e : Exception) {
             Error(e)
         }
+    }
+
+    override suspend fun addCallbackOnMessage(callback: KSuspendFunction1<PotMessage, Unit>) {
+        onMessage.add(callback)
+    }
+
+    override suspend fun removeCallbackOnMessage(callback: KSuspendFunction1<PotMessage, Unit>) {
+        onMessage.remove(callback)
     }
 
     override suspend fun connect(address: SocketAddress): Error? {
