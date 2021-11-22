@@ -1,5 +1,6 @@
 package it.greengers.potconnectors.connection
 
+import it.greengers.potconnectors.dns.PotDNS
 import it.greengers.potconnectors.messages.*
 import it.greengers.potconnectors.utils.FunResult
 import it.unibo.kactor.ApplMessage
@@ -23,6 +24,14 @@ abstract class AbstractPotConnection : PotConnection {
         } catch (e : Exception) {
             Error(e)
         }
+    }
+
+    override suspend fun connect(dns: PotDNS): Error? {
+        val address = dns.resolve(destinationName)
+        return if(address.thereIsError())
+            address.error
+        else
+            connect(address.res!!)
     }
 
     override suspend fun addCallbackOnMessage(callback: KSuspendFunction1<PotMessage, Unit>) {

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9b1a0c57-8089-43bb-9b6f-0c79997dc2d2" name="Changes" comment="" />
+    <list default="true" id="c5641061-d199-4651-bbd5-0410fc1f33e3" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -50,12 +50,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
-        <option value="Kotlin Enum" />
-        <option value="Kotlin Object" />
         <option value="Kotlin Class" />
-        <option value="Kotlin File" />
-        <option value="Kotlin Interface" />
       </list>
     </option>
   </component>
@@ -63,7 +58,7 @@
     <option name="LAST_EDITED_MODULE_NAME" />
     <option name="LAST_EDITED_TAB_NAME" />
   </component>
-  <component name="ProjectId" id="20oVaDc6hlpyTYZIfqfuJ6sGuHs" />
+  <component name="ProjectId" id="21HzYgoH6LZWJ3AAP3Ou3kOoc24" />
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
       <profile-state />
@@ -85,17 +80,6 @@
     <property name="MemberChooser.sorted" value="false" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../Documenti/GitHub/Greengers/PotConnectors" />
-    <property name="project.structure.last.edited" value="Libraries" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.4805599" />
-    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-  </component>
-  <component name="RecentsManager">
-    <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
-      <recent name="it.greengers.potserver.proxy" />
-      <recent name="it.greengers.potserver.core" />
-    </key>
   </component>
   <component name="RunManager">
     <configuration default="true" type="Applet" factoryName="Applet">
@@ -137,13 +121,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ProvaKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="it.greengers.potserver.proxy.ProvaKt" />
-      <module name="PotServer" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration default="true" type="Remote">
       <option name="USE_SOCKET_TRANSPORT" value="true" />
       <option name="SERVER_MODE" value="false" />
@@ -155,11 +132,6 @@
         <option name="BuildArtifacts" enabled="false" />
       </method>
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Kotlin.ProvaKt" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration" maxAnnotateRevisions="500">
@@ -178,11 +150,11 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="9b1a0c57-8089-43bb-9b6f-0c79997dc2d2" name="Changes" comment="" />
-      <created>1636710989422</created>
+      <changelist id="c5641061-d199-4651-bbd5-0410fc1f33e3" name="Changes" comment="" />
+      <created>1637612850167</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1636710989422</updated>
+      <updated>1637612850167</updated>
     </task>
     <servers />
   </component>

@@ -24,7 +24,7 @@ sourceCompatibility = 1.8
 repositories {
     mavenCentral()
     jcenter()
-    flatDir {   dirs '../unibolibs'	 }
+    flatDir {   dirs '../unibolibs', '../klibs'	 }
 }
 
 dependencies {
@@ -81,6 +81,7 @@ dependencies {
 	compile name: 'IssActorKotlinRobotSupport-2.0'
 	//BLS
 	//compile name: 'it.unibo.bls19Local-1.0'
+    compile name: 'PotConnectors-1.0'
 }
 
 compileKotlin {

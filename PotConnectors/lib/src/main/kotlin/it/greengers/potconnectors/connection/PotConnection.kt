@@ -1,5 +1,7 @@
 package it.greengers.potconnectors.connection
 
+import it.greengers.potconnectors.dns.LocalPotDNS
+import it.greengers.potconnectors.dns.PotDNS
 import it.greengers.potconnectors.messages.*
 import it.greengers.potconnectors.utils.FunResult
 import it.unibo.kactor.ApplMessageType
@@ -14,6 +16,7 @@ interface PotConnection {
     val destinationName : String
 
     suspend fun connect(ip : String, port : Int) : Error?
+    suspend fun connect(dns : PotDNS = LocalPotDNS) : Error?
     suspend fun connect(address : SocketAddress) : Error?
     suspend fun isConnected() : Boolean
     suspend fun getConnectedAdress() : SocketAddress?
