@@ -65,33 +65,27 @@ class StateRequestUtil (
         val res = try {
             val received = chan.receive()
             LOGGER.info("Received response message from [${potConnection.getConnectedAdress()}]")
-            FunResult(res = received as StateReplyMessage)
+            FunResult(received as StateReplyMessage)
         } catch(e : Exception) {
             LOGGER.error(e)
-            FunResult(error = Error(e))
+            FunResult(Error(e))
         }
         chan.close()
 
         return res
     }
 
-    suspend fun performActorRequest(msg : String) : FunResult<ActorMessage> {
+    suspend fun performActorRequest(applMsg : ApplMessage) : FunResult<ActorMessage> {
 
-        LOGGER.info("Performing actor request [$msg] to [${potConnection.getConnectedAdress()}]...")
-        val applMsg = try {
-            ApplMessage(msg)
-        } catch (e : Exception) {
-            LOGGER.error(e)
-            return FunResult(error = Error(e))
-        }
+        LOGGER.info("Performing actor request [$applMsg] to [${potConnection.getConnectedAdress()}]...")
 
         if(!applMsg.isRequest()) {
-            LOGGER.warn("The message [$msg] is not an actor request")
-            return FunResult(error = Error("The message [$msg] is not an actor request"))
+            LOGGER.warn("The message [$applMsg] is not an actor request")
+            return FunResult(Error("The message [$applMsg] is not an actor request"))
         }
 
-        val err = potConnection.sendAsyncRawActorMessage(msg)
-        if(err != null) return FunResult(error = err)
+        val err = potConnection.sendAsyncActorMessage(applMsg)
+        if(err != null) return FunResult(err)
 
         val res = try {
             val received = chan.receive()
@@ -99,7 +93,7 @@ class StateRequestUtil (
             FunResult(received as ActorMessage)
         } catch (e : Exception) {
             LOGGER.error(e)
-            FunResult(error = Error(e))
+            FunResult(Error(e))
         }
         chan.close()
 

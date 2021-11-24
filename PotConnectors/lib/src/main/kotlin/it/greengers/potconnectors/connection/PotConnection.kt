@@ -4,6 +4,7 @@ import it.greengers.potconnectors.dns.LocalPotDNS
 import it.greengers.potconnectors.dns.PotDNS
 import it.greengers.potconnectors.messages.*
 import it.greengers.potconnectors.utils.FunResult
+import it.unibo.kactor.ApplMessage
 import it.unibo.kactor.ApplMessageType
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.coroutineScope
@@ -28,14 +29,17 @@ interface PotConnection {
     suspend fun sendAsyncCommunication(communicationType : String, communication : String) : Error?
     suspend fun sendAsyncRawActorMessage(msg : String) : Error?
     suspend fun sendAsyncActorMessage(destActor : String, msgType : ApplMessageType, msgName : String, vararg payloadArgs : String) : Error?
+    suspend fun sendAsyncActorMessage(applMessage: ApplMessage) : Error?
     suspend fun sendAsyncStateRequest() : Error?
     suspend fun sendAsyncStateReply(temperature : Double, humidity : Double, brightness : Double, battery : Double) : Error?
     suspend fun sendAsyncValueOutOfRange(valueType : String, value : Any) : Error?
     suspend fun sendAsyncError(errorDescription : String) : Error?
     suspend fun sendAsyncError(e : Throwable) : Error?
+    suspend fun sendUnsupportedOperationMessage(explanation : String, referredMessage : PotMessage? = null) : Error?
 
     suspend fun performStateRequest() : FunResult<StateReplyMessage>
     suspend fun performRawActorRequest(msg : String) : FunResult<ActorMessage>
     suspend fun performActorRequest(destActor : String, msgName : String, vararg payloadArgs : String) : FunResult<ActorMessage>
+    suspend fun performActorRequest(applMessage : ApplMessage) : FunResult<ActorMessage>
 
 }

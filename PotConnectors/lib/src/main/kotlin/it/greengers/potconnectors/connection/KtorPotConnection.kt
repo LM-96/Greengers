@@ -10,6 +10,8 @@ import it.greengers.potconnectors.messages.PotMessage
 import it.greengers.potconnectors.messages.StateReplyMessage
 import it.greengers.potconnectors.utils.FunResult
 import it.greengers.potconnectors.utils.StateRequestUtil
+import it.greengers.potconnectors.utils.withExceptionToError
+import it.unibo.kactor.ApplMessage
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
 import org.apache.logging.log4j.kotlin.logger
@@ -43,7 +45,7 @@ class KtorPotConnection(
     private val requestUtil = StateRequestUtil(this)
 
     override suspend fun doConnect(address: SocketAddress): Error? {
-        try {
+        return withExceptionToError(LOGGER) {
             LOGGER.info("Connecting to [$address]")
             socket = aSocket(ActorSelectorManager(Dispatchers.IO)).tcp().connect(address)
             input = socket!!.openReadChannel()
@@ -51,12 +53,7 @@ class KtorPotConnection(
             LOGGER.info("Connected to [$address]")
 
             job = launchListener()
-        } catch (e : Exception) {
-            LOGGER.error(e)
-            return Error(e)
         }
-
-        return null
     }
 
     private fun launchListener() : Job {
@@ -86,7 +83,7 @@ class KtorPotConnection(
     }
 
     override suspend fun doDisconnect(): Error? {
-        return try {
+        return withExceptionToError(LOGGER) {
             LOGGER.info("Disconnecting from  [$connectedAddress]")
             socket?.close()
             socket?.dispose()
@@ -94,23 +91,14 @@ class KtorPotConnection(
             input = null
             output = null
             LOGGER.info("Disconnected from [$connectedAddress]")
-
-            null
-        } catch (e : Exception) {
-            LOGGER.error(e)
-            Error(e)
         }
     }
 
     override suspend fun sendAsyncMessage(msg: PotMessage): Error? {
-        try {
+        return withExceptionToError(LOGGER) {
             output?.writeStringUtf8(gson.toJson(msg))?: return Error("Not connected")
             LOGGER.info("Sent message [$msg]")
-        } catch (e : Exception) {
-            LOGGER.error("Error sending message [$msg]: $e")
-            return Error(e)
         }
-        return null
     }
 
     override suspend fun performStateRequest(): FunResult<StateReplyMessage> {
@@ -119,10 +107,10 @@ class KtorPotConnection(
             .performStateRequestAndWaitResponse()
     }
 
-    override suspend fun performRawActorRequest(msg: String): FunResult<ActorMessage> {
+    override suspend fun performActorRequest(applMessage: ApplMessage): FunResult<ActorMessage> {
         return requestUtil
             .attachForSingleRequest()
-            .performActorRequest(msg)
+            .performActorRequest(applMessage)
     }
 
 }

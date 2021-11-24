@@ -4,6 +4,8 @@ import it.greengers.potconnectors.utils.FunResult
 import java.io.InputStream
 import java.io.OutputStream
 import java.net.SocketAddress
+import java.nio.file.Files
+import java.nio.file.Paths
 
 interface PotDNS {
 

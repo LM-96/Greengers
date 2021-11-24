@@ -1,0 +1,3 @@
+2021-11-24 01:11:52.788 [main] ERROR main - java.lang.ArithmeticException: / by zero
+	at it.greengers.potconnectors.utils.ProvaKt.main(Prova.kt:7)
+

@@ -1,8 +1,9 @@
 package it.greengers.potconnectors.connection
 
+import it.greengers.potconnectors.dns.LocalPotDNS
 import it.greengers.potconnectors.dns.PotDNS
 import it.greengers.potconnectors.messages.*
-import it.greengers.potconnectors.utils.FunResult
+import it.greengers.potconnectors.utils.*
 import it.unibo.kactor.ApplMessage
 import it.unibo.kactor.ApplMessageType
 import it.unibo.kactor.MsgUtil
@@ -19,11 +20,7 @@ abstract class AbstractPotConnection : PotConnection {
     abstract suspend fun doDisconnect() : Error?
 
     override suspend fun connect(ip: String, port: Int): Error? {
-        return try {
-            connect(InetSocketAddress(ip, port))
-        } catch (e : Exception) {
-            Error(e)
-        }
+        return withExceptionToError { connect(InetSocketAddress(ip, port)) }
     }
 
     override suspend fun connect(dns: PotDNS): Error? {
@@ -46,27 +43,23 @@ abstract class AbstractPotConnection : PotConnection {
         if(connectedAddress != null)
             return Error("Already connected. Please disconnect before")
 
-        return try {
+        return withExceptionAndErrorToError {
             val res = doConnect(address)
             if(res == null)
                 connectedAddress = address
 
             res
-        } catch (e : Exception) {
-            Error(e)
         }
     }
 
     override suspend fun disconnect(): Error? {
         if(connectedAddress != null) {
-            return try {
+            withExceptionAndErrorToError {
                 val res = doDisconnect()
                 if(res == null)
                     connectedAddress = null
 
                 res
-            } catch (e : Exception) {
-                Error(e)
             }
         }
 
@@ -87,33 +80,27 @@ abstract class AbstractPotConnection : PotConnection {
         msgName: String,
         vararg payloadArgs: String
     ): Error? {
-        val content = "$msgName(${payloadArgs.map { it.trim() }.joinToString(separator = ",")})"
-        val applMsg : ApplMessage? = when(msgType) {
-            ApplMessageType.dispatch ->
-                MsgUtil.buildDispatch(InfoPoint.getApplicationHostName(), msgName, content, destActor)
-            ApplMessageType.event ->
-                MsgUtil.buildEvent(InfoPoint.getApplicationHostName(), msgName, content)
-            ApplMessageType.request ->
-                MsgUtil.buildRequest(InfoPoint.getApplicationHostName(), msgName, content, destActor)
-            ApplMessageType.reply ->
-                MsgUtil.buildReply(InfoPoint.getApplicationHostName(), msgName, content, destActor)
+        val applMsg = buildApplMessage(destActor, msgType, msgName)
+        if(applMsg.thereIsError())
+            return applMsg.error
 
-            else -> {return Error("Unsupported ApplMessageType")}
-        }
+        return sendAsyncMessage(buildActorMessage(applMsg.res!!, destinationName))
+    }
 
-        return sendAsyncMessage(ActorMessage(destinationName, InfoPoint.getApplicationHostName(), applMsg.toString()))
+    override suspend fun sendAsyncActorMessage(applMessage: ApplMessage): Error? {
+        return sendAsyncMessage(buildActorMessage(applMessage, destinationName))
     }
 
     override suspend fun sendAsyncRawActorMessage(msg: String): Error? {
-        return try {
-            sendAsyncMessage(ActorMessage(destinationName, InfoPoint.getApplicationHostName(), ApplMessage(msg).toString()))
-        } catch (e : Exception) {
-            Error("Bad actor message format")
-        }
+        val actorMsg = buildActorMessage(msg, destinationName)
+        if(actorMsg.thereIsError())
+            return actorMsg.error
+
+        return sendAsyncMessage(actorMsg.res!!)
     }
 
     override suspend fun sendAsyncCommunication(communicationType: String, communication: String): Error? {
-        return sendAsyncMessage(CommunicationMessage(destinationName, InfoPoint.getApplicationHostName(), communicationType, communication))
+        return sendAsyncMessage(buildCommunicationMessage(communicationType, communication, destinationName))
     }
 
     override suspend fun sendAsyncStateReply(
@@ -122,23 +109,27 @@ abstract class AbstractPotConnection : PotConnection {
         brightness: Double,
         battery: Double
     ): Error? {
-        return sendAsyncMessage(StateReplyMessage(destinationName, InfoPoint.getApplicationHostName(), temperature, humidity, brightness, battery))
+        return sendAsyncMessage(buildStateReplyMessage(temperature, humidity, brightness, battery, destinationName))
     }
 
     override suspend fun sendAsyncStateRequest(): Error? {
-        return sendAsyncMessage(StateRequestMessage(destinationName, InfoPoint.getApplicationHostName()))
+        return sendAsyncMessage(buildStateRequestMessage(destinationName))
     }
 
     override suspend fun sendAsyncValueOutOfRange(valueType: String, value: Any) : Error? {
-        return sendAsyncMessage(ValueOutOfRangeMessage(destinationName, InfoPoint.getApplicationHostName(), valueType, value.toString()))
+        return sendAsyncMessage(buildValueOutOfRangeMessage(valueType, value, destinationName))
     }
 
     override suspend fun sendAsyncError(errorDescription: String) : Error? {
-        return sendAsyncMessage(ErrorMessage(destinationName, InfoPoint.getApplicationHostName(), errorDescription))
+        return sendAsyncMessage(buildErrorMessage(errorDescription, destinationName))
     }
 
     override suspend fun sendAsyncError(e: Throwable): Error? {
-        return sendAsyncError(e.localizedMessage)
+        return sendAsyncMessage(buildErrorMessage(e, destinationName))
+    }
+
+    override suspend fun sendUnsupportedOperationMessage(explanation: String, referredMessage: PotMessage?) : Error? {
+        return sendAsyncMessage(buildUnsupportedOperationMessage(explanation, referredMessage, destinationName))
     }
 
     override suspend fun performActorRequest(
@@ -146,12 +137,25 @@ abstract class AbstractPotConnection : PotConnection {
         msgName: String,
         vararg payloadArgs: String
     ): FunResult<ActorMessage> {
-        val content = "$msgName(${payloadArgs.map { it.trim() }.joinToString(separator = ",")})"
-        return try {
-            performRawActorRequest(MsgUtil.buildRequest(InfoPoint.getApplicationHostName(), msgName, content, destActor).toString())
-        } catch (e : Exception) {
-            FunResult(error = Error("Bad actor message format"))
+        val applMsg = buildApplMessage(destActor, ApplMessageType.request, msgName, *payloadArgs)
+        if(applMsg.thereIsError()) {
+            return applMsg.castWithError()
         }
+
+        return performActorRequest(applMsg.res!!)
+
+        /*
+        buildApplMessage(destActor, ApplMessageType.request, msgName, *payloadArgs)
+            .withThisIfError { return it.castWithError() }
+            .withValue { return performActorRequest(it) }*/
+    }
+
+    override suspend fun performRawActorRequest(msg: String): FunResult<ActorMessage> {
+        val applMsg = buildValidApplMessage(msg)
+        if(applMsg.thereIsError())
+            return applMsg.castWithError()
+
+        return performActorRequest(applMsg.res!!)
     }
 
 }
