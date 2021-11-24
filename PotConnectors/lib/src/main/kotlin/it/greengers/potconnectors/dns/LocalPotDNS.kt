@@ -80,7 +80,7 @@ object LocalPotDNS : PotDNS {
     }
 
     private fun makeBackup(serializableDNS: SerializableDNS) : Error? {
-        withNotNullError(createConfigDirectoryIfNotExists()) {
+        withError(createConfigDirectoryIfNotExists()) {
             return it
         }
 

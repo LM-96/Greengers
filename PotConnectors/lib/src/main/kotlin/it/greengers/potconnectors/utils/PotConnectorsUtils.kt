@@ -4,7 +4,6 @@ import it.greengers.potconnectors.dns.LocalPotDNS
 import it.unibo.kactor.ApplMessage
 import it.unibo.kactor.ApplMessageType
 import it.unibo.kactor.MsgUtil
-import org.apache.logging.log4j.kotlin.KotlinLogger
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
@@ -49,50 +48,3 @@ fun createDirectoryIfNotExists(path : Path) : Error? {
     }
 }
 
-inline fun withExceptionToError(toDo : () -> Unit) : Error? {
-    try {
-        toDo.invoke()
-    } catch (e : Exception) {
-        return Error(e.stackTraceToString())
-    }
-
-    return null
-}
-
-inline fun withExceptionToError(logger : KotlinLogger, toDo: () -> Unit) : Error? {
-    try {
-        toDo.invoke()
-    } catch (e : Exception) {
-        logger.error(e.stackTraceToString())
-        return Error(e.stackTraceToString())
-    }
-
-    return null
-}
-
-inline fun withExceptionAndErrorToError(toDo: () -> Error?) : Error? {
-    return try {
-        toDo.invoke()
-    } catch (e : Exception) {
-        Error(e.stackTraceToString())
-    }
-}
-
-inline fun withExceptionAndErrorToError(logger : KotlinLogger, toDo: () -> Error?) : Error? {
-    return try {
-        toDo.invoke()
-    } catch (e : Exception) {
-        logger.error(e.stackTraceToString())
-        Error(e.stackTraceToString())
-    }
-}
-
-inline fun withNullError(error: Error?, toDo: () -> Unit) {
-    if(error == null)
-        toDo.invoke()
-}
-
-inline fun withNotNullError(error: Error?, toDo: (Error) -> Unit) {
-    if(error != null)
-        toDo.invoke(error)
-}
