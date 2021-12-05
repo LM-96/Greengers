@@ -11,6 +11,7 @@ import it.greengers.potconnectors.messages.StateReplyMessage
 import it.greengers.potconnectors.utils.FunResult
 import it.greengers.potconnectors.utils.StateRequestUtil
 import it.greengers.potconnectors.utils.withExceptionToError
+import it.greengers.potconnectors.utils.withLoggedException
 import it.unibo.kactor.ApplMessage
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
@@ -42,7 +43,7 @@ class KtorPotConnection(
     private var input : ByteReadChannel? = null
     private var output : ByteWriteChannel? = null
     private val gson = Gson()
-    private val requestUtil = StateRequestUtil(this)
+    override val type: PotConnectionType = PotConnectionType.KTOR
 
     override suspend fun doConnect(address: SocketAddress): Error? {
         return withExceptionToError(LOGGER) {
@@ -64,26 +65,37 @@ class KtorPotConnection(
                 var rawMsg : String? = ""
                 LOGGER.info("Listener for [$connectedAddress] started")
 
-                while (input != null) {
+                do {
                     try {
                         rawMsg = input!!.readUTF8Line()
                         msg = gson.fromJson(rawMsg, PotMessage::class.java)
                         LOGGER.info("Received message [$msg] from [$connectedAddress]")
-                        onMessage.forEach { it.invoke(msg) }
+                        onMessage.forEach {
+                            withLoggedException(LOGGER, "Error invoking onMessage callback method") {
+                                it.invoke(msg)
+                            }
+                        }
                     } catch (je : JsonSyntaxException) {
-                    LOGGER.warn("Error in JSON parsing for message $rawMsg")
-                    sendAsyncError(je)
-                }
+                        LOGGER.warn("Error in JSON parsing for message $rawMsg")
+                        sendAsyncError(je)
+                    }
+                } while (rawMsg != null)
 
-                }
+                //The cycle ends becaus null is received -> client has naturally close connection
+                LOGGER.info("Client [$connectedAddress] has closed connection")
+                disconnect("Client [$connectedAddress] has closed connection")
+
             } catch (e : Exception) {
+                //Exception while reading from socket channel
                 LOGGER.info("Listener for [$connectedAddress] closed")
+                LOGGER.error(e)
+                disconnect(e.stackTraceToString())
             }
         }
     }
 
-    override suspend fun doDisconnect(): Error? {
-        return withExceptionToError(LOGGER) {
+    override suspend fun doDisconnect(reason : String): Error? {
+        val err = withExceptionToError(LOGGER) {
             LOGGER.info("Disconnecting from  [$connectedAddress]")
             socket?.close()
             socket?.dispose()
@@ -92,6 +104,13 @@ class KtorPotConnection(
             output = null
             LOGGER.info("Disconnected from [$connectedAddress]")
         }
+
+        onDisconnection.forEach {
+            withLoggedException(LOGGER, "Error invoking onDisconnection callback method") {
+                it.invoke(reason)
+            }
+        }
+        return err
     }
 
     override suspend fun sendAsyncMessage(msg: PotMessage): Error? {
@@ -99,18 +118,6 @@ class KtorPotConnection(
             output?.writeStringUtf8(gson.toJson(msg))?: return Error("Not connected")
             LOGGER.info("Sent message [$msg]")
         }
-    }
-
-    override suspend fun performStateRequest(): FunResult<StateReplyMessage> {
-        return requestUtil
-            .attachForSingleRequest()
-            .performStateRequestAndWaitResponse()
-    }
-
-    override suspend fun performActorRequest(applMessage: ApplMessage): FunResult<ActorMessage> {
-        return requestUtil
-            .attachForSingleRequest()
-            .performActorRequest(applMessage)
     }
 
 }

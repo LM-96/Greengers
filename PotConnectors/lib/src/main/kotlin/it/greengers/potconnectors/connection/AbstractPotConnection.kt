@@ -14,10 +14,12 @@ import kotlin.reflect.KSuspendFunction1
 abstract class AbstractPotConnection : PotConnection {
 
     protected var connectedAddress : SocketAddress? = null
-    val onMessage: MutableList<KSuspendFunction1<PotMessage, Unit>> = mutableListOf()
+    protected val onMessage: MutableList<KSuspendFunction1<PotMessage, Unit>> = mutableListOf()
+    protected val onDisconnection: MutableList<KSuspendFunction1<String, Unit>> = mutableListOf()
+    val requestUtil = StateRequestUtil(this)
 
-    abstract suspend fun doConnect(address: SocketAddress) : Error?
-    abstract suspend fun doDisconnect() : Error?
+    protected abstract suspend fun doConnect(address: SocketAddress) : Error?
+    protected abstract suspend fun doDisconnect(reason : String) : Error?
 
     override suspend fun connect(ip: String, port: Int): Error? {
         return withExceptionToError { connect(InetSocketAddress(ip, port)) }
@@ -39,6 +41,14 @@ abstract class AbstractPotConnection : PotConnection {
         onMessage.remove(callback)
     }
 
+    override suspend fun addCallbackOnDisconnection(callback: KSuspendFunction1<String, Unit>) {
+        onDisconnection.add(callback)
+    }
+
+    override suspend fun removeCallbackOnDisconnection(callback: KSuspendFunction1<String, Unit>) {
+        onDisconnection.remove(callback)
+    }
+
     override suspend fun connect(address: SocketAddress): Error? {
         if(connectedAddress != null)
             return Error("Already connected. Please disconnect before")
@@ -52,10 +62,10 @@ abstract class AbstractPotConnection : PotConnection {
         }
     }
 
-    override suspend fun disconnect(): Error? {
+    override suspend fun disconnect(reason : String): Error? {
         if(connectedAddress != null) {
             withExceptionAndErrorToError {
-                val res = doDisconnect()
+                val res = doDisconnect(reason)
                 if(res == null)
                     connectedAddress = null
 
@@ -150,6 +160,18 @@ abstract class AbstractPotConnection : PotConnection {
             .withValue { return performActorRequest(it) }*/
     }
 
+    override suspend fun performActorRequest(applMessage: ApplMessage): FunResult<ActorMessage> {
+        return requestUtil
+            .attachForSingleRequest()
+            .performActorRequest(applMessage)
+    }
+
+    override suspend fun performStateRequest(): FunResult<StateReplyMessage> {
+        return requestUtil
+            .attachForSingleRequest()
+            .performStateRequestAndWaitResponse()
+    }
+
     override suspend fun performRawActorRequest(msg: String): FunResult<ActorMessage> {
         val applMsg = buildValidApplMessage(msg)
         if(applMsg.thereIsError())
@@ -157,5 +179,10 @@ abstract class AbstractPotConnection : PotConnection {
 
         return performActorRequest(applMsg.res!!)
     }
+
+    override fun toString(): String {
+        return "AbstractPotConnection(destinationName='$destinationName', type=$type, connectedAddress=$connectedAddress)"
+    }
+
 
 }
