@@ -10,10 +10,11 @@ DHT_PIN = 4
 # Max sample rate 1Hz
 
 class HumidityTemperatureSensor:
-    def getTemperature(self):
-        humidity, temperature = Adafruit_DHT.read_retry(DHT_SENSOR, DHT_PIN)
-        return temperature
+    def read(self):
+        self.humidity, self.temperature = Adafruit_DHT.read_retry(DHT_SENSOR, DHT_PIN)
+    
+    def getTemperature(self):    
+        return self.temperature
 
     def getHumidity(self):
-        humidity, temperature = Adafruit_DHT.read_retry(DHT_SENSOR, DHT_PIN)
-        return humidity
+        return self.humidity
