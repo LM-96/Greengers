@@ -8,6 +8,7 @@ Event valueOutOfRange : valueOutOfRange(SENSOR_ID, CURR_VALUE)
 //DISPATCH ***************************************************************
 Dispatch sensorError : sensorError(SENSOR_ID, DESC)
 Dispatch sensorStarted : sensorStarted(SENSOR_ID)
+Dispatch stateRequest : stateRequest(X)
 
 //REQUEST/REPLY **********************************************************
 Request sensorRead : sensorRead(SENSOR_ID)

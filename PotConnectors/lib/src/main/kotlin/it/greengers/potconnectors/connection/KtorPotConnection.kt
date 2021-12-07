@@ -22,11 +22,11 @@ import java.net.SocketAddress
 @ExperimentalCoroutinesApi
 @ObsoleteCoroutinesApi
 class KtorPotConnection(
-    private val scope : CoroutineScope = GlobalScope,
-    override val destinationName: String
+    override val destinationName: String,
+    private val scope : CoroutineScope = GlobalScope
 ) : AbstractPotConnection() {
 
-    constructor(scope : CoroutineScope, destinationName: String, socket : Socket) : this(scope, destinationName) {
+    constructor(destinationName: String, socket : Socket, scope : CoroutineScope = GlobalScope) : this(destinationName, scope) {
         connectedAddress = socket.remoteAddress
         this.socket = socket
         input = socket.openReadChannel()

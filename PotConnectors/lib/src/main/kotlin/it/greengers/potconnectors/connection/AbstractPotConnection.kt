@@ -17,15 +17,21 @@ abstract class AbstractPotConnection : PotConnection {
     protected val onMessage: MutableList<KSuspendFunction1<PotMessage, Unit>> = mutableListOf()
     protected val onDisconnection: MutableList<KSuspendFunction1<String, Unit>> = mutableListOf()
     val requestUtil = StateRequestUtil(this)
+    protected var dns: PotDNS = LocalPotDNS
 
     protected abstract suspend fun doConnect(address: SocketAddress) : Error?
     protected abstract suspend fun doDisconnect(reason : String) : Error?
 
-    override suspend fun connect(ip: String, port: Int): Error? {
-        return withExceptionToError { connect(InetSocketAddress(ip, port)) }
+    override suspend fun connect(ip: String, port: Int, updateDNS: Boolean): Error? {
+        return withExceptionToError { connect(InetSocketAddress(ip, port), updateDNS) }
+    }
+
+    override suspend fun connect(): Error? {
+        return connect(dns)
     }
 
     override suspend fun connect(dns: PotDNS): Error? {
+        this.dns = dns
         val address = dns.resolve(destinationName)
         return if(address.thereIsError())
             address.error
@@ -49,15 +55,18 @@ abstract class AbstractPotConnection : PotConnection {
         onDisconnection.remove(callback)
     }
 
-    override suspend fun connect(address: SocketAddress): Error? {
+    override suspend fun connect(address: SocketAddress, updateDNS : Boolean): Error? {
         if(connectedAddress != null)
             return Error("Already connected. Please disconnect before")
 
         return withExceptionAndErrorToError {
             val res = doConnect(address)
-            if(res == null)
+            withNoError(res) {
                 connectedAddress = address
+                if(updateDNS) dns.registerOrUpdate(destinationName, address)
+            }
 
+            //Return ing res...
             res
         }
     }

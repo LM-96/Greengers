@@ -8,6 +8,17 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.ObsoleteCoroutinesApi
 
+@ExperimentalCoroutinesApi
+@ObsoleteCoroutinesApi
+fun newKtorConnection(destinationName : String, scope : CoroutineScope = GlobalScope) : PotConnection {
+    return KtorPotConnection(destinationName, scope)
+}
+
+@ExperimentalCoroutinesApi
+@ObsoleteCoroutinesApi
+fun newSocketIOConnection(destinationName: String, scope: CoroutineScope = GlobalScope) : PotConnection {
+    return SocketIOPotConnection(destinationName, scope)
+}
 
 @ExperimentalCoroutinesApi
 @ObsoleteCoroutinesApi
@@ -16,7 +27,7 @@ suspend fun newConnectedKtorConnection(destinationName : String, dns: PotDNS = L
     if(addr.thereIsError())
         return FunResult(addr.error!!)
 
-    val conn = KtorPotConnection(scope, destinationName)
+    val conn = KtorPotConnection(destinationName, scope)
     val connErr = conn.connect(dns) ?: return FunResult(conn)
 
     return FunResult(connErr)
@@ -29,7 +40,7 @@ suspend fun newConnectedSocketIOConnection(destinationName : String, dns: PotDNS
     if(addr.thereIsError())
         return FunResult(addr.error!!)
 
-    val conn = SocketIOPotConnection(scope, destinationName)
+    val conn = SocketIOPotConnection(destinationName, scope)
     val connErr = conn.connect(dns) ?: return FunResult(conn)
 
     return FunResult(connErr)
