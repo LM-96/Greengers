@@ -3,38 +3,37 @@ package it.greengers.potserver.core
 import it.greengers.potconnectors.connection.ConnectionManager
 import it.greengers.potconnectors.connection.PotConnection
 import it.greengers.potconnectors.dns.LocalPotDNS
-import it.greengers.potconnectors.messages.ActorMessage
-import it.greengers.potconnectors.messages.PotMessage
-import it.greengers.potconnectors.messages.PotMessageType
+import it.greengers.potconnectors.messages.*
 import it.greengers.potconnectors.utils.Reconnector
-import it.greengers.potconnectors.utils.withNotNullValue
-import it.unibo.kactor.ActorBasicFsm
 import it.unibo.kactor.MsgUtil
 import it.unibo.kactor.QakContext
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
 import java.net.InetSocketAddress
+import kotlin.concurrent.thread
 import kotlin.coroutines.EmptyCoroutineContext
 
 @ExperimentalCoroutinesApi
 @ObsoleteCoroutinesApi
 object PotCore {
 
+    @JvmStatic private val SERVER_NAME = "main-server"
     @JvmStatic private var SERVER_CONNECTION : PotConnection
     @JvmStatic private var RECONNECTOR : Reconnector
     @JvmStatic private var MANAGER_ACTOR = QakContext.getActor("manageractor")!!
     @JvmStatic private val ON_MESSAGE = this::onMessage
     @JvmStatic private val SCOPE = CoroutineScope(EmptyCoroutineContext + CoroutineName(this::javaClass.name))
-    @JvmStatic private val CHANNEL = Channel<PotMessage>()
+    @JvmStatic private val SEND_CHANNEL = Channel<PotMessage>()
 
     init {
 
         runBlocking {
+
             //1. Load DNS for resolving main server name
             println("\nPotCore | DNS CONFIGURATION *******************************")
             println("PotCore | Loading DNS...")
             loadDNS()
-            println("PotCore | DNS Loaded. Central server address: [${LocalPotDNS.resolve("main-server")}")
+            println("PotCore | DNS Loaded. Central server address: [${LocalPotDNS.resolve(SERVER_NAME)}")
 
             //2. Enstablish connection to main server
             println("\nPotCore | CONNECTION TO CENTRAL SERVER ********************")
@@ -54,11 +53,25 @@ object PotCore {
             RECONNECTOR = Reconnector.attachPersistentReconnector(conn)
             println("PotCore | Attached automatic reconnector")
 
+            //4. Send name to the server
+            SEND_CHANNEL.send(buildCommunicationMessage("whoami", LocalPotDNS.getApplicationName(), SERVER_NAME))
+
+            //5. Manage application shutdown
+            Runtime.getRuntime().addShutdownHook(
+                thread {
+                    SEND_CHANNEL.close()
+                    SCOPE.cancel()
+                    runBlocking {
+                        SERVER_CONNECTION.removeCallbackOnMessage(ON_MESSAGE)
+                        SERVER_CONNECTION.disconnect("application shutdown")
+                    }
+                }
+            )
         }
     }
 
     private suspend fun loadDNS() {
-        LocalPotDNS.resolve("main-server")
+        LocalPotDNS.resolve(SERVER_NAME)
             .withError {
                 println("PotCore | Central Server address is not into DNS. Will be used the default configuration")
                 val addr = Settings.getSetting("main-server-address")
@@ -78,9 +91,16 @@ object PotCore {
         when(message.type) {
             PotMessageType.ACTOR -> {
                 val applMessage = (message as ActorMessage).applMessage
-                val actor = QakContext.getActor(applMessage.msgReceiver())
-                println("----> Redirecting application message to the actor ${actor?.name}")
-                MsgUtil.sendMsg(applMessage, actor!!)
+                val actorName = applMessage.msgReceiver()
+                val actor = QakContext.getActor(actorName)
+                if(actor == null) {
+                    println("----> Actor $actorName does not exist")
+                    val msg = buildErrorMessage("Actor $actorName does not exist", message.destinationName)
+                    send(msg)
+                } else {
+                    println("----> Redirecting application message to the actor $actorName")
+                    MsgUtil.sendMsg(applMessage, actor!!)
+                }
             }
 
             PotMessageType.STATE_REQUEST -> {
@@ -88,25 +108,36 @@ object PotCore {
                 val applMessage = MsgUtil.buildDispatch("potcore", "stateRequest", "STATE", MANAGER_ACTOR.name)
                 MsgUtil.sendMsg(applMessage, MANAGER_ACTOR)
             }
+
+            else -> {
+                println("----> Operation not already supported")
+                val msg = buildUnsupportedOperationMessage("Not already supported", message, message.destinationName)
+                send(msg)
+            }
         }
     }
 
     private fun writerListener() {
         SCOPE.launch {
-                while (!CHANNEL.isClosedForSend) {
+                while (true) {
                     try {
-                        val msg = CHANNEL.receive()
-                        val err = SERVER_CONNECTION.sendAsyncMessage(msg)
-
+                        val msg = SEND_CHANNEL.receive()
+                        var err = SERVER_CONNECTION.sendAsyncMessage(msg)
+                        while(err != null){
+                            println("PotCore [writer] | $err\n----> Waiting connection")
+                            RECONNECTOR.waitConnection()
+                            err = SERVER_CONNECTION.sendAsyncMessage(msg)
+                        }
                     } catch (e : Exception) {
                         e.printStackTrace()
+                        continue
                     }
                 }
         }
     }
 
     suspend fun send(message : PotMessage) {
-        CHANNEL.send(message)
+        SEND_CHANNEL.send(message)
     }
 
 }
