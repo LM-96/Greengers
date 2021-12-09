@@ -129,6 +129,10 @@ abstract class AbstractPotConnection : PotConnection {
         return sendAsyncMessage(buildCommunicationMessage(communicationType, communication, destinationName))
     }
 
+    override suspend fun sendAsyncCommunication(communicationType: BuiltInCommunicationType, communication: String): Error? {
+        return sendAsyncMessage(buildCommunicationMessage(communicationType, communication, destinationName))
+    }
+
     override suspend fun sendAsyncStateReply(
         temperature: Double,
         humidity: Double,

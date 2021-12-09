@@ -28,9 +28,10 @@ class KtorPotConnection(
     private val scope : CoroutineScope = SCOPE
 ) : AbstractPotConnection() {
 
-    constructor(destinationName: String, socket : Socket, scope : CoroutineScope = SCOPE,
+    constructor(destinationName: String, socket : Socket,
                 input: ByteReadChannel = socket.openReadChannel(),
-                output: ByteWriteChannel = socket.openWriteChannel(autoFlush = true)
+                output: ByteWriteChannel = socket.openWriteChannel(autoFlush = true),
+                scope : CoroutineScope = SCOPE
     ) : this(destinationName, scope) {
         connectedAddress = socket.remoteAddress
         this.socket = socket

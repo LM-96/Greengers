@@ -70,6 +70,15 @@ object ConnectionManager {
     }
 
     /**
+     * Register a connection to the manager
+     *
+     * @param connection the connection to register
+     */
+    suspend fun register(connection: PotConnection) {
+        MUTEX.withLock { CONNECTIONS[connection.destinationName] = connection }
+    }
+
+    /**
      * Request to disconnect the opened connection to the specified name.
      * If no connection is opened, nothing will be done
      *

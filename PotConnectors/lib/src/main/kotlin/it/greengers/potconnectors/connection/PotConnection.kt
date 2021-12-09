@@ -137,6 +137,16 @@ interface PotConnection {
     suspend fun sendAsyncCommunication(communicationType : String, communication : String) : Error?
 
     /**
+     * Send a CommunicationMessage using this connection. This send is asynchronous, so this function
+     * return after the message has been sent
+     *
+     * @param communicationType the type of the communication
+     * @param communication a string that represents the communication
+     * @return a not null error if the message is not successfully sent or null otherwise
+     */
+    suspend fun sendAsyncCommunication(communicationType : BuiltInCommunicationType, communication : String) : Error?
+
+    /**
      * Send an ActorMessage using this connection. This send is asynchronous, so this function
      * return after the message has been sent.
      * If the string is not formatted as QAK-message, an error is returned

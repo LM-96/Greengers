@@ -5,12 +5,10 @@ import io.ktor.network.sockets.*
 import io.ktor.utils.io.*
 import it.greengers.potconnectors.dns.LocalPotDNS
 import it.greengers.potconnectors.dns.PotDNS
-import it.greengers.potconnectors.messages.CommunicationMessage
-import it.greengers.potconnectors.messages.PotMessage
-import it.greengers.potconnectors.messages.PotMessageType
-import it.greengers.potconnectors.messages.buildErrorMessage
+import it.greengers.potconnectors.messages.*
 import it.greengers.potconnectors.utils.FunResult
 import kotlinx.coroutines.*
+import java.util.*
 
 @ExperimentalCoroutinesApi
 @ObsoleteCoroutinesApi
@@ -50,11 +48,14 @@ suspend fun newConnectedSocketIOConnection(destinationName : String, dns: PotDNS
     return FunResult(connErr)
 }
 
-fun io.ktor.network.sockets.Socket.identificateAndThen(
+@ExperimentalCoroutinesApi
+@ObsoleteCoroutinesApi
+fun io.ktor.network.sockets.Socket.potConnect(
     scope : CoroutineScope = AbstractPotConnection.SCOPE,
     dns : PotDNS = PotDNS.SYSTEM_DNS,
-    onIdentificated : (name : String) -> Unit) {
+    onIdentificated : suspend (connection : PotConnection) -> Unit = {}) {
 
+    val sock = this
     scope.launch {
 
         val input = openReadChannel()
@@ -63,14 +64,17 @@ fun io.ktor.network.sockets.Socket.identificateAndThen(
         var identificated = false
 
         var msg : PotMessage
+        var commType : Optional<BuiltInCommunicationType>
         while(!identificated) {
             msg = gson.fromJson(input.readUTF8Line(), PotMessage::class.java)
             if(msg.type == PotMessageType.COMMUNICATION) {
-                msg as CommunicationMessage
-                if(msg.communicationType == "whoami") {
-                    dns.registerOrUpdate(msg.communication, remoteAddress)
-                    onIdentificated.invoke(msg.communication)
-                    identificated = true
+                commType = (msg as CommunicationMessage).isBuiltInCommunicationType()
+                if(commType.isPresent) {
+                    if(commType.get() == BuiltInCommunicationType.WHOAMI) {
+                        dns.registerOrUpdate(msg.communication, remoteAddress)
+                        onIdentificated.invoke(KtorPotConnection(msg.communication, sock, input, output))
+                        identificated = true
+                    }
                 }
             } else {
                 val res = buildErrorMessage("Please send your name", "unknown-dest-name")
