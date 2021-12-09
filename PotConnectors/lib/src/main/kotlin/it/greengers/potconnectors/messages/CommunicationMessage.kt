@@ -1,5 +1,7 @@
 package it.greengers.potconnectors.messages
 
+import java.util.*
+
 class CommunicationMessage(
     destinationName: String,
     senderName : String,
@@ -9,5 +11,13 @@ class CommunicationMessage(
 
     override fun toString(): String {
         return "CommunicationMessage(communicationType='$communicationType', communication='$communication') ${super.toString()}"
+    }
+
+    fun isBuiltInCommunicationType() : Optional<BuiltInCommunicationType> {
+        return try {
+            Optional.of(BuiltInCommunicationType.valueOf(communicationType))
+        } catch (e : Exception) {
+            Optional.empty()
+        }
     }
 }

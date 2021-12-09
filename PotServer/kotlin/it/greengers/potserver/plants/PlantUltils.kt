@@ -4,6 +4,7 @@ import com.google.gson.Gson
 import it.greengers.potserver.core.CurrentPlant
 import it.greengers.potserver.sensors.SensorFactory
 import it.greengers.potserver.sensors.SensorType
+import it.greengers.potserver.sensors.ValueRange
 import java.lang.NumberFormatException
 
 private data class CurrentPlantWithState(
@@ -34,6 +35,9 @@ object PlantUtils {
 }
 
 val GSON = Gson()
+val EMPTY_PLANT = Plant("NO_PLANT", "UNKNOWN", "UNKNOWN", "UNKNOWN", "UNKNOWN", "UNKNOWN", "UNKNOWN", "UNKNOWN", "UNKNOWN",
+    OptimalPlantCondition(ValueRange<Double>(Double.MIN_VALUE, Double.MAX_VALUE), ValueRange<Double>(Double.MIN_VALUE, Double.MAX_VALUE), ValueRange<Double>(Double.MIN_VALUE, Double.MAX_VALUE))
+)
 
 fun CurrentPlant.withStateToJSON() : String {
     val data = CurrentPlantWithState(CURRENT_PLANT, STATE)

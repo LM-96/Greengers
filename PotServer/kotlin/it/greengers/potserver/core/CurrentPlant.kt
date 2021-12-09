@@ -1,10 +1,7 @@
 package it.greengers.potserver.core
 
 import it.greengers.potconnectors.utils.withExceptionToError
-import it.greengers.potserver.plants.GSON
-import it.greengers.potserver.plants.Plant
-import it.greengers.potserver.plants.PlantState
-import it.greengers.potserver.plants.reset
+import it.greengers.potserver.plants.*
 import java.nio.file.Files
 import java.nio.file.Paths
 import java.nio.file.StandardOpenOption
@@ -17,12 +14,20 @@ object CurrentPlant {
     val STATE : PlantState = PlantState()
 
     @JvmStatic fun loadCurrentPlant() {
-        
+        if(Files.exists(CURRENT_PLANT_FILE)) {
+            CURRENT_PLANT = try {
+                GSON.fromJson(Files.newBufferedReader(CURRENT_PLANT_FILE), Plant::class.java)
+            } catch (e : Exception) {
+                EMPTY_PLANT
+            }
+        }
+        CURRENT_PLANT = EMPTY_PLANT
     }
 
     @JvmStatic fun changeCurrentPlant(plant: Plant) {
         CURRENT_PLANT = plant
         STATE.reset()
+        persist()
     }
 
     @JvmStatic fun persist() : Error? {

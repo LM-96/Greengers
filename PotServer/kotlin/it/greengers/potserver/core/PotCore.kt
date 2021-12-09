@@ -7,8 +7,6 @@ import it.greengers.potconnectors.messages.*
 import it.greengers.potconnectors.utils.Reconnector
 import it.greengers.potconnectors.utils.withError
 import it.greengers.potserver.plants.PlantState
-import it.greengers.potserver.plants.changeCurrentPlantFromJSON
-import it.greengers.potserver.plants.withStateToJSON
 import it.greengers.potserver.sensors.SensorFactory
 import it.unibo.kactor.MsgUtil
 import it.unibo.kactor.QakContext
@@ -60,8 +58,9 @@ object PotCore {
             RECONNECTOR = Reconnector.attachPersistentReconnector(conn)
             println("PotCore | Attached automatic reconnector")
 
-            //4. Send name to the server
-            SEND_CHANNEL.send(buildCommunicationMessage("whoami", LocalPotDNS.getApplicationName(), SERVER_NAME))
+            //4. Launch writer and send name to the server
+            SCOPE.launch { writerListener() }
+            SEND_CHANNEL.send(buildCommunicationMessage(BuiltInCommunicationType.WHOAMI, LocalPotDNS.getApplicationName(), SERVER_NAME))
 
             //5. Manage application shutdown
             Runtime.getRuntime().addShutdownHook(
@@ -96,25 +95,9 @@ object PotCore {
     private suspend fun onMessage(message : PotMessage) {
         println("PotCore | Received message [$message]")
         when(message.type) {
-            PotMessageType.ACTOR -> {
-                val applMessage = (message as ActorMessage).applMessage
-                val actorName = applMessage.msgReceiver()
-                val actor = QakContext.getActor(actorName)
-                if(actor == null) {
-                    println("----> Actor $actorName does not exist")
-                    val msg = buildErrorMessage("Actor $actorName does not exist", message.destinationName)
-                    send(msg)
-                } else {
-                    println("----> Redirecting application message to the actor $actorName")
-                    MsgUtil.sendMsg(applMessage, actor!!)
-                }
-            }
-
-            PotMessageType.STATE_REQUEST -> {
-                println("----> Redirecting state request to $MANAGER_ACTOR")
-                val applMessage = MsgUtil.buildDispatch("potcore", "stateRequest", message.senderName, MANAGER_ACTOR.name)
-                MsgUtil.sendMsg(applMessage, MANAGER_ACTOR)
-            }
+            PotMessageType.ACTOR -> handleActorMessage(message as ActorMessage)
+            PotMessageType.COMMUNICATION -> handleCommunicationMessage(message as CommunicationMessage)
+            PotMessageType.STATE_REQUEST -> handleStateRequest(message as StateRequestMessage)
 
             else -> {
                 println("----> Operation not already supported")
@@ -122,6 +105,39 @@ object PotCore {
                 send(msg)
             }
         }
+    }
+
+    private suspend fun handleActorMessage(message : ActorMessage) {
+        val applMessage = (message as ActorMessage).applMessage
+        val actorName = applMessage.msgReceiver()
+        val actor = QakContext.getActor(actorName)
+        if(actor == null) {
+            println("----> Actor $actorName does not exist")
+            val msg = buildErrorMessage("Actor $actorName does not exist", message.destinationName)
+            send(msg)
+        } else {
+            println("----> Redirecting application message to the actor $actorName")
+            MsgUtil.sendMsg(applMessage, actor!!)
+        }
+    }
+
+    private suspend fun handleCommunicationMessage(message : CommunicationMessage) {
+        val type = message.isBuiltInCommunicationType()
+        if(type.isPresent) {
+            when(type.get()) {
+                BuiltInCommunicationType.PLANTCHANGE -> {
+                    val applMessage = MsgUtil.buildDispatch("potcore", "changeCurrentPlant", message.communication, MANAGER_ACTOR.name)
+                    println("----> Redirecting plant change command to the actor $MANAGER_ACTOR")
+                    MsgUtil.sendMsg(applMessage, MANAGER_ACTOR)
+                }
+            }
+        }
+    }
+
+    private suspend fun handleStateRequest(message: StateRequestMessage) {
+        println("----> Redirecting state request to $MANAGER_ACTOR")
+        val applMessage = MsgUtil.buildDispatch("potcore", "stateRequest", message.senderName, MANAGER_ACTOR.name)
+        MsgUtil.sendMsg(applMessage, MANAGER_ACTOR)
     }
 
     private fun writerListener() {

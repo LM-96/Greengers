@@ -21,6 +21,10 @@ fun buildCommunicationMessage(communicationType : String, communication : String
     return CommunicationMessage(destination, sender, communicationType, communication)
 }
 
+fun buildCommunicationMessage(communicationType : BuiltInCommunicationType, communication : String, destination: String, sender: String = LocalPotDNS.getApplicationName()) : CommunicationMessage {
+    return CommunicationMessage(destination, sender, communicationType.toString(), communication)
+}
+
 fun buildErrorMessage(errorDescription : String, destination: String, sender: String = LocalPotDNS.getApplicationName()) : ErrorMessage {
     return ErrorMessage(destination, sender, errorDescription)
 }
