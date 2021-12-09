@@ -4,11 +4,14 @@ System potserver
 Event loadComplete : loadComplete(X)
 Event criticalErr : criticalErr(X)
 Event valueOutOfRange : valueOutOfRange(SENSOR_ID, CURR_VALUE)
+Event sensorValue : sensorValue(SENSOR_ID, CURR_VALUE)
+Event polling : polling(DOPOLLING)
 
 //DISPATCH ***************************************************************
 Dispatch sensorError : sensorError(SENSOR_ID, DESC)
 Dispatch sensorStarted : sensorStarted(SENSOR_ID)
-Dispatch stateRequest : stateRequest(X)
+Dispatch stateRequest : stateRequest(WHOHASREQUESTED)
+Dispatch changeCurrentPlant : changeCurrentPlant(PLANT_INFO)
 
 //REQUEST/REPLY **********************************************************
 Request sensorRead : sensorRead(SENSOR_ID)
@@ -19,13 +22,19 @@ Context ctxpotserver ip[host="localhost" port=9000]
 
 QActor manageractor context ctxpotserver {
 	[#
-		val sensors = it.greengers.potserver.sensors.SensorFactory.getSensors()
-		val loadcount = it.greengers.potserver.utils.LoadCounter(sensors.map{it.id})
+		val SENS_IDS = it.greengers.potserver.sensors.SensorFactory.getSensorIds()
+		val loadcount = it.greengers.potserver.utils.LoadCounter(SENS_IDS)
+		val CORE = it.greengers.potserver.core.PotCore
+		val DESTINATION = ""
+		val TEMP_SENS_ID = `it.greengers`.potserver.sensors.SensorFactory.getMainId(`it.greengers`.potserver.sensors.SensorType.TEMPERATURE)
+		val HUM_SENS_ID = `it.greengers`.potserver.sensors.SensorFactory.getMainId(`it.greengers`.potserver.sensors.SensorType.HUMIDITY)
+		val BRI_SENS_ID = `it.greengers`.potserver.sensors.SensorFactory.getMainId(`it.greengers`.potserver.sensors.SensorType.BRIGHTNESS)
+		val CURR_PLANT = `it.greengers`.potserver.core.CurrentPlant
 	#]
 	
 	State s0 initial {
 		[# 
-			`it.greengers`.potserver.core.CurrentPlant.loadCurrentPlant()
+			CURR_PLANT.loadCurrentPlant()
 			val err = `it.greengers`.potserver.core.Settings.load()
 			if(err != null) {
 				
@@ -54,7 +63,37 @@ QActor manageractor context ctxpotserver {
 	
 	State work {
 		println("$name | Waiting...")
-	}
+	} Transition t 
+		whenMsg stateRequest -> handleStateRequest
+		whenEvent sensorValue -> updateState
+		whenMsg changeCurrentPlant -> changeCurrentPlant
+		whenEvent valueOutOfRange -> handleValueOutOfRange
+		
+	State updateState {
+		onMsg(sensorValue : sensorValue) {
+			[# `it.greengers`.potserver.plants.PlantUtils.updateCurrentPlantState(payloadArg(0), payloadArg(1)) #]
+		}
+		updateResource[# `it.greengers`.potserver.plants.PlantUtils.currentPlantWithStateToJSON() #]
+	} Goto work
+	
+	State changeCurrentPlant {
+		onMsg(changeCurrentPlant : changeCurrentPlant) {
+			[# `it.greengers`.potserver.plants.PlantUtils.changeCurrentPlantFromJSON(payloadArg(0)) #]
+			emit polling : polling(DOPOLLING)
+		}
+	} Goto work
+	
+	State handleStateRequest {
+		onMsg(stateRequest : stateRequest) {
+			[# CORE.sendState(payloadArg(0), CURR_PLANT.STATE) #]
+		}
+	} Goto work
+	
+	State handleValueOutOfRange {
+		onMsg(valueOutOfRange : valueOutOfRange) {
+			[# CORE.sendValueOutOfRange(payloadArg(0), payloadArg(1)) #]
+		}
+	} Goto work
 	
 	State exit {
 		println("$name | Terminate")
@@ -87,7 +126,7 @@ QActor temperatureactor context ctxpotserver {
 			} else {
 				SENSOR_ID = loadId!!
 			
-				val loadSensor = `it.greengers`.potserver.sensors.SensorFactory.getInputSensor<Double>(SENSOR_ID)
+				val loadSensor = `it.greengers`.potserver.sensors.SensorFactory.getSensor(SENSOR_ID) as `it.greengers`.potserver.sensors.InputSensor<Double>
 				if(loadSensor == null) {
 		#]
 					forward manageractor -m sensorError : sensorError($SENSOR_ID, ERROR_LOADING)
@@ -104,12 +143,14 @@ QActor temperatureactor context ctxpotserver {
 		println("$name | Working")
 	} Transition t0
 		whenTimeVar POLLING_TIME -> polling
+		whenEvent polling -> polling
 		whenRequest sensorRead -> handleReadRequest
 		whenEvent criticalErr -> exit
 		
 	State polling {
 		[# CURR_VALUE = SENSOR.read() #]
 		println("$name | Read temperature from sensor [$CURR_VALUE]")
+		emit sensorValue : sensorValue($SENSOR_ID, $CURR_VALUE)
 		
 		[# if(CURRENT_PLANT.optimalPlantCondition.temperatureRange.isOutOfRange(CURR_VALUE)) { #]
 				emit valueOutOfRange : valueOutOfRange($SENSOR_ID, $CURR_VALUE)
@@ -160,7 +201,7 @@ QActor humidityactor context ctxpotserver {
 			} else {
 				SENSOR_ID = loadId!!
 			
-				val loadSensor = `it.greengers`.potserver.sensors.SensorFactory.getInputSensor<Double>(SENSOR_ID)
+				val loadSensor = `it.greengers`.potserver.sensors.SensorFactory.getSensor(SENSOR_ID) as `it.greengers`.potserver.sensors.InputSensor<Double>
 				if(loadSensor == null) {
 		#]
 					forward manageractor -m sensorError : sensorError($SENSOR_ID, ERROR_LOADING)
@@ -177,12 +218,14 @@ QActor humidityactor context ctxpotserver {
 		println("$name | Working")
 	} Transition t0
 		whenTimeVar POLLING_TIME -> polling
+		whenEvent polling -> polling
 		whenRequest sensorRead -> handleReadRequest
 		whenEvent criticalErr -> exit
 		
 	State polling {
 		[# CURR_VALUE = SENSOR.read() #]
 		println("$name | Read humidity from sensor [$CURR_VALUE]")
+		emit sensorValue : sensorValue($SENSOR_ID, $CURR_VALUE)
 		
 		[# if(CURRENT_PLANT.optimalPlantCondition.humidityRange.isOutOfRange(CURR_VALUE)) { #]
 				emit valueOutOfRange : valueOutOfRange($SENSOR_ID, $CURR_VALUE)
@@ -233,7 +276,7 @@ QActor brightnessactor context ctxpotserver {
 			} else {
 				SENSOR_ID = loadId!!
 			
-				val loadSensor = `it.greengers`.potserver.sensors.SensorFactory.getInputSensor<Double>(SENSOR_ID)
+				val loadSensor = `it.greengers`.potserver.sensors.SensorFactory.getSensor(SENSOR_ID) as `it.greengers`.potserver.sensors.InputSensor<Double>
 				if(loadSensor == null) {
 		#]
 					forward manageractor -m sensorError : sensorError($SENSOR_ID, ERROR_LOADING)
@@ -250,12 +293,14 @@ QActor brightnessactor context ctxpotserver {
 		println("$name | Working")
 	} Transition t0
 		whenTimeVar POLLING_TIME -> polling
+		whenEvent polling -> polling
 		whenRequest sensorRead -> handleReadRequest
 		whenEvent criticalErr -> exit
 		
 	State polling {
 		[# CURR_VALUE = SENSOR.read() #]
 		println("$name | Read brightness from sensor [$CURR_VALUE]")
+		emit sensorValue : sensorValue($SENSOR_ID, $CURR_VALUE)
 		
 		[# if(CURRENT_PLANT.optimalPlantCondition.brightnessRange.isOutOfRange(CURR_VALUE)) { #]
 				emit valueOutOfRange : valueOutOfRange($SENSOR_ID, $CURR_VALUE)

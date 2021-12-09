@@ -1,40 +1,16 @@
 package it.greengers.potconnectors.utils
 
+import io.ktor.network.selector.*
+import io.ktor.network.sockets.*
 import kotlinx.coroutines.*
-import it.greengers.potconnectors.concurrency.newCondition
-import kotlinx.coroutines.sync.Mutex
+import it.greengers.potconnectors.connection.identificateAndThen
+import java.net.InetSocketAddress
 
 fun main(args : Array<String>) {
-    val mutex = Mutex()
-    val cond = mutex.newCondition()
-
-    val job1 = GlobalScope.launch {
-        println("job1 is going to sleep")
-        mutex.lock()
-        cond.wait()
-        println("job1 signaled")
-        mutex.unlock()
-        delay(10000)
-    }
-
-    val job2 = GlobalScope.launch {
-        delay(2000)
-        cond.signalAll()
-        delay(2000)
-    }
-
-    val job3 = GlobalScope.launch {
-        println("job3 is going to sleep")
-        mutex.lock()
-        cond.wait()
-        mutex.unlock()
-        println("job3 signaled")
-        delay(10000)
-    }
-
     runBlocking {
-        job1.join()
-        job2.join()
-        job3.join()
+        val socket = aSocket(ActorSelectorManager(Dispatchers.IO)).tcp().connect(InetSocketAddress("127.0.0.1", 2323))
+        socket.identificateAndThen{
+
+        }
     }
 }

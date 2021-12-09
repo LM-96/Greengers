@@ -7,11 +7,18 @@ import it.greengers.potconnectors.utils.*
 import it.unibo.kactor.ApplMessage
 import it.unibo.kactor.ApplMessageType
 import it.unibo.kactor.MsgUtil
+import kotlinx.coroutines.CoroutineName
+import kotlinx.coroutines.CoroutineScope
 import java.net.InetSocketAddress
 import java.net.SocketAddress
+import kotlin.coroutines.EmptyCoroutineContext
 import kotlin.reflect.KSuspendFunction1
 
 abstract class AbstractPotConnection : PotConnection {
+
+    companion object {
+        @JvmStatic val SCOPE = CoroutineScope(EmptyCoroutineContext + CoroutineName(this::javaClass.name))
+    }
 
     protected var connectedAddress : SocketAddress? = null
     protected val onMessage: MutableList<KSuspendFunction1<PotMessage, Unit>> = mutableListOf()

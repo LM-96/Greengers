@@ -18,24 +18,37 @@ import kotlinx.coroutines.channels.Channel
 import org.apache.logging.log4j.kotlin.logger
 import org.apache.logging.log4j.kotlin.loggerOf
 import java.net.SocketAddress
+import kotlin.concurrent.thread
+import kotlin.coroutines.EmptyCoroutineContext
 
 @ExperimentalCoroutinesApi
 @ObsoleteCoroutinesApi
 class KtorPotConnection(
     override val destinationName: String,
-    private val scope : CoroutineScope = GlobalScope
+    private val scope : CoroutineScope = SCOPE
 ) : AbstractPotConnection() {
 
-    constructor(destinationName: String, socket : Socket, scope : CoroutineScope = GlobalScope) : this(destinationName, scope) {
+    constructor(destinationName: String, socket : Socket, scope : CoroutineScope = SCOPE,
+                input: ByteReadChannel = socket.openReadChannel(),
+                output: ByteWriteChannel = socket.openWriteChannel(autoFlush = true)
+    ) : this(destinationName, scope) {
         connectedAddress = socket.remoteAddress
         this.socket = socket
-        input = socket.openReadChannel()
-        output = socket.openWriteChannel(autoFlush = true)
+        this.input = input
+        this.output = output
         job = launchListener()
     }
 
     companion object {
         @JvmStatic val LOGGER = loggerOf(this::class.java)
+
+        init {
+            Runtime.getRuntime().addShutdownHook(
+                thread {
+                    SCOPE.cancel()
+                }
+            )
+        }
     }
 
     private var job : Job? = null

@@ -28,7 +28,7 @@ class Brightnessactor ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( 
 					action { //it:State
 						println("TemperatureActor: started")
 					}
-					 transition(edgeName="t10",targetState="getSensor",cond=whenEvent("loadComplete"))
+					 transition(edgeName="t16",targetState="getSensor",cond=whenEvent("loadComplete"))
 				}	 
 				state("getSensor") { //this:State
 					action { //it:State
@@ -42,7 +42,7 @@ class Brightnessactor ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( 
 									} else {
 										SENSOR_ID = loadId!!
 									
-										val loadSensor = `it.greengers`.potserver.sensors.SensorFactory.getInputSensor<Double>(SENSOR_ID)
+										val loadSensor = `it.greengers`.potserver.sensors.SensorFactory.getSensor(SENSOR_ID) as `it.greengers`.potserver.sensors.InputSensor<Double>
 										if(loadSensor == null) {
 						forward("sensorError", "sensorError($SENSOR_ID,ERROR_LOADING)" ,"manageractor" ) 
 						
@@ -63,14 +63,16 @@ class Brightnessactor ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( 
 						stateTimer = TimerActor("timer_work", 
 							scope, context!!, "local_tout_brightnessactor_work", POLLING_TIME )
 					}
-					 transition(edgeName="t011",targetState="polling",cond=whenTimeout("local_tout_brightnessactor_work"))   
-					transition(edgeName="t012",targetState="handleReadRequest",cond=whenRequest("sensorRead"))
-					transition(edgeName="t013",targetState="exit",cond=whenEvent("criticalErr"))
+					 transition(edgeName="t017",targetState="polling",cond=whenTimeout("local_tout_brightnessactor_work"))   
+					transition(edgeName="t018",targetState="polling",cond=whenEvent("polling"))
+					transition(edgeName="t019",targetState="handleReadRequest",cond=whenRequest("sensorRead"))
+					transition(edgeName="t020",targetState="exit",cond=whenEvent("criticalErr"))
 				}	 
 				state("polling") { //this:State
 					action { //it:State
 						 CURR_VALUE = SENSOR.read()  
 						println("$name | Read brightness from sensor [$CURR_VALUE]")
+						emit("sensorValue", "sensorValue($SENSOR_ID,$CURR_VALUE)" ) 
 						 if(CURRENT_PLANT.optimalPlantCondition.brightnessRange.isOutOfRange(CURR_VALUE)) {  
 						emit("valueOutOfRange", "valueOutOfRange($SENSOR_ID,$CURR_VALUE)" ) 
 						 }  

@@ -14,14 +14,14 @@ import java.net.SocketAddress
 @ObsoleteCoroutinesApi
 class SocketIOPotConnection(
     override val destinationName: String,
-    private val scope : CoroutineScope = GlobalScope
+    private val scope : CoroutineScope = SCOPE
 ) : AbstractPotConnection() {
 
     companion object {
         @JvmStatic val LOGGER = loggerOf(this::class.java)
     }
 
-    constructor(destinationName: String, socket : Socket, scope : CoroutineScope = GlobalScope) : this(destinationName, scope) {
+    constructor(destinationName: String, socket : Socket, scope : CoroutineScope = SCOPE) : this(destinationName, scope) {
         connectedAddress = socket.remoteSocketAddress
         this.socket = socket
         this.input = BufferedReader(InputStreamReader(socket!!.getInputStream()))

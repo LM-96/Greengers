@@ -5,6 +5,11 @@ import it.greengers.potconnectors.connection.PotConnection
 import it.greengers.potconnectors.dns.LocalPotDNS
 import it.greengers.potconnectors.messages.*
 import it.greengers.potconnectors.utils.Reconnector
+import it.greengers.potconnectors.utils.withError
+import it.greengers.potserver.plants.PlantState
+import it.greengers.potserver.plants.changeCurrentPlantFromJSON
+import it.greengers.potserver.plants.withStateToJSON
+import it.greengers.potserver.sensors.SensorFactory
 import it.unibo.kactor.MsgUtil
 import it.unibo.kactor.QakContext
 import kotlinx.coroutines.*
@@ -18,7 +23,7 @@ import kotlin.coroutines.EmptyCoroutineContext
 object PotCore {
 
     @JvmStatic private val SERVER_NAME = "main-server"
-    @JvmStatic private var SERVER_CONNECTION : PotConnection
+    @JvmStatic var SERVER_CONNECTION : PotConnection private set
     @JvmStatic private var RECONNECTOR : Reconnector
     @JvmStatic private var MANAGER_ACTOR = QakContext.getActor("manageractor")!!
     @JvmStatic private val ON_MESSAGE = this::onMessage
@@ -43,8 +48,10 @@ object PotCore {
             println("PotCore | Message listener attached")
             while(!conn.isConnected()) {
                 println("PotCore | Trying to connect...")
-                conn.connect()
-                delay(2000)
+                withError(conn.connect()) {
+                    println("----> Connection error: ${it.localizedMessage}")
+                    delay(2000)
+                }
             }
             SERVER_CONNECTION = conn
             println("PotCore | Connected to ${conn.getConnectedAdress()}")
@@ -105,7 +112,7 @@ object PotCore {
 
             PotMessageType.STATE_REQUEST -> {
                 println("----> Redirecting state request to $MANAGER_ACTOR")
-                val applMessage = MsgUtil.buildDispatch("potcore", "stateRequest", "STATE", MANAGER_ACTOR.name)
+                val applMessage = MsgUtil.buildDispatch("potcore", "stateRequest", message.senderName, MANAGER_ACTOR.name)
                 MsgUtil.sendMsg(applMessage, MANAGER_ACTOR)
             }
 
@@ -138,6 +145,20 @@ object PotCore {
 
     suspend fun send(message : PotMessage) {
         SEND_CHANNEL.send(message)
+    }
+
+    suspend fun sendState(destinationName : String, state : PlantState = CurrentPlant.STATE) {
+        SEND_CHANNEL.send(buildStateReplyMessage(state.temperature, state.brightness, state.humidity, -1.0, destinationName))
+    }
+
+    suspend fun sendValueOutOfRange(sensorId : String, currValue : String) {
+        val valueType = SensorFactory.getSensorType(sensorId)
+        if(valueType == null) {
+            println("PotCore | Unable to find a type for ValueOutRange message [sensorId=$sensorId, currValue=$currValue]")
+            return
+        }
+
+        SEND_CHANNEL.send(buildValueOutOfRangeMessage(valueType.toString(), currValue, SERVER_NAME))
     }
 
 }

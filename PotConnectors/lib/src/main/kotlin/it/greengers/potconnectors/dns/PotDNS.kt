@@ -9,6 +9,10 @@ import java.nio.file.Paths
 
 interface PotDNS {
 
+    companion object {
+        @JvmStatic val SYSTEM_DNS : PotDNS = LocalPotDNS
+    }
+
     /**
      * Resolve a simbolic name to a SocketAddress
      *

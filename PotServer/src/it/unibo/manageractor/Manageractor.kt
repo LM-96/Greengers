@@ -17,13 +17,19 @@ class Manageractor ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( nam
 	@kotlinx.coroutines.ExperimentalCoroutinesApi			
 	override fun getBody() : (ActorBasicFsm.() -> Unit){
 		
-				val sensors = it.greengers.potserver.sensors.SensorFactory.getSensors()
-				val loadcount = it.greengers.potserver.utils.LoadCounter(sensors.map{it.id})
+				val SENS_IDS = it.greengers.potserver.sensors.SensorFactory.getSensorIds()
+				val loadcount = it.greengers.potserver.utils.LoadCounter(SENS_IDS)
+				val CORE = it.greengers.potserver.core.PotCore
+				val DESTINATION = ""
+				val TEMP_SENS_ID = `it.greengers`.potserver.sensors.SensorFactory.getMainId(`it.greengers`.potserver.sensors.SensorType.TEMPERATURE)
+				val HUM_SENS_ID = `it.greengers`.potserver.sensors.SensorFactory.getMainId(`it.greengers`.potserver.sensors.SensorType.HUMIDITY)
+				val BRI_SENS_ID = `it.greengers`.potserver.sensors.SensorFactory.getMainId(`it.greengers`.potserver.sensors.SensorType.BRIGHTNESS)
+				val CURR_PLANT = `it.greengers`.potserver.core.CurrentPlant
 		return { //this:ActionBasciFsm
 				state("s0") { //this:State
 					action { //it:State
 						 
-									`it.greengers`.potserver.core.CurrentPlant.loadCurrentPlant()
+									CURR_PLANT.loadCurrentPlant()
 									val err = `it.greengers`.potserver.core.Settings.load()
 									if(err != null) {
 										
@@ -66,6 +72,49 @@ class Manageractor ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( nam
 					action { //it:State
 						println("$name | Waiting...")
 					}
+					 transition(edgeName="t2",targetState="handleStateRequest",cond=whenDispatch("stateRequest"))
+					transition(edgeName="t3",targetState="updateState",cond=whenEvent("sensorValue"))
+					transition(edgeName="t4",targetState="changeCurrentPlant",cond=whenDispatch("changeCurrentPlant"))
+					transition(edgeName="t5",targetState="handleValueOutOfRange",cond=whenEvent("valueOutOfRange"))
+				}	 
+				state("updateState") { //this:State
+					action { //it:State
+						if( checkMsgContent( Term.createTerm("sensorValue(SENSOR_ID,CURR_VALUE)"), Term.createTerm("sensorValue"), 
+						                        currentMsg.msgContent()) ) { //set msgArgList
+								 `it.greengers`.potserver.plants.PlantUtils.updateCurrentPlantState(payloadArg(0), payloadArg(1))  
+						}
+						updateResourceRep( `it.greengers`.potserver.plants.PlantUtils.currentPlantWithStateToJSON()  
+						)
+					}
+					 transition( edgeName="goto",targetState="work", cond=doswitch() )
+				}	 
+				state("changeCurrentPlant") { //this:State
+					action { //it:State
+						if( checkMsgContent( Term.createTerm("changeCurrentPlant(PLANT_INFO)"), Term.createTerm("changeCurrentPlant"), 
+						                        currentMsg.msgContent()) ) { //set msgArgList
+								 `it.greengers`.potserver.plants.PlantUtils.changeCurrentPlantFromJSON(payloadArg(0))  
+								emit("polling", "polling(DOPOLLING)" ) 
+						}
+					}
+					 transition( edgeName="goto",targetState="work", cond=doswitch() )
+				}	 
+				state("handleStateRequest") { //this:State
+					action { //it:State
+						if( checkMsgContent( Term.createTerm("stateRequest(WHOHASREQUESTED)"), Term.createTerm("stateRequest"), 
+						                        currentMsg.msgContent()) ) { //set msgArgList
+								 CORE.sendState(payloadArg(0), CURR_PLANT.STATE)  
+						}
+					}
+					 transition( edgeName="goto",targetState="work", cond=doswitch() )
+				}	 
+				state("handleValueOutOfRange") { //this:State
+					action { //it:State
+						if( checkMsgContent( Term.createTerm("valueOutOfRange(SENSOR_ID,CURR_VALUE)"), Term.createTerm("valueOutOfRange"), 
+						                        currentMsg.msgContent()) ) { //set msgArgList
+								 CORE.sendValueOutOfRange(payloadArg(0), payloadArg(1))  
+						}
+					}
+					 transition( edgeName="goto",targetState="work", cond=doswitch() )
 				}	 
 				state("exit") { //this:State
 					action { //it:State
