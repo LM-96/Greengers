@@ -4,6 +4,12 @@ object SensorFactory {
 
     private val sensors = mutableMapOf<String, Sensor>()
 
+    init {
+        sensors["TEMP0"] = TemperatureSensor("TEMP0")
+        sensors["BRIGHT0"] = BrightnessSensor("BRIGHT0")
+        sensors["HUMIDITY0"] = HumiditySensor("HUMIDITY0")
+    }
+
     fun getSensor(id : String) : Sensor? {
         return sensors[id]
     }
@@ -12,7 +18,7 @@ object SensorFactory {
         return sensors[id]?.type
     }
 
-    fun getMainId(type : SensorType) : String? {
+    fun getMainId(type : SensorType) : String {
         return when(type) {
             SensorType.TEMPERATURE -> "TEMP0"
             SensorType.BRIGHTNESS -> "BRIGHT0"

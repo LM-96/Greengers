@@ -18,7 +18,7 @@ class Humidityactor ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( na
 	override fun getBody() : (ActorBasicFsm.() -> Unit){
 		 
 				lateinit var SENSOR_ID : String
-				val CURRENT_PLANT = `it.greengers`.potserver.core.CurrentPlant.currentPlant
+				val CURRENT_PLANT = `it.greengers`.potserver.core.CurrentPlant.CURRENT_PLANT
 				lateinit var SENSOR : `it.greengers`.potserver.sensors.InputSensor<Double>
 				var CURR_VALUE : Double = 0.0
 				var POLLING_TIME : Long = 5000

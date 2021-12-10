@@ -104,7 +104,7 @@ QActor manageractor context ctxpotserver {
 QActor temperatureactor context ctxpotserver {
 	[# 
 		lateinit var SENSOR_ID : String
-		val CURRENT_PLANT = `it.greengers`.potserver.core.CurrentPlant.currentPlant
+		val CURRENT_PLANT = `it.greengers`.potserver.core.CurrentPlant.CURRENT_PLANT
 		lateinit var SENSOR : `it.greengers`.potserver.sensors.InputSensor<Double>
 		var CURR_VALUE : Double = 0.0
 		var POLLING_TIME : Long = 5000
@@ -179,7 +179,7 @@ QActor temperatureactor context ctxpotserver {
 QActor humidityactor context ctxpotserver {
 	[# 
 		lateinit var SENSOR_ID : String
-		val CURRENT_PLANT = `it.greengers`.potserver.core.CurrentPlant.currentPlant
+		val CURRENT_PLANT = `it.greengers`.potserver.core.CurrentPlant.CURRENT_PLANT
 		lateinit var SENSOR : `it.greengers`.potserver.sensors.InputSensor<Double>
 		var CURR_VALUE : Double = 0.0
 		var POLLING_TIME : Long = 5000
@@ -254,7 +254,7 @@ QActor humidityactor context ctxpotserver {
 QActor brightnessactor context ctxpotserver {
 	[# 
 		lateinit var SENSOR_ID : String
-		val CURRENT_PLANT = `it.greengers`.potserver.core.CurrentPlant.currentPlant
+		val CURRENT_PLANT = `it.greengers`.potserver.core.CurrentPlant.CURRENT_PLANT
 		lateinit var SENSOR : `it.greengers`.potserver.sensors.InputSensor<Double>
 		var CURR_VALUE : Double = 0.0
 		var POLLING_TIME : Long = 5000
