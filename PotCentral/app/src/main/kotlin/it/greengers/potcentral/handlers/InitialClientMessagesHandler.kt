@@ -1,14 +1,29 @@
 package it.greengers.potcentral.handlers
 
 import it.greengers.potcentral.core.PotContextContainer
+import it.greengers.potconnectors.connection.ConnectionManager
 import it.greengers.potconnectors.connection.PotConnection
 import it.greengers.potconnectors.messages.BuiltInCommunicationType
 import it.greengers.potconnectors.messages.CommunicationMessage
 import it.greengers.potconnectors.messages.PotMessage
 import it.greengers.potconnectors.messages.PotMessageType
 
+private class InitialDisconnectionHandler(
+    private val messagesHandler: ConnectionMessagesHandler, potConnection: PotConnection, autoAttach : Boolean = true)
+    : AbstractDisconnectionHandler(potConnection, autoAttach) {
+
+    override suspend fun onDisconnection(reason: String) {
+        detachOnDisconnection()
+        messagesHandler.detachOnMessage()
+        println("\t-- Disconnected [$connection] --")
+    }
+
+}
+
 class InitialClientMessagesHandler(potConnection: PotConnection, autoAttach : Boolean = true)
 : AbstractConnectionMessagesHandler(potConnection, autoAttach) {
+
+    private val initialDisconnectionHandler = InitialDisconnectionHandler(this, potConnection, autoAttach)
 
     override suspend fun onMessage(msg: PotMessage) {
         if(msg.type == PotMessageType.COMMUNICATION) {
@@ -39,8 +54,10 @@ class InitialClientMessagesHandler(potConnection: PotConnection, autoAttach : Bo
         val ctx = PotContextContainer.getContext(potId)
         if(ctx != null) {
             detachOnMessage()
-            val clientHandler = ClientMessagesHandler(potConnection)
-            val handledConnection = potConnection.handleConnection(clientHandler)
+            initialDisconnectionHandler.detachOnDisconnection()
+            val msgHandler = ClientMessagesHandler(potConnection)
+            val discHandler = ClientDisconnectionHandler(potConnection)
+            val handledConnection = potConnection.handleConnection(msgHandler, discHandler)
             if(potConnection.destinationName == potId)
                 ctx.potConnection = handledConnection
             else
@@ -66,4 +83,12 @@ class InitialClientMessagesHandler(potConnection: PotConnection, autoAttach : Bo
         val ctx = PotContextContainer.closeContext(potId)
         println("De-Registered PotContext for Pot[$potId]")
     }
+}
+
+fun PotConnection.attachInitialHandler() {
+    InitialClientMessagesHandler(this)
+}
+
+suspend fun PotConnection.removeFromManagerOnDisconnection() {
+    ConnectionManager.deleteConnection(destinationName)
 }

@@ -7,6 +7,7 @@ import it.greengers.potconnectors.messages.*
 import it.greengers.potconnectors.utils.Reconnector
 import it.greengers.potconnectors.utils.withError
 import it.greengers.potserver.plants.PlantState
+import it.greengers.potserver.plants.PlantUtils
 import it.greengers.potserver.sensors.SensorFactory
 import it.unibo.kactor.MsgUtil
 import it.unibo.kactor.QakContext
@@ -126,7 +127,7 @@ object PotCore {
         if(type.isPresent) {
             when(type.get()) {
                 BuiltInCommunicationType.PLANTCHANGE -> {
-                    val applMessage = MsgUtil.buildDispatch("potcore", "changeCurrentPlant", message.communication, MANAGER_ACTOR.name)
+                    val applMessage = MsgUtil.buildDispatch(message.senderName, "changeCurrentPlant", message.communication, MANAGER_ACTOR.name)
                     println("----> Redirecting plant change command to the actor $MANAGER_ACTOR")
                     MsgUtil.sendMsg(applMessage, MANAGER_ACTOR)
                 }
@@ -165,6 +166,10 @@ object PotCore {
 
     suspend fun sendState(destinationName : String, state : PlantState = CurrentPlant.STATE) {
         SEND_CHANNEL.send(buildStateReplyMessage(state.temperature, state.brightness, state.humidity, -1.0, destinationName))
+    }
+
+    suspend fun sendCompleteState() {
+        SEND_CHANNEL.send(buildCommunicationMessage(BuiltInCommunicationType.COMPLETE_STATE, PlantUtils.currentPlantWithStateToJSON(), SERVER_NAME))
     }
 
     suspend fun sendValueOutOfRange(sensorId : String, currValue : String) {

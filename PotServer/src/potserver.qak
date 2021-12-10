@@ -80,6 +80,7 @@ QActor manageractor context ctxpotserver {
 		onMsg(changeCurrentPlant : changeCurrentPlant) {
 			[# `it.greengers`.potserver.plants.PlantUtils.changeCurrentPlantFromJSON(payloadArg(0)) #]
 			emit polling : polling(DOPOLLING)
+			[# CORE.sendCompleteState() #]
 		}
 	} Goto work
 	

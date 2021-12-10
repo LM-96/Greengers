@@ -5,7 +5,7 @@ import kotlinx.coroutines.runBlocking
 import kotlin.reflect.KSuspendFunction1
 
 abstract class AbstractDisconnectionHandler(
-    private val connection : PotConnection,
+    protected val connection : PotConnection,
     autoAttach : Boolean = true
 ) : DisconnectionHandler {
 

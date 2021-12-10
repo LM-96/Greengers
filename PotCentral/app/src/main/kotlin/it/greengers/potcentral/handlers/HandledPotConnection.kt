@@ -1,20 +1,13 @@
 package it.greengers.potcentral.handlers
 
-import it.greengers.potcentral.core.PotContext
+import it.greengers.potconnectors.connection.ConnectionManager
 import it.greengers.potconnectors.connection.PotConnection
 
 class HandledPotConnection(
     val connection : PotConnection,
-    private var messageHandler : ConnectionMessagesHandler = noOpMessagesHandlerFor(connection, false),
-    private var disconnectionHandler : DisconnectionHandler = noOpDisconnectionHandlerFor(connection, false)
-) {
-
-    suspend fun switchMessagesHandler(messageHandler: ConnectionMessagesHandler, autoAttach : Boolean = true) {
-        this.messageHandler.detachOnMessage()
-        this.messageHandler = messageHandler
-    }
-
-}
+    var messageHandler : ConnectionMessagesHandler = noOpMessagesHandlerFor(connection, false),
+    var disconnectionHandler : DisconnectionHandler = noOpDisconnectionHandlerFor(connection, false)
+)
 
 fun PotConnection.handleConnection(
     messageHandler : ConnectionMessagesHandler = noOpMessagesHandlerFor(this, false),

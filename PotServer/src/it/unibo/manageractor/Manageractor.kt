@@ -94,6 +94,7 @@ class Manageractor ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( nam
 						                        currentMsg.msgContent()) ) { //set msgArgList
 								 `it.greengers`.potserver.plants.PlantUtils.changeCurrentPlantFromJSON(payloadArg(0))  
 								emit("polling", "polling(DOPOLLING)" ) 
+								 CORE.sendCompleteState()  
 						}
 					}
 					 transition( edgeName="goto",targetState="work", cond=doswitch() )

@@ -6,6 +6,11 @@ package it.greengers.potcentral
 import io.ktor.network.selector.*
 import io.ktor.network.sockets.*
 import it.greengers.potcentral.core.PotContext
+import it.greengers.potcentral.handlers.InitialClientMessagesHandler
+import it.greengers.potcentral.handlers.attachInitialHandler
+import it.greengers.potcentral.handlers.handleConnection
+import it.greengers.potcentral.handlers.removeFromManagerOnDisconnection
+import it.greengers.potconnectors.connection.ConnectionManager
 import it.greengers.potconnectors.connection.potConnect
 import it.greengers.potconnectors.dns.LocalPotDNS
 import kotlinx.coroutines.*
@@ -22,8 +27,10 @@ fun main() {
         val server = aSocket(ActorSelectorManager(Dispatchers.IO)).tcp().bind(InetSocketAddress("127.0.0.1", 2323))
         while(true) {
             server.accept().potConnect {
+                ConnectionManager.register(it)
+                it.removeFromManagerOnDisconnection()
+                it.attachInitialHandler()
                 println("PotCentral | Accepted connection [$it]")
-
             }
         }
     }
