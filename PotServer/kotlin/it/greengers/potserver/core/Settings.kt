@@ -1,5 +1,6 @@
 package it.greengers.potserver.core
 
+import it.greengers.potconnectors.utils.withError
 import okhttp3.internal.toImmutableList
 import java.nio.file.Files
 import java.nio.file.Paths
@@ -10,6 +11,13 @@ object Settings {
 
     @JvmStatic val SETTINGS_FILE = "data/settings.props"
     private val props = Properties()
+
+    init {
+        withError(load()) {
+            loadDefauls()
+            persist()
+        }
+    }
 
     @JvmStatic fun load() : Error? {
         try {
@@ -52,7 +60,8 @@ object Settings {
         props.setProperty("bright-poll-time", "300000")
         props.setProperty("humidity-poll-time", "5000")
         props.setProperty("battery-critical-level", "20")
-        props.setProperty("main-server", "www.greengerspot.it")
+        props.setProperty("main-server-address", "www.greengerspot.it")
+        props.setProperty("main-server-port", "5555")
         persist()
     }
 

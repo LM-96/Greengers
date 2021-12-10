@@ -28,7 +28,7 @@ class Humidityactor ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( na
 					action { //it:State
 						println("TemperatureActor: started")
 					}
-					 transition(edgeName="t6",targetState="getSensor",cond=whenEvent("loadComplete"))
+					 transition(edgeName="t11",targetState="getSensor",cond=whenEvent("loadComplete"))
 				}	 
 				state("getSensor") { //this:State
 					action { //it:State
@@ -42,7 +42,7 @@ class Humidityactor ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( na
 									} else {
 										SENSOR_ID = loadId!!
 									
-										val loadSensor = `it.greengers`.potserver.sensors.SensorFactory.getInputSensor<Double>(SENSOR_ID)
+										val loadSensor = `it.greengers`.potserver.sensors.SensorFactory.getSensor(SENSOR_ID) as `it.greengers`.potserver.sensors.InputSensor<Double>
 										if(loadSensor == null) {
 						forward("sensorError", "sensorError($SENSOR_ID,ERROR_LOADING)" ,"manageractor" ) 
 						
@@ -63,14 +63,16 @@ class Humidityactor ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( na
 						stateTimer = TimerActor("timer_work", 
 							scope, context!!, "local_tout_humidityactor_work", POLLING_TIME )
 					}
-					 transition(edgeName="t07",targetState="polling",cond=whenTimeout("local_tout_humidityactor_work"))   
-					transition(edgeName="t08",targetState="handleReadRequest",cond=whenRequest("sensorRead"))
-					transition(edgeName="t09",targetState="exit",cond=whenEvent("criticalErr"))
+					 transition(edgeName="t012",targetState="polling",cond=whenTimeout("local_tout_humidityactor_work"))   
+					transition(edgeName="t013",targetState="polling",cond=whenEvent("polling"))
+					transition(edgeName="t014",targetState="handleReadRequest",cond=whenRequest("sensorRead"))
+					transition(edgeName="t015",targetState="exit",cond=whenEvent("criticalErr"))
 				}	 
 				state("polling") { //this:State
 					action { //it:State
 						 CURR_VALUE = SENSOR.read()  
 						println("$name | Read humidity from sensor [$CURR_VALUE]")
+						emit("sensorValue", "sensorValue($SENSOR_ID,$CURR_VALUE)" ) 
 						 if(CURRENT_PLANT.optimalPlantCondition.humidityRange.isOutOfRange(CURR_VALUE)) {  
 						emit("valueOutOfRange", "valueOutOfRange($SENSOR_ID,$CURR_VALUE)" ) 
 						 }  

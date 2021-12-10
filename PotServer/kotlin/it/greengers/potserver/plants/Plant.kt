@@ -1,8 +1,6 @@
 package it.greengers.potserver.plants
 
-import it.greengers.potserver.sensors.ValueRange
-
-class Plant(
+data class Plant(
     val id : String,
     val name : String,
     val scientificName : String,
@@ -13,6 +11,4 @@ class Plant(
     val genus : String,
     val species : String,
     val optimalPlantCondition: OptimalPlantCondition
-){
-
-}
+)

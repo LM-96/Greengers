@@ -18,19 +18,30 @@ interface PotConnection {
     val type : PotConnectionType
 
     /**
-     * Connect this PotConnection to a specified IP and port
+     * Connect this PotConnection to a specified IP and port.
+     * If the connection is successful, the referred DNS will be
+     * updated with the current name and address of the end-point
      *
      * @param ip the IP address of the other end-point
      * @param port the port you want to connect
+     * @param updateDNS indicate whether the DNS needs to be updated with
+     * the endpoint name and address after a successful connection
      *
      * @return a null error if the connection was successful or a non-null
      * error otherwise
      */
-    suspend fun connect(ip : String, port : Int) : Error?
+    suspend fun connect(ip : String, port : Int, updateDNS: Boolean = true) : Error?
+
+    /**
+     * Connect this PotConnection using the previous DNS to resolve the destination
+     * IP and PORT. If no DNS was previously used, then the LocalPotDNS will be used
+     */
+    suspend fun connect() : Error?
 
     /**
      * Connect this PotConnection using a DNS to resolve the destination
-     * IP and PORT. If a PotDNS is not specified, the LocalPotDNS will be used
+     * IP and PORT. If a PotDNS is not specified, the LocalPotDNS will be used.
+     * The specified DNS is saved for next connection
      *
      * @param dns the PotDNS implementation that must be used to resolve the destination
      * name
@@ -38,17 +49,21 @@ interface PotConnection {
      * @return a null error if the connection was successful or a non-null
      * error otherwise
      */
-    suspend fun connect(dns : PotDNS = LocalPotDNS) : Error?
+    suspend fun connect(dns : PotDNS) : Error?
 
     /**
-     * Connect this PotConnection to a specified SocketAddress
+     * Connect this PotConnection to a specified SocketAddress.
+     * If the connection is successful, the referred DNS will be
+     * updated with the current name and address of the end-point
      *
      * @param address the SocketAddress of the other end-point
+     * @param updateDNS indicate whether the DNS needs to be updated with
+     * the endpoint name and address after a successful connection
      *
      * @return a null error if the connection was successful or a non-null
      * error otherwise
      */
-    suspend fun connect(address : SocketAddress) : Error?
+    suspend fun connect(address : SocketAddress, updateDNS : Boolean = true) : Error?
 
     /**
      * Return true if this connection is already connected with the destinationName
@@ -65,7 +80,9 @@ interface PotConnection {
     suspend fun getConnectedAdress() : SocketAddress?
 
     /**
-     * Disconnect this connection
+     * Disconnect this connection.
+     * This method also release all resource used by the
+     * connection such as listeners
      *
      * @param reason the reason of the disconnection
      * @return a not null error if fails, null if successful disconnected
@@ -118,6 +135,16 @@ interface PotConnection {
      * @return a not null error if the message is not successfully sent or null otherwise
      */
     suspend fun sendAsyncCommunication(communicationType : String, communication : String) : Error?
+
+    /**
+     * Send a CommunicationMessage using this connection. This send is asynchronous, so this function
+     * return after the message has been sent
+     *
+     * @param communicationType the type of the communication
+     * @param communication a string that represents the communication
+     * @return a not null error if the message is not successfully sent or null otherwise
+     */
+    suspend fun sendAsyncCommunication(communicationType : BuiltInCommunicationType, communication : String) : Error?
 
     /**
      * Send an ActorMessage using this connection. This send is asynchronous, so this function

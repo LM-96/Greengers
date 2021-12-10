@@ -1,12 +1,16 @@
 package it.greengers.potconnectors.connection
 
+import io.ktor.utils.io.*
 import it.greengers.potconnectors.dns.LocalPotDNS
 import it.greengers.potconnectors.dns.PotDNS
 import it.greengers.potconnectors.messages.PotMessage
 import it.greengers.potconnectors.utils.*
 import kotlinx.coroutines.CoroutineName
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import org.apache.logging.log4j.kotlin.loggerOf
 import java.util.*
 import kotlin.concurrent.thread
@@ -19,18 +23,23 @@ object ConnectionManager {
 
     @JvmStatic val LOGGER = loggerOf(this::class.java)
 
-    private val CONNECTIONS = mutableMapOf<String, PotConnection>()
+    @JvmStatic private val CONNECTIONS = mutableMapOf<String, PotConnection>()
+    @JvmStatic private val MUTEX = Mutex()
     private val SCOPE = CoroutineScope(EmptyCoroutineContext + CoroutineName(this.javaClass.simpleName))
 
     init {
         Runtime.getRuntime().addShutdownHook(
             thread {
+                LOGGER.info("Shutdown Hook")
                 runBlocking {
                     withLoggedException(LOGGER) {
                         CONNECTIONS.values.forEach {
                             it.disconnect("Closing application")
                             LOGGER.info("Closed connection [${it}]")
                         }
+
+                        SCOPE.cancel()
+                        LOGGER.info("Scope cancelled")
                     }
                 }
             }
@@ -38,7 +47,8 @@ object ConnectionManager {
     }
 
     /**
-     * Request a new connection to a given name using a dns.
+     * Request a new connection to a given name. Notice that the connection is
+     * not connected.
      *
      * @param destinationName the name of the destination
      * @param type the type of the connection (if not specified, it will be used the defult type)
@@ -47,21 +57,25 @@ object ConnectionManager {
      *
      * @return a FunResult containing the opened connection or an error if fails
      */
-    suspend fun requestConnection(destinationName : String, type : PotConnectionType = PotConnectionType.KTOR, dns: PotDNS = LocalPotDNS, scope : CoroutineScope = SCOPE) : FunResult<PotConnection> {
-        val res : FunResult<PotConnection>  = when(type) {
-            PotConnectionType.KTOR -> newConnectedKtorConnection(destinationName, dns, scope)
-            PotConnectionType.SOCKET_IO -> newConnectedSocketIOConnection(destinationName, dns, scope)
-            else -> return FunResult.fromErrorString("Requested unsupported type connection")
+    suspend fun newConnection(destinationName : String, type : PotConnectionType = PotConnectionType.KTOR, scope : CoroutineScope = SCOPE) : PotConnection {
+        val res : PotConnection  = when(type) {
+            PotConnectionType.KTOR -> KtorPotConnection(destinationName, scope)
+            PotConnectionType.SOCKET_IO -> SocketIOPotConnection(destinationName, scope)
         }
 
-        res.withError {
-            LOGGER.error("Unable to open connection to $destinationName:\n${it.stackTraceToString()}")
-        }.withValue {
-            CONNECTIONS[destinationName] = it
-            LOGGER.info("Opened connection [$it]")
-        }
+        MUTEX.withLock { CONNECTIONS[destinationName] = res }
+        LOGGER.info("Opened connection [$res]")
 
         return res
+    }
+
+    /**
+     * Register a connection to the manager
+     *
+     * @param connection the connection to register
+     */
+    suspend fun register(connection: PotConnection) {
+        MUTEX.withLock { CONNECTIONS[connection.destinationName] = connection }
     }
 
     /**
@@ -71,8 +85,10 @@ object ConnectionManager {
      * @param destinationName the name of the end-point of the connection
      * @return an error if something fails or null if successfull
      */
-    suspend fun requestDisconnection(destinationName: String) : Error? {
-        val conn = CONNECTIONS.remove(destinationName)
+    suspend fun deleteConnection(destinationName: String) : Error? {
+        val conn : PotConnection? = MUTEX.withLock {
+            CONNECTIONS.remove(destinationName)
+        }
         withNullValue(conn) {
             LOGGER.info("No opened connection for $destinationName")
             return null
@@ -86,8 +102,10 @@ object ConnectionManager {
      * @param destinationName the name associated to the connection
      * @return an Optional containing the connection if previously opened
      */
-    fun getConnection(destinationName: String) : Optional<PotConnection> {
-        return Optional.ofNullable(CONNECTIONS[destinationName])
+    suspend fun getConnection(destinationName: String) : Optional<PotConnection> {
+        return MUTEX.withLock {
+            Optional.ofNullable(CONNECTIONS[destinationName])
+        }
     }
 
     /**
@@ -98,7 +116,7 @@ object ConnectionManager {
      * @return an error if something fails or null if successfull
      */
     suspend fun sendAsync(message : PotMessage) : Error? {
-        val conn = CONNECTIONS[message.destinationName]
+        val conn = MUTEX.withLock { CONNECTIONS[message.destinationName] }
         withNullValue(conn) {
             LOGGER.info("Unable to perform a send: no opened connection for ${message.destinationName}")
         }
@@ -115,8 +133,13 @@ object ConnectionManager {
      * @return the message received if successfull or an error if something fails
      */
     suspend fun receiveFrom(name: String) : FunResult<PotMessage> {
-        val conn = CONNECTIONS[name] ?: return FunResult(Error("No opened connection for [$name]"))
-        val listener = SingleMessageListener(conn)
+        val conn = MUTEX.withLock { CONNECTIONS[name] }
+        withNullValue(conn) {
+            LOGGER.info("No opened connection for $name")
+            return FunResult.fromErrorString("ConnectonManager: no opened connection for $name")
+        }
+
+        val listener = SingleMessageListener(conn!!)
         return listener.waitMessage()
     }
 

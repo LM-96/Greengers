@@ -3,7 +3,7 @@ package it.greengers.potserver.sensors
 import java.io.IOException
 import kotlin.jvm.Throws
 
-abstract class OutputSensor<T>(id : String, name : String, enabled : Boolean = true) : Sensor(id, name, enabled) {
+abstract class OutputSensor<T>(id : String, name : String, type : SensorType, enabled : Boolean = true) : Sensor(id, name, type, enabled) {
 
     @Throws(IOException::class)
     protected abstract fun handleWriteRequest(data : T)

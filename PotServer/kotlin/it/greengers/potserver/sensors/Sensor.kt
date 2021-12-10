@@ -6,6 +6,7 @@ import java.util.concurrent.atomic.AtomicBoolean
 abstract class Sensor(
     val sensorName : String,
     val id : String,
+    val type : SensorType,
     protected var enabled : Boolean = true
 ) : Closeable, AutoCloseable {
 
