@@ -42,14 +42,6 @@ class KtorPotConnection(
 
     companion object {
         @JvmStatic val LOGGER = loggerOf(this::class.java)
-
-        init {
-            Runtime.getRuntime().addShutdownHook(
-                thread {
-                    SCOPE.cancel()
-                }
-            )
-        }
     }
 
     private var job : Job? = null

@@ -94,3 +94,10 @@ jar {
     duplicatesStrategy(DuplicatesStrategy.EXCLUDE)
 
 }
+
+task copyJarToBin {
+    copy {
+        from 'build/libs'
+        into "../../klibs"
+    }
+}

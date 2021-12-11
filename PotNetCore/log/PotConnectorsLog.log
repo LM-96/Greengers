@@ -1,14 +1,97 @@
-2021-12-11 12:29:42.726 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - 
+2021-12-11 13:22:46.398 [main] ERROR it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotNetCore | Unable to start temperature monitoring system: java.lang.Error: Sensor already enabled
+2021-12-11 13:22:46.398 [DefaultDispatcher-worker-2] INFO  it.greengers.potnetcore.sensors.polling.AbstractPollingJob - AbstractPollingJob[BRIGHT0] | Started coroutine StandaloneCoroutine{Active}@6ff38985
+2021-12-11 13:22:46.408 [main] ERROR it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotNetCore | Unable to start humidity monitoring system: java.lang.Error: Sensor already enabled
+2021-12-11 13:22:46.398 [DefaultDispatcher-worker-1] INFO  it.greengers.potnetcore.sensors.polling.AbstractPollingJob - AbstractPollingJob[TEMP0] | Started coroutine StandaloneCoroutine{Active}@7fd6be5c
+2021-12-11 13:22:46.408 [main] ERROR it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotNetCore | Unable to start brightness monitoring system: java.lang.Error: Sensor already enabled
+2021-12-11 13:22:46.398 [DefaultDispatcher-worker-3] INFO  it.greengers.potnetcore.sensors.polling.AbstractPollingJob - AbstractPollingJob[HUMIDITY0] | Started coroutine StandaloneCoroutine{Active}@5153ed6f
+2021-12-11 13:22:46.408 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - 
 PotNetCore | DNS CONFIGURATION *******************************
-2021-12-11 12:29:42.735 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotNetCore | Loading DNS...
-2021-12-11 12:29:42.849 [main] ERROR it.greengers.potconnectors.dns.LocalPotDNS - java.nio.file.NoSuchFileException: conf\dns.config
-2021-12-11 12:29:42.853 [main] INFO  it.greengers.potconnectors.dns.LocalPotDNS - Generated default configuration SerializableDNS(APPLICATION_NAME='unknown', ADDRESSES={})
-2021-12-11 12:29:42.884 [main] INFO  it.greengers.potconnectors.dns.LocalPotDNS - Written actual DNS configuration into config file [conf\dns.config]
-2021-12-11 12:29:42.894 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotNetCore | Central Server address is not into DNS. Will be used the default configuration
-2021-12-11 12:29:43.012 [main] INFO  it.greengers.potconnectors.dns.LocalPotDNS - Added entry ["main-server"-{www.greengerspot.it:5555}] to local DNS
-2021-12-11 12:29:43.013 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotNetCore | Added default central server address and port to the DNS
-2021-12-11 12:29:43.023 [main] INFO  it.greengers.potconnectors.dns.LocalPotDNS - Written actual DNS configuration into config file [conf\dns.config]
-2021-12-11 12:29:43.024 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotNetCore | DNS backup successfully done
-2021-12-11 12:29:43.025 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotNetCore | DNS Loaded. Central server address: [Value[www.greengerspot.it:5555]
-2021-12-11 12:29:43.026 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - 
+2021-12-11 13:22:46.408 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotNetCore | Loading DNS...
+2021-12-11 13:22:46.481 [main] ERROR it.greengers.potconnectors.dns.LocalPotDNS - java.lang.RuntimeException: Failed to invoke public java.net.SocketAddress() with no args
+2021-12-11 13:22:46.481 [main] INFO  it.greengers.potconnectors.dns.LocalPotDNS - Generated default configuration SerializableDNS(APPLICATION_NAME='unknown', ADDRESSES={})
+2021-12-11 13:22:46.489 [main] INFO  it.greengers.potconnectors.dns.LocalPotDNS - Written actual DNS configuration into config file [conf\dns.config]
+2021-12-11 13:22:46.496 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotNetCore | Central Server address is not into DNS. Will be used the default configuration
+2021-12-11 13:22:46.502 [main] INFO  it.greengers.potconnectors.dns.LocalPotDNS - Added entry ["main-server"-{www.greengerspot.it/10.0.0.1:5555}] to local DNS
+2021-12-11 13:22:46.502 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotNetCore | Added default central server address and port to the DNS
+2021-12-11 13:22:46.508 [main] INFO  it.greengers.potconnectors.dns.LocalPotDNS - Written actual DNS configuration into config file [conf\dns.config]
+2021-12-11 13:22:46.508 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotNetCore | DNS backup successfully done
+2021-12-11 13:22:46.508 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotNetCore | DNS Loaded. Central server address: [Value[www.greengerspot.it/10.0.0.1:5555]
+2021-12-11 13:22:46.508 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - 
 PotCore | CONNECTION TO CENTRAL SERVER ********************
+2021-12-11 13:22:46.689 [main] INFO  it.greengers.potconnectors.connection.ConnectionManager - Opened connection [AbstractPotConnection(destinationName='main-server', type=KTOR, connectedAddress=null)]
+2021-12-11 13:22:46.690 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotCore | Instantiated connection to the central server
+2021-12-11 13:22:46.693 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotCore | Message listener attached
+2021-12-11 13:22:46.695 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotCore | Trying to connect...
+2021-12-11 13:22:46.697 [main] INFO  it.greengers.potconnectors.connection.KtorPotConnection - Connecting to [www.greengerspot.it/10.0.0.1:5555]
+2021-12-11 13:23:07.768 [main] ERROR it.greengers.potconnectors.connection.KtorPotConnection - java.net.ConnectException: Connection timed out: no further information
+	at java.base/sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:779)
+	at io.ktor.network.sockets.SocketImpl.connect$ktor_network(SocketImpl.kt:38)
+	at io.ktor.network.sockets.SocketImpl$connect$1.invokeSuspend(SocketImpl.kt)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
+	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:106)
+	at kotlinx.coroutines.EventLoopImplBase.processNextEvent(EventLoop.common.kt:277)
+	at kotlinx.coroutines.BlockingCoroutine.joinBlocking(Builders.kt:87)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking(Builders.kt:61)
+	at kotlinx.coroutines.BuildersKt.runBlocking(Unknown Source)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking$default(Builders.kt:40)
+	at kotlinx.coroutines.BuildersKt.runBlocking$default(Unknown Source)
+	at it.greengers.potnetcore.controller.PotNetCoreCoreCoreController.<clinit>(PotNetCoreController.kt:40)
+	at it.greengers.potnetcore.PotNetCoreApplKt.main(PotNetCoreAppl.kt:10)
+	at it.greengers.potnetcore.PotNetCoreApplKt.main(PotNetCoreAppl.kt)
+
+2021-12-11 13:23:07.768 [main] ERROR it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - ----> Connection error: java.net.ConnectException: Connection timed out: no further information
+	at java.base/sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:779)
+	at io.ktor.network.sockets.SocketImpl.connect$ktor_network(SocketImpl.kt:38)
+	at io.ktor.network.sockets.SocketImpl$connect$1.invokeSuspend(SocketImpl.kt)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
+	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:106)
+	at kotlinx.coroutines.EventLoopImplBase.processNextEvent(EventLoop.common.kt:277)
+	at kotlinx.coroutines.BlockingCoroutine.joinBlocking(Builders.kt:87)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking(Builders.kt:61)
+	at kotlinx.coroutines.BuildersKt.runBlocking(Unknown Source)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking$default(Builders.kt:40)
+	at kotlinx.coroutines.BuildersKt.runBlocking$default(Unknown Source)
+	at it.greengers.potnetcore.controller.PotNetCoreCoreCoreController.<clinit>(PotNetCoreController.kt:40)
+	at it.greengers.potnetcore.PotNetCoreApplKt.main(PotNetCoreAppl.kt:10)
+	at it.greengers.potnetcore.PotNetCoreApplKt.main(PotNetCoreAppl.kt)
+
+2021-12-11 13:23:09.776 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotCore | Trying to connect...
+2021-12-11 13:23:09.777 [main] INFO  it.greengers.potconnectors.connection.KtorPotConnection - Connecting to [www.greengerspot.it/10.0.0.1:5555]
+2021-12-11 13:23:30.817 [main] ERROR it.greengers.potconnectors.connection.KtorPotConnection - java.net.ConnectException: Connection timed out: no further information
+	at java.base/sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:779)
+	at io.ktor.network.sockets.SocketImpl.connect$ktor_network(SocketImpl.kt:38)
+	at io.ktor.network.sockets.SocketImpl$connect$1.invokeSuspend(SocketImpl.kt)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
+	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:106)
+	at kotlinx.coroutines.EventLoopImplBase.processNextEvent(EventLoop.common.kt:277)
+	at kotlinx.coroutines.BlockingCoroutine.joinBlocking(Builders.kt:87)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking(Builders.kt:61)
+	at kotlinx.coroutines.BuildersKt.runBlocking(Unknown Source)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking$default(Builders.kt:40)
+	at kotlinx.coroutines.BuildersKt.runBlocking$default(Unknown Source)
+	at it.greengers.potnetcore.controller.PotNetCoreCoreCoreController.<clinit>(PotNetCoreController.kt:40)
+	at it.greengers.potnetcore.PotNetCoreApplKt.main(PotNetCoreAppl.kt:10)
+	at it.greengers.potnetcore.PotNetCoreApplKt.main(PotNetCoreAppl.kt)
+
+2021-12-11 13:23:30.818 [main] ERROR it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - ----> Connection error: java.net.ConnectException: Connection timed out: no further information
+	at java.base/sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:779)
+	at io.ktor.network.sockets.SocketImpl.connect$ktor_network(SocketImpl.kt:38)
+	at io.ktor.network.sockets.SocketImpl$connect$1.invokeSuspend(SocketImpl.kt)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
+	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:106)
+	at kotlinx.coroutines.EventLoopImplBase.processNextEvent(EventLoop.common.kt:277)
+	at kotlinx.coroutines.BlockingCoroutine.joinBlocking(Builders.kt:87)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking(Builders.kt:61)
+	at kotlinx.coroutines.BuildersKt.runBlocking(Unknown Source)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking$default(Builders.kt:40)
+	at kotlinx.coroutines.BuildersKt.runBlocking$default(Unknown Source)
+	at it.greengers.potnetcore.controller.PotNetCoreCoreCoreController.<clinit>(PotNetCoreController.kt:40)
+	at it.greengers.potnetcore.PotNetCoreApplKt.main(PotNetCoreAppl.kt:10)
+	at it.greengers.potnetcore.PotNetCoreApplKt.main(PotNetCoreAppl.kt)
+
+2021-12-11 13:23:32.826 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotCore | Trying to connect...
+2021-12-11 13:23:32.826 [main] INFO  it.greengers.potconnectors.connection.KtorPotConnection - Connecting to [www.greengerspot.it/10.0.0.1:5555]
