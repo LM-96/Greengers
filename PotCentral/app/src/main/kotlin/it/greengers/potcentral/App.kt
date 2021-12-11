@@ -24,7 +24,8 @@ fun main() {
     runBlocking {
         LocalPotDNS.setApplicationName("main-server")
         val port = 5555
-        val server = aSocket(ActorSelectorManager(Dispatchers.IO)).tcp().bind(InetSocketAddress("127.0.0.1", 2323))
+        val server = aSocket(ActorSelectorManager(Dispatchers.IO)).tcp().bind(InetSocketAddress("127.0.0.1", port))
+        println("Waiting for connection on ${server.localAddress}")
         while(true) {
             server.accept().potConnect {
                 ConnectionManager.register(it)
