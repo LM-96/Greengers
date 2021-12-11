@@ -55,7 +55,7 @@ dependencies {
     compile name: 'it.unibo.qakactor-2.4'
 
     //POT CONNECTORS
-    compile name: 'PotConnectors-1.4'
+    compile name: 'PotConnectors-1.5'
 
     //KTOR
     // https://mvnrepository.com/artifact/io.ktor/ktor-network
@@ -90,7 +90,6 @@ distZip {
     into("$baseName-$version/bin") {
         from '.'
         include 'data/*'
-        include '*.pl'
         include 'python/*'
     }
 }

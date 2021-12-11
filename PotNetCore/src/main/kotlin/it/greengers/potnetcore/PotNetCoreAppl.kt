@@ -3,8 +3,14 @@
  */
 package it.greengers.potnetcore
 
-import it.greengers.potnetcore.sensors.SensorFactory
+import it.greengers.potnetcore.controller.PotNetCoreCoreCoreController
+import kotlinx.coroutines.runBlocking
 
 fun main() {
-
+    PotNetCoreCoreCoreController.welcome()
+    println("PotNetCoreAppl | Application started")
+    runBlocking {
+        PotNetCoreCoreCoreController.TERMINATE_CHANNEL.receive()
+    }
+    println("PotNetCoreAppl | Application shuwdowned")
 }

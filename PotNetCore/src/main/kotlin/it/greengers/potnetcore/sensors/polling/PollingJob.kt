@@ -27,6 +27,6 @@ enum class PollingJobState {
     READY, WORKING, PAUSED, STOPPED
 }
 
-fun <T> InputSensor<T>.newPollingJob() : PollingJob<T> {
+fun <T> InputSensor<T>.newPollingJob() : SensorPollingJob<T> {
     return SensorPollingJob(this, PollingJob.POLLING_SCOPE)
 }

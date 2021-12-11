@@ -1,6 +1,7 @@
 package it.greengers.potnetcore.core
 
 import it.greengers.potconnectors.utils.FunResult
+import it.greengers.potconnectors.utils.toFunResult
 import it.greengers.potnetcore.sensors.Sensor
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -53,8 +54,7 @@ object MasterContext {
         }
         if(master == null)
             return FunResult.fromErrorString("Unable to find a master with id [${msg.destination}]")
-
-
+        return master.toFunResult()
     }
 
 }

@@ -22,7 +22,7 @@ repositories {
 	flatDir {   dirs '../../unibolibs', '../../klibs'	 }
 }
 
-group 'it.greengers.PotCentral'
+group 'PotNetCentral'
 version '1.0'
 sourceCompatibility = 11
 
@@ -58,7 +58,7 @@ dependencies {
     compile name: 'it.unibo.qakactor-2.4'
 	
 	//POT CONNECTORS
-	compile name: 'PotConnectors-1.4'
+	compile name: 'PotConnectors-1.5'
 
     //LOGGING
     // https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api-kotlin
@@ -80,14 +80,12 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClass = 'it.greengers.potcentral.AppKt'
+    mainClass = 'it.greengers.potcentral.PotNetCentralKt'
 }
 
 distZip {
     into("$baseName-$version/bin") {
         from '.'
-        include 'data/*'
-        include '*.pl'
-        include 'python/*'
+        include 'conf/*'
     }
 }

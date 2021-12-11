@@ -25,9 +25,23 @@ object CurrentPlant {
     }
 
     @JvmStatic
+    suspend fun <T> safeProduceWithCurrentPlant(action : (Plant) -> T) : T {
+        mutex.withLock {
+            return action.invoke(CURRENT_PLANT)
+        }
+    }
+
+    @JvmStatic
     suspend fun withSafeState(action : (PlantState) -> Unit) {
         mutex.withLock {
             action.invoke(STATE)
+        }
+    }
+
+    @JvmStatic
+    suspend fun <T> safeProduteWithState(action : (PlantState) -> T) : T {
+        mutex.withLock {
+            return action.invoke(STATE)
         }
     }
 

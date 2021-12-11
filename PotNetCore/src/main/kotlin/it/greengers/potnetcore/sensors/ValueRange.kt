@@ -11,4 +11,24 @@ class ValueRange<T> (
     fun isOutOfRange(value : T) : Boolean {
         return value !in min..max
     }
+
+    fun ifOutOfRange(value : T, action : (T) -> Unit) : ValueRange<T> {
+        if(value !in min..max)
+            action.invoke(value)
+
+        return this
+    }
+
+    fun ifInRange(value : T, action : (T) -> Unit) : ValueRange<T> {
+        if(value in min..max)
+            action.invoke(value)
+
+        return this
+    }
+
+    override fun toString(): String {
+        return "ValueRange[min=$min, max=$max]"
+    }
+
+
 }
