@@ -11,7 +11,7 @@ open class PythonDoubleInputSensor(
 ) : InputSensor<Double>(id, name, type) {
 
     override fun handleReadRequest(): Double {
-        val proc = Runtime.getRuntime().exec(script)
+        val proc = Runtime.getRuntime().exec("python3 $script")
         val reader = BufferedReader(InputStreamReader(proc.inputStream))
         val value = reader.readLine()
         val res : Double

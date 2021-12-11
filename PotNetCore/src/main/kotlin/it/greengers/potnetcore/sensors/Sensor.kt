@@ -30,6 +30,10 @@ abstract class Sensor(
         return Error("Sensor already disabled")
     }
 
+    fun isEnabled() : Boolean {
+        return enabled
+    }
+
     override fun toString(): String {
         return "Sensor(sensorName='$sensorName', id='$id', enabled=$enabled)"
     }

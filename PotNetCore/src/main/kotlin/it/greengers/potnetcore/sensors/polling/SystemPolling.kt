@@ -12,8 +12,10 @@ data class ManagedInputSensor<T>(
     val listener : PollingListener<T> = pollingJob.buildDefaultListener()
 ) {
     suspend fun enableAndStart() : Error? {
-        val error = sensor.enable()
-        if(error != null) return error
+        if(!sensor.isEnabled()) {
+            val error = sensor.enable()
+            if(error != null) return error
+        }
         return pollingJob.start()
 
     }

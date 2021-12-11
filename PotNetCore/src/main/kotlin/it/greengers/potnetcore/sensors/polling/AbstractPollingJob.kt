@@ -40,6 +40,7 @@ abstract class AbstractPollingJob<T>(val id: String, protected val scope : Corou
             var currState = stateChanges.receive()
             while (currState != PollingJobState.WORKING)
                 currState = stateChanges.receive()
+            LOGGER.info("AbstractPollingJob[$id] | Start polling")
             while (true) {
                 select<Unit> {
 

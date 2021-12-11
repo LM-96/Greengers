@@ -1,33 +1,48 @@
-2021-12-11 13:22:46.398 [main] ERROR it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotNetCore | Unable to start temperature monitoring system: java.lang.Error: Sensor already enabled
-2021-12-11 13:22:46.398 [DefaultDispatcher-worker-2] INFO  it.greengers.potnetcore.sensors.polling.AbstractPollingJob - AbstractPollingJob[BRIGHT0] | Started coroutine StandaloneCoroutine{Active}@6ff38985
-2021-12-11 13:22:46.408 [main] ERROR it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotNetCore | Unable to start humidity monitoring system: java.lang.Error: Sensor already enabled
-2021-12-11 13:22:46.398 [DefaultDispatcher-worker-1] INFO  it.greengers.potnetcore.sensors.polling.AbstractPollingJob - AbstractPollingJob[TEMP0] | Started coroutine StandaloneCoroutine{Active}@7fd6be5c
-2021-12-11 13:22:46.408 [main] ERROR it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotNetCore | Unable to start brightness monitoring system: java.lang.Error: Sensor already enabled
-2021-12-11 13:22:46.398 [DefaultDispatcher-worker-3] INFO  it.greengers.potnetcore.sensors.polling.AbstractPollingJob - AbstractPollingJob[HUMIDITY0] | Started coroutine StandaloneCoroutine{Active}@5153ed6f
-2021-12-11 13:22:46.408 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - 
+2021-12-11 15:28:29.434 [DefaultDispatcher-worker-3] INFO  it.greengers.potnetcore.sensors.polling.AbstractPollingJob - AbstractPollingJob[HUMIDITY0] | Started coroutine StandaloneCoroutine{Active}@4eb71b4
+2021-12-11 15:28:29.434 [DefaultDispatcher-worker-2] INFO  it.greengers.potnetcore.sensors.polling.AbstractPollingJob - AbstractPollingJob[TEMP0] | Started coroutine StandaloneCoroutine{Active}@2ca45ab8
+2021-12-11 15:28:29.437 [DefaultDispatcher-worker-1] INFO  it.greengers.potnetcore.sensors.polling.AbstractPollingJob - AbstractPollingJob[BRIGHT0] | Started coroutine StandaloneCoroutine{Active}@5f941935
+2021-12-11 15:28:29.447 [DefaultDispatcher-worker-2] INFO  it.greengers.potnetcore.sensors.polling.AbstractPollingJob - AbstractPollingJob[TEMP0] | Start polling
+2021-12-11 15:28:29.447 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotNetCore | temperature monitoring system started
+2021-12-11 15:28:29.448 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotNetCore | humidity monitoring system started
+2021-12-11 15:28:29.448 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotNetCore | brightness monitoring system started
+2021-12-11 15:28:29.449 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - 
 PotNetCore | DNS CONFIGURATION *******************************
-2021-12-11 13:22:46.408 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotNetCore | Loading DNS...
-2021-12-11 13:22:46.481 [main] ERROR it.greengers.potconnectors.dns.LocalPotDNS - java.lang.RuntimeException: Failed to invoke public java.net.SocketAddress() with no args
-2021-12-11 13:22:46.481 [main] INFO  it.greengers.potconnectors.dns.LocalPotDNS - Generated default configuration SerializableDNS(APPLICATION_NAME='unknown', ADDRESSES={})
-2021-12-11 13:22:46.489 [main] INFO  it.greengers.potconnectors.dns.LocalPotDNS - Written actual DNS configuration into config file [conf\dns.config]
-2021-12-11 13:22:46.496 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotNetCore | Central Server address is not into DNS. Will be used the default configuration
-2021-12-11 13:22:46.502 [main] INFO  it.greengers.potconnectors.dns.LocalPotDNS - Added entry ["main-server"-{www.greengerspot.it/10.0.0.1:5555}] to local DNS
-2021-12-11 13:22:46.502 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotNetCore | Added default central server address and port to the DNS
-2021-12-11 13:22:46.508 [main] INFO  it.greengers.potconnectors.dns.LocalPotDNS - Written actual DNS configuration into config file [conf\dns.config]
-2021-12-11 13:22:46.508 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotNetCore | DNS backup successfully done
-2021-12-11 13:22:46.508 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotNetCore | DNS Loaded. Central server address: [Value[www.greengerspot.it/10.0.0.1:5555]
-2021-12-11 13:22:46.508 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - 
+2021-12-11 15:28:29.449 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotNetCore | Loading DNS...
+2021-12-11 15:28:29.450 [DefaultDispatcher-worker-3] INFO  it.greengers.potnetcore.sensors.polling.AbstractPollingJob - AbstractPollingJob[BRIGHT0] | Start polling
+2021-12-11 15:28:29.449 [DefaultDispatcher-worker-1] INFO  it.greengers.potnetcore.sensors.polling.AbstractPollingJob - AbstractPollingJob[HUMIDITY0] | Start polling
+2021-12-11 15:28:29.531 [main] ERROR it.greengers.potconnectors.dns.LocalPotDNS - java.lang.RuntimeException: Failed to invoke public java.net.SocketAddress() with no args
+2021-12-11 15:28:29.532 [main] INFO  it.greengers.potconnectors.dns.LocalPotDNS - Generated default configuration SerializableDNS(APPLICATION_NAME='unknown', ADDRESSES={})
+2021-12-11 15:28:29.546 [main] INFO  it.greengers.potconnectors.dns.LocalPotDNS - Written actual DNS configuration into config file [conf\dns.config]
+2021-12-11 15:28:29.550 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotNetCore | Central Server address is not into DNS. Will be used the default configuration
+2021-12-11 15:28:29.623 [main] INFO  it.greengers.potconnectors.dns.LocalPotDNS - Added entry ["main-server"-{www.greengerspot.it:5555}] to local DNS
+2021-12-11 15:28:29.623 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotNetCore | Added default central server address and port to the DNS
+2021-12-11 15:28:29.627 [main] INFO  it.greengers.potconnectors.dns.LocalPotDNS - Written actual DNS configuration into config file [conf\dns.config]
+2021-12-11 15:28:29.628 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotNetCore | DNS backup successfully done
+2021-12-11 15:28:29.628 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotNetCore | DNS Loaded. Central server address: [Value[www.greengerspot.it:5555]
+2021-12-11 15:28:29.629 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - 
 PotCore | CONNECTION TO CENTRAL SERVER ********************
-2021-12-11 13:22:46.689 [main] INFO  it.greengers.potconnectors.connection.ConnectionManager - Opened connection [AbstractPotConnection(destinationName='main-server', type=KTOR, connectedAddress=null)]
-2021-12-11 13:22:46.690 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotCore | Instantiated connection to the central server
-2021-12-11 13:22:46.693 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotCore | Message listener attached
-2021-12-11 13:22:46.695 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotCore | Trying to connect...
-2021-12-11 13:22:46.697 [main] INFO  it.greengers.potconnectors.connection.KtorPotConnection - Connecting to [www.greengerspot.it/10.0.0.1:5555]
-2021-12-11 13:23:07.768 [main] ERROR it.greengers.potconnectors.connection.KtorPotConnection - java.net.ConnectException: Connection timed out: no further information
-	at java.base/sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
-	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:779)
-	at io.ktor.network.sockets.SocketImpl.connect$ktor_network(SocketImpl.kt:38)
-	at io.ktor.network.sockets.SocketImpl$connect$1.invokeSuspend(SocketImpl.kt)
+2021-12-11 15:28:29.833 [main] INFO  it.greengers.potconnectors.connection.ConnectionManager - Opened connection [AbstractPotConnection(destinationName='main-server', type=KTOR, connectedAddress=null)]
+2021-12-11 15:28:29.834 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotCore | Instantiated connection to the central server
+2021-12-11 15:28:29.834 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotCore | Message listener attached
+2021-12-11 15:28:29.835 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotCore | Trying to connect...
+2021-12-11 15:28:29.838 [main] INFO  it.greengers.potconnectors.connection.KtorPotConnection - Connecting to [www.greengerspot.it:5555]
+2021-12-11 15:28:29.875 [main] ERROR it.greengers.potconnectors.connection.KtorPotConnection - java.nio.channels.UnresolvedAddressException
+	at java.base/sun.nio.ch.Net.checkAddress(Net.java:130)
+	at java.base/sun.nio.ch.SocketChannelImpl.connect(SocketChannelImpl.java:675)
+	at io.ktor.network.sockets.SocketImpl.connect$ktor_network(SocketImpl.kt:32)
+	at io.ktor.network.sockets.ConnectUtilsJvmKt.connect(ConnectUtilsJvm.kt:19)
+	at io.ktor.network.sockets.TcpSocketBuilder.connect(TcpSocketBuilder.kt:38)
+	at io.ktor.network.sockets.TcpSocketBuilder.connect$default(TcpSocketBuilder.kt:35)
+	at it.greengers.potconnectors.connection.KtorPotConnection.doConnect(KtorPotConnection.kt:57)
+	at it.greengers.potconnectors.connection.AbstractPotConnection.connect$suspendImpl(AbstractPotConnection.kt:70)
+	at it.greengers.potconnectors.connection.AbstractPotConnection.connect(AbstractPotConnection.kt)
+	at it.greengers.potconnectors.connection.PotConnection$DefaultImpls.connect$default(PotConnection.kt:66)
+	at it.greengers.potconnectors.connection.AbstractPotConnection.connect$suspendImpl(AbstractPotConnection.kt:46)
+	at it.greengers.potconnectors.connection.AbstractPotConnection.connect(AbstractPotConnection.kt)
+	at it.greengers.potconnectors.connection.AbstractPotConnection.connect$suspendImpl(AbstractPotConnection.kt:37)
+	at it.greengers.potconnectors.connection.AbstractPotConnection.connect(AbstractPotConnection.kt)
+	at it.greengers.potnetcore.controller.PotNetCoreCoreCoreController.enstablishConnection(PotNetCoreController.kt:70)
+	at it.greengers.potnetcore.controller.PotNetCoreCoreCoreController$1.invokeSuspend(PotNetCoreController.kt:49)
 	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
 	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:106)
 	at kotlinx.coroutines.EventLoopImplBase.processNextEvent(EventLoop.common.kt:277)
@@ -40,11 +55,23 @@ PotCore | CONNECTION TO CENTRAL SERVER ********************
 	at it.greengers.potnetcore.PotNetCoreApplKt.main(PotNetCoreAppl.kt:10)
 	at it.greengers.potnetcore.PotNetCoreApplKt.main(PotNetCoreAppl.kt)
 
-2021-12-11 13:23:07.768 [main] ERROR it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - ----> Connection error: java.net.ConnectException: Connection timed out: no further information
-	at java.base/sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
-	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:779)
-	at io.ktor.network.sockets.SocketImpl.connect$ktor_network(SocketImpl.kt:38)
-	at io.ktor.network.sockets.SocketImpl$connect$1.invokeSuspend(SocketImpl.kt)
+2021-12-11 15:28:29.879 [main] ERROR it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - ----> Connection error: java.nio.channels.UnresolvedAddressException
+	at java.base/sun.nio.ch.Net.checkAddress(Net.java:130)
+	at java.base/sun.nio.ch.SocketChannelImpl.connect(SocketChannelImpl.java:675)
+	at io.ktor.network.sockets.SocketImpl.connect$ktor_network(SocketImpl.kt:32)
+	at io.ktor.network.sockets.ConnectUtilsJvmKt.connect(ConnectUtilsJvm.kt:19)
+	at io.ktor.network.sockets.TcpSocketBuilder.connect(TcpSocketBuilder.kt:38)
+	at io.ktor.network.sockets.TcpSocketBuilder.connect$default(TcpSocketBuilder.kt:35)
+	at it.greengers.potconnectors.connection.KtorPotConnection.doConnect(KtorPotConnection.kt:57)
+	at it.greengers.potconnectors.connection.AbstractPotConnection.connect$suspendImpl(AbstractPotConnection.kt:70)
+	at it.greengers.potconnectors.connection.AbstractPotConnection.connect(AbstractPotConnection.kt)
+	at it.greengers.potconnectors.connection.PotConnection$DefaultImpls.connect$default(PotConnection.kt:66)
+	at it.greengers.potconnectors.connection.AbstractPotConnection.connect$suspendImpl(AbstractPotConnection.kt:46)
+	at it.greengers.potconnectors.connection.AbstractPotConnection.connect(AbstractPotConnection.kt)
+	at it.greengers.potconnectors.connection.AbstractPotConnection.connect$suspendImpl(AbstractPotConnection.kt:37)
+	at it.greengers.potconnectors.connection.AbstractPotConnection.connect(AbstractPotConnection.kt)
+	at it.greengers.potnetcore.controller.PotNetCoreCoreCoreController.enstablishConnection(PotNetCoreController.kt:70)
+	at it.greengers.potnetcore.controller.PotNetCoreCoreCoreController$1.invokeSuspend(PotNetCoreController.kt:49)
 	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
 	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:106)
 	at kotlinx.coroutines.EventLoopImplBase.processNextEvent(EventLoop.common.kt:277)
@@ -57,15 +84,33 @@ PotCore | CONNECTION TO CENTRAL SERVER ********************
 	at it.greengers.potnetcore.PotNetCoreApplKt.main(PotNetCoreAppl.kt:10)
 	at it.greengers.potnetcore.PotNetCoreApplKt.main(PotNetCoreAppl.kt)
 
-2021-12-11 13:23:09.776 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotCore | Trying to connect...
-2021-12-11 13:23:09.777 [main] INFO  it.greengers.potconnectors.connection.KtorPotConnection - Connecting to [www.greengerspot.it/10.0.0.1:5555]
-2021-12-11 13:23:30.817 [main] ERROR it.greengers.potconnectors.connection.KtorPotConnection - java.net.ConnectException: Connection timed out: no further information
-	at java.base/sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
-	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:779)
-	at io.ktor.network.sockets.SocketImpl.connect$ktor_network(SocketImpl.kt:38)
-	at io.ktor.network.sockets.SocketImpl$connect$1.invokeSuspend(SocketImpl.kt)
+2021-12-11 15:28:31.882 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotCore | Trying to connect...
+2021-12-11 15:28:31.882 [main] INFO  it.greengers.potconnectors.connection.KtorPotConnection - Connecting to [www.greengerspot.it:5555]
+2021-12-11 15:28:31.894 [main] ERROR it.greengers.potconnectors.connection.KtorPotConnection - java.nio.channels.UnresolvedAddressException
+	at java.base/sun.nio.ch.Net.checkAddress(Net.java:130)
+	at java.base/sun.nio.ch.SocketChannelImpl.connect(SocketChannelImpl.java:675)
+	at io.ktor.network.sockets.SocketImpl.connect$ktor_network(SocketImpl.kt:32)
+	at io.ktor.network.sockets.ConnectUtilsJvmKt.connect(ConnectUtilsJvm.kt:19)
+	at io.ktor.network.sockets.TcpSocketBuilder.connect(TcpSocketBuilder.kt:38)
+	at io.ktor.network.sockets.TcpSocketBuilder.connect$default(TcpSocketBuilder.kt:35)
+	at it.greengers.potconnectors.connection.KtorPotConnection.doConnect(KtorPotConnection.kt:57)
+	at it.greengers.potconnectors.connection.AbstractPotConnection.connect$suspendImpl(AbstractPotConnection.kt:70)
+	at it.greengers.potconnectors.connection.AbstractPotConnection.connect(AbstractPotConnection.kt)
+	at it.greengers.potconnectors.connection.PotConnection$DefaultImpls.connect$default(PotConnection.kt:66)
+	at it.greengers.potconnectors.connection.AbstractPotConnection.connect$suspendImpl(AbstractPotConnection.kt:46)
+	at it.greengers.potconnectors.connection.AbstractPotConnection.connect(AbstractPotConnection.kt)
+	at it.greengers.potconnectors.connection.AbstractPotConnection.connect$suspendImpl(AbstractPotConnection.kt:37)
+	at it.greengers.potconnectors.connection.AbstractPotConnection.connect(AbstractPotConnection.kt)
+	at it.greengers.potnetcore.controller.PotNetCoreCoreCoreController.enstablishConnection(PotNetCoreController.kt:70)
+	at it.greengers.potnetcore.controller.PotNetCoreCoreCoreController$enstablishConnection$1.invokeSuspend(PotNetCoreController.kt)
 	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
-	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:106)
+	at kotlinx.coroutines.DispatchedTaskKt.resume(DispatchedTask.kt:235)
+	at kotlinx.coroutines.DispatchedTaskKt.dispatch(DispatchedTask.kt:167)
+	at kotlinx.coroutines.CancellableContinuationImpl.dispatchResume(CancellableContinuationImpl.kt:406)
+	at kotlinx.coroutines.CancellableContinuationImpl.resumeImpl(CancellableContinuationImpl.kt:440)
+	at kotlinx.coroutines.CancellableContinuationImpl.resumeImpl$default(CancellableContinuationImpl.kt:429)
+	at kotlinx.coroutines.CancellableContinuationImpl.resumeUndispatched(CancellableContinuationImpl.kt:527)
+	at kotlinx.coroutines.EventLoopImplBase$DelayedResumeTask.run(EventLoop.common.kt:497)
 	at kotlinx.coroutines.EventLoopImplBase.processNextEvent(EventLoop.common.kt:277)
 	at kotlinx.coroutines.BlockingCoroutine.joinBlocking(Builders.kt:87)
 	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking(Builders.kt:61)
@@ -76,13 +121,31 @@ PotCore | CONNECTION TO CENTRAL SERVER ********************
 	at it.greengers.potnetcore.PotNetCoreApplKt.main(PotNetCoreAppl.kt:10)
 	at it.greengers.potnetcore.PotNetCoreApplKt.main(PotNetCoreAppl.kt)
 
-2021-12-11 13:23:30.818 [main] ERROR it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - ----> Connection error: java.net.ConnectException: Connection timed out: no further information
-	at java.base/sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
-	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:779)
-	at io.ktor.network.sockets.SocketImpl.connect$ktor_network(SocketImpl.kt:38)
-	at io.ktor.network.sockets.SocketImpl$connect$1.invokeSuspend(SocketImpl.kt)
+2021-12-11 15:28:31.898 [main] ERROR it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - ----> Connection error: java.nio.channels.UnresolvedAddressException
+	at java.base/sun.nio.ch.Net.checkAddress(Net.java:130)
+	at java.base/sun.nio.ch.SocketChannelImpl.connect(SocketChannelImpl.java:675)
+	at io.ktor.network.sockets.SocketImpl.connect$ktor_network(SocketImpl.kt:32)
+	at io.ktor.network.sockets.ConnectUtilsJvmKt.connect(ConnectUtilsJvm.kt:19)
+	at io.ktor.network.sockets.TcpSocketBuilder.connect(TcpSocketBuilder.kt:38)
+	at io.ktor.network.sockets.TcpSocketBuilder.connect$default(TcpSocketBuilder.kt:35)
+	at it.greengers.potconnectors.connection.KtorPotConnection.doConnect(KtorPotConnection.kt:57)
+	at it.greengers.potconnectors.connection.AbstractPotConnection.connect$suspendImpl(AbstractPotConnection.kt:70)
+	at it.greengers.potconnectors.connection.AbstractPotConnection.connect(AbstractPotConnection.kt)
+	at it.greengers.potconnectors.connection.PotConnection$DefaultImpls.connect$default(PotConnection.kt:66)
+	at it.greengers.potconnectors.connection.AbstractPotConnection.connect$suspendImpl(AbstractPotConnection.kt:46)
+	at it.greengers.potconnectors.connection.AbstractPotConnection.connect(AbstractPotConnection.kt)
+	at it.greengers.potconnectors.connection.AbstractPotConnection.connect$suspendImpl(AbstractPotConnection.kt:37)
+	at it.greengers.potconnectors.connection.AbstractPotConnection.connect(AbstractPotConnection.kt)
+	at it.greengers.potnetcore.controller.PotNetCoreCoreCoreController.enstablishConnection(PotNetCoreController.kt:70)
+	at it.greengers.potnetcore.controller.PotNetCoreCoreCoreController$enstablishConnection$1.invokeSuspend(PotNetCoreController.kt)
 	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
-	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:106)
+	at kotlinx.coroutines.DispatchedTaskKt.resume(DispatchedTask.kt:235)
+	at kotlinx.coroutines.DispatchedTaskKt.dispatch(DispatchedTask.kt:167)
+	at kotlinx.coroutines.CancellableContinuationImpl.dispatchResume(CancellableContinuationImpl.kt:406)
+	at kotlinx.coroutines.CancellableContinuationImpl.resumeImpl(CancellableContinuationImpl.kt:440)
+	at kotlinx.coroutines.CancellableContinuationImpl.resumeImpl$default(CancellableContinuationImpl.kt:429)
+	at kotlinx.coroutines.CancellableContinuationImpl.resumeUndispatched(CancellableContinuationImpl.kt:527)
+	at kotlinx.coroutines.EventLoopImplBase$DelayedResumeTask.run(EventLoop.common.kt:497)
 	at kotlinx.coroutines.EventLoopImplBase.processNextEvent(EventLoop.common.kt:277)
 	at kotlinx.coroutines.BlockingCoroutine.joinBlocking(Builders.kt:87)
 	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking(Builders.kt:61)
@@ -93,5 +156,150 @@ PotCore | CONNECTION TO CENTRAL SERVER ********************
 	at it.greengers.potnetcore.PotNetCoreApplKt.main(PotNetCoreAppl.kt:10)
 	at it.greengers.potnetcore.PotNetCoreApplKt.main(PotNetCoreAppl.kt)
 
-2021-12-11 13:23:32.826 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotCore | Trying to connect...
-2021-12-11 13:23:32.826 [main] INFO  it.greengers.potconnectors.connection.KtorPotConnection - Connecting to [www.greengerspot.it/10.0.0.1:5555]
+2021-12-11 15:28:33.901 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotCore | Trying to connect...
+2021-12-11 15:28:33.903 [main] INFO  it.greengers.potconnectors.connection.KtorPotConnection - Connecting to [www.greengerspot.it:5555]
+2021-12-11 15:28:33.904 [main] ERROR it.greengers.potconnectors.connection.KtorPotConnection - java.nio.channels.UnresolvedAddressException
+	at java.base/sun.nio.ch.Net.checkAddress(Net.java:130)
+	at java.base/sun.nio.ch.SocketChannelImpl.connect(SocketChannelImpl.java:675)
+	at io.ktor.network.sockets.SocketImpl.connect$ktor_network(SocketImpl.kt:32)
+	at io.ktor.network.sockets.ConnectUtilsJvmKt.connect(ConnectUtilsJvm.kt:19)
+	at io.ktor.network.sockets.TcpSocketBuilder.connect(TcpSocketBuilder.kt:38)
+	at io.ktor.network.sockets.TcpSocketBuilder.connect$default(TcpSocketBuilder.kt:35)
+	at it.greengers.potconnectors.connection.KtorPotConnection.doConnect(KtorPotConnection.kt:57)
+	at it.greengers.potconnectors.connection.AbstractPotConnection.connect$suspendImpl(AbstractPotConnection.kt:70)
+	at it.greengers.potconnectors.connection.AbstractPotConnection.connect(AbstractPotConnection.kt)
+	at it.greengers.potconnectors.connection.PotConnection$DefaultImpls.connect$default(PotConnection.kt:66)
+	at it.greengers.potconnectors.connection.AbstractPotConnection.connect$suspendImpl(AbstractPotConnection.kt:46)
+	at it.greengers.potconnectors.connection.AbstractPotConnection.connect(AbstractPotConnection.kt)
+	at it.greengers.potconnectors.connection.AbstractPotConnection.connect$suspendImpl(AbstractPotConnection.kt:37)
+	at it.greengers.potconnectors.connection.AbstractPotConnection.connect(AbstractPotConnection.kt)
+	at it.greengers.potnetcore.controller.PotNetCoreCoreCoreController.enstablishConnection(PotNetCoreController.kt:70)
+	at it.greengers.potnetcore.controller.PotNetCoreCoreCoreController$enstablishConnection$1.invokeSuspend(PotNetCoreController.kt)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
+	at kotlinx.coroutines.DispatchedTaskKt.resume(DispatchedTask.kt:235)
+	at kotlinx.coroutines.DispatchedTaskKt.dispatch(DispatchedTask.kt:167)
+	at kotlinx.coroutines.CancellableContinuationImpl.dispatchResume(CancellableContinuationImpl.kt:406)
+	at kotlinx.coroutines.CancellableContinuationImpl.resumeImpl(CancellableContinuationImpl.kt:440)
+	at kotlinx.coroutines.CancellableContinuationImpl.resumeImpl$default(CancellableContinuationImpl.kt:429)
+	at kotlinx.coroutines.CancellableContinuationImpl.resumeUndispatched(CancellableContinuationImpl.kt:527)
+	at kotlinx.coroutines.EventLoopImplBase$DelayedResumeTask.run(EventLoop.common.kt:497)
+	at kotlinx.coroutines.EventLoopImplBase.processNextEvent(EventLoop.common.kt:277)
+	at kotlinx.coroutines.BlockingCoroutine.joinBlocking(Builders.kt:87)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking(Builders.kt:61)
+	at kotlinx.coroutines.BuildersKt.runBlocking(Unknown Source)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking$default(Builders.kt:40)
+	at kotlinx.coroutines.BuildersKt.runBlocking$default(Unknown Source)
+	at it.greengers.potnetcore.controller.PotNetCoreCoreCoreController.<clinit>(PotNetCoreController.kt:40)
+	at it.greengers.potnetcore.PotNetCoreApplKt.main(PotNetCoreAppl.kt:10)
+	at it.greengers.potnetcore.PotNetCoreApplKt.main(PotNetCoreAppl.kt)
+
+2021-12-11 15:28:33.908 [main] ERROR it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - ----> Connection error: java.nio.channels.UnresolvedAddressException
+	at java.base/sun.nio.ch.Net.checkAddress(Net.java:130)
+	at java.base/sun.nio.ch.SocketChannelImpl.connect(SocketChannelImpl.java:675)
+	at io.ktor.network.sockets.SocketImpl.connect$ktor_network(SocketImpl.kt:32)
+	at io.ktor.network.sockets.ConnectUtilsJvmKt.connect(ConnectUtilsJvm.kt:19)
+	at io.ktor.network.sockets.TcpSocketBuilder.connect(TcpSocketBuilder.kt:38)
+	at io.ktor.network.sockets.TcpSocketBuilder.connect$default(TcpSocketBuilder.kt:35)
+	at it.greengers.potconnectors.connection.KtorPotConnection.doConnect(KtorPotConnection.kt:57)
+	at it.greengers.potconnectors.connection.AbstractPotConnection.connect$suspendImpl(AbstractPotConnection.kt:70)
+	at it.greengers.potconnectors.connection.AbstractPotConnection.connect(AbstractPotConnection.kt)
+	at it.greengers.potconnectors.connection.PotConnection$DefaultImpls.connect$default(PotConnection.kt:66)
+	at it.greengers.potconnectors.connection.AbstractPotConnection.connect$suspendImpl(AbstractPotConnection.kt:46)
+	at it.greengers.potconnectors.connection.AbstractPotConnection.connect(AbstractPotConnection.kt)
+	at it.greengers.potconnectors.connection.AbstractPotConnection.connect$suspendImpl(AbstractPotConnection.kt:37)
+	at it.greengers.potconnectors.connection.AbstractPotConnection.connect(AbstractPotConnection.kt)
+	at it.greengers.potnetcore.controller.PotNetCoreCoreCoreController.enstablishConnection(PotNetCoreController.kt:70)
+	at it.greengers.potnetcore.controller.PotNetCoreCoreCoreController$enstablishConnection$1.invokeSuspend(PotNetCoreController.kt)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
+	at kotlinx.coroutines.DispatchedTaskKt.resume(DispatchedTask.kt:235)
+	at kotlinx.coroutines.DispatchedTaskKt.dispatch(DispatchedTask.kt:167)
+	at kotlinx.coroutines.CancellableContinuationImpl.dispatchResume(CancellableContinuationImpl.kt:406)
+	at kotlinx.coroutines.CancellableContinuationImpl.resumeImpl(CancellableContinuationImpl.kt:440)
+	at kotlinx.coroutines.CancellableContinuationImpl.resumeImpl$default(CancellableContinuationImpl.kt:429)
+	at kotlinx.coroutines.CancellableContinuationImpl.resumeUndispatched(CancellableContinuationImpl.kt:527)
+	at kotlinx.coroutines.EventLoopImplBase$DelayedResumeTask.run(EventLoop.common.kt:497)
+	at kotlinx.coroutines.EventLoopImplBase.processNextEvent(EventLoop.common.kt:277)
+	at kotlinx.coroutines.BlockingCoroutine.joinBlocking(Builders.kt:87)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking(Builders.kt:61)
+	at kotlinx.coroutines.BuildersKt.runBlocking(Unknown Source)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking$default(Builders.kt:40)
+	at kotlinx.coroutines.BuildersKt.runBlocking$default(Unknown Source)
+	at it.greengers.potnetcore.controller.PotNetCoreCoreCoreController.<clinit>(PotNetCoreController.kt:40)
+	at it.greengers.potnetcore.PotNetCoreApplKt.main(PotNetCoreAppl.kt:10)
+	at it.greengers.potnetcore.PotNetCoreApplKt.main(PotNetCoreAppl.kt)
+
+2021-12-11 15:28:34.431 [DefaultDispatcher-worker-2] ERROR it.greengers.potnetcore.sensors.polling.AbstractPollingJob - java.lang.Error: java.io.IOException: Cannot run program "python3": CreateProcess error=2, Impossibile trovare il file specificato
+2021-12-11 15:28:34.440 [DefaultDispatcher-worker-2] ERROR it.greengers.potnetcore.sensors.polling.AbstractPollingJob - java.lang.Error: java.io.IOException: Cannot run program "python3": CreateProcess error=2, Impossibile trovare il file specificato
+2021-12-11 15:28:34.444 [DefaultDispatcher-worker-3] ERROR it.greengers.potnetcore.sensors.polling.AbstractPollingJob - java.lang.Error: java.io.IOException: Cannot run program "python3": CreateProcess error=2, Impossibile trovare il file specificato
+2021-12-11 15:28:35.912 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotCore | Trying to connect...
+2021-12-11 15:28:35.912 [main] INFO  it.greengers.potconnectors.connection.KtorPotConnection - Connecting to [www.greengerspot.it:5555]
+2021-12-11 15:28:35.914 [main] ERROR it.greengers.potconnectors.connection.KtorPotConnection - java.nio.channels.UnresolvedAddressException
+	at java.base/sun.nio.ch.Net.checkAddress(Net.java:130)
+	at java.base/sun.nio.ch.SocketChannelImpl.connect(SocketChannelImpl.java:675)
+	at io.ktor.network.sockets.SocketImpl.connect$ktor_network(SocketImpl.kt:32)
+	at io.ktor.network.sockets.ConnectUtilsJvmKt.connect(ConnectUtilsJvm.kt:19)
+	at io.ktor.network.sockets.TcpSocketBuilder.connect(TcpSocketBuilder.kt:38)
+	at io.ktor.network.sockets.TcpSocketBuilder.connect$default(TcpSocketBuilder.kt:35)
+	at it.greengers.potconnectors.connection.KtorPotConnection.doConnect(KtorPotConnection.kt:57)
+	at it.greengers.potconnectors.connection.AbstractPotConnection.connect$suspendImpl(AbstractPotConnection.kt:70)
+	at it.greengers.potconnectors.connection.AbstractPotConnection.connect(AbstractPotConnection.kt)
+	at it.greengers.potconnectors.connection.PotConnection$DefaultImpls.connect$default(PotConnection.kt:66)
+	at it.greengers.potconnectors.connection.AbstractPotConnection.connect$suspendImpl(AbstractPotConnection.kt:46)
+	at it.greengers.potconnectors.connection.AbstractPotConnection.connect(AbstractPotConnection.kt)
+	at it.greengers.potconnectors.connection.AbstractPotConnection.connect$suspendImpl(AbstractPotConnection.kt:37)
+	at it.greengers.potconnectors.connection.AbstractPotConnection.connect(AbstractPotConnection.kt)
+	at it.greengers.potnetcore.controller.PotNetCoreCoreCoreController.enstablishConnection(PotNetCoreController.kt:70)
+	at it.greengers.potnetcore.controller.PotNetCoreCoreCoreController$enstablishConnection$1.invokeSuspend(PotNetCoreController.kt)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
+	at kotlinx.coroutines.DispatchedTaskKt.resume(DispatchedTask.kt:235)
+	at kotlinx.coroutines.DispatchedTaskKt.dispatch(DispatchedTask.kt:167)
+	at kotlinx.coroutines.CancellableContinuationImpl.dispatchResume(CancellableContinuationImpl.kt:406)
+	at kotlinx.coroutines.CancellableContinuationImpl.resumeImpl(CancellableContinuationImpl.kt:440)
+	at kotlinx.coroutines.CancellableContinuationImpl.resumeImpl$default(CancellableContinuationImpl.kt:429)
+	at kotlinx.coroutines.CancellableContinuationImpl.resumeUndispatched(CancellableContinuationImpl.kt:527)
+	at kotlinx.coroutines.EventLoopImplBase$DelayedResumeTask.run(EventLoop.common.kt:497)
+	at kotlinx.coroutines.EventLoopImplBase.processNextEvent(EventLoop.common.kt:277)
+	at kotlinx.coroutines.BlockingCoroutine.joinBlocking(Builders.kt:87)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking(Builders.kt:61)
+	at kotlinx.coroutines.BuildersKt.runBlocking(Unknown Source)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking$default(Builders.kt:40)
+	at kotlinx.coroutines.BuildersKt.runBlocking$default(Unknown Source)
+	at it.greengers.potnetcore.controller.PotNetCoreCoreCoreController.<clinit>(PotNetCoreController.kt:40)
+	at it.greengers.potnetcore.PotNetCoreApplKt.main(PotNetCoreAppl.kt:10)
+	at it.greengers.potnetcore.PotNetCoreApplKt.main(PotNetCoreAppl.kt)
+
+2021-12-11 15:28:35.920 [main] ERROR it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - ----> Connection error: java.nio.channels.UnresolvedAddressException
+	at java.base/sun.nio.ch.Net.checkAddress(Net.java:130)
+	at java.base/sun.nio.ch.SocketChannelImpl.connect(SocketChannelImpl.java:675)
+	at io.ktor.network.sockets.SocketImpl.connect$ktor_network(SocketImpl.kt:32)
+	at io.ktor.network.sockets.ConnectUtilsJvmKt.connect(ConnectUtilsJvm.kt:19)
+	at io.ktor.network.sockets.TcpSocketBuilder.connect(TcpSocketBuilder.kt:38)
+	at io.ktor.network.sockets.TcpSocketBuilder.connect$default(TcpSocketBuilder.kt:35)
+	at it.greengers.potconnectors.connection.KtorPotConnection.doConnect(KtorPotConnection.kt:57)
+	at it.greengers.potconnectors.connection.AbstractPotConnection.connect$suspendImpl(AbstractPotConnection.kt:70)
+	at it.greengers.potconnectors.connection.AbstractPotConnection.connect(AbstractPotConnection.kt)
+	at it.greengers.potconnectors.connection.PotConnection$DefaultImpls.connect$default(PotConnection.kt:66)
+	at it.greengers.potconnectors.connection.AbstractPotConnection.connect$suspendImpl(AbstractPotConnection.kt:46)
+	at it.greengers.potconnectors.connection.AbstractPotConnection.connect(AbstractPotConnection.kt)
+	at it.greengers.potconnectors.connection.AbstractPotConnection.connect$suspendImpl(AbstractPotConnection.kt:37)
+	at it.greengers.potconnectors.connection.AbstractPotConnection.connect(AbstractPotConnection.kt)
+	at it.greengers.potnetcore.controller.PotNetCoreCoreCoreController.enstablishConnection(PotNetCoreController.kt:70)
+	at it.greengers.potnetcore.controller.PotNetCoreCoreCoreController$enstablishConnection$1.invokeSuspend(PotNetCoreController.kt)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
+	at kotlinx.coroutines.DispatchedTaskKt.resume(DispatchedTask.kt:235)
+	at kotlinx.coroutines.DispatchedTaskKt.dispatch(DispatchedTask.kt:167)
+	at kotlinx.coroutines.CancellableContinuationImpl.dispatchResume(CancellableContinuationImpl.kt:406)
+	at kotlinx.coroutines.CancellableContinuationImpl.resumeImpl(CancellableContinuationImpl.kt:440)
+	at kotlinx.coroutines.CancellableContinuationImpl.resumeImpl$default(CancellableContinuationImpl.kt:429)
+	at kotlinx.coroutines.CancellableContinuationImpl.resumeUndispatched(CancellableContinuationImpl.kt:527)
+	at kotlinx.coroutines.EventLoopImplBase$DelayedResumeTask.run(EventLoop.common.kt:497)
+	at kotlinx.coroutines.EventLoopImplBase.processNextEvent(EventLoop.common.kt:277)
+	at kotlinx.coroutines.BlockingCoroutine.joinBlocking(Builders.kt:87)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking(Builders.kt:61)
+	at kotlinx.coroutines.BuildersKt.runBlocking(Unknown Source)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking$default(Builders.kt:40)
+	at kotlinx.coroutines.BuildersKt.runBlocking$default(Unknown Source)
+	at it.greengers.potnetcore.controller.PotNetCoreCoreCoreController.<clinit>(PotNetCoreController.kt:40)
+	at it.greengers.potnetcore.PotNetCoreApplKt.main(PotNetCoreAppl.kt:10)
+	at it.greengers.potnetcore.PotNetCoreApplKt.main(PotNetCoreAppl.kt)
+
