@@ -4,5 +4,5 @@ import it.greengers.potnetcore.sensors.PythonDoubleInputSensor
 import it.greengers.potnetcore.sensors.SensorType
 
 class BrightnessSensor (id : String)
-    : PythonDoubleInputSensor("python/brightness.py", id, id, SensorType.TEMPERATURE) {
+    : PythonDoubleInputSensor("python/Brightness.py", id, id, SensorType.TEMPERATURE) {
 }
