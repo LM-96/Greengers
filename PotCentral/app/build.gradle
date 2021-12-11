@@ -83,6 +83,10 @@ application {
     mainClass = 'it.greengers.potcentral.PotNetCentralKt'
 }
 
+jar {
+    archivesBaseName = archivesBaseName + '-' + version
+}
+
 distZip {
     into("$baseName-$version/bin") {
         from '.'
