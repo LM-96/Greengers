@@ -27,6 +27,7 @@ object ConnectionManager {
     @JvmStatic private val MUTEX = Mutex()
     private val SCOPE = CoroutineScope(EmptyCoroutineContext + CoroutineName(this.javaClass.simpleName))
 
+    /*
     init {
         Runtime.getRuntime().addShutdownHook(
             thread {
@@ -44,7 +45,7 @@ object ConnectionManager {
                 }
             }
         )
-    }
+    }*/
 
     /**
      * Request a new connection to a given name. Notice that the connection is

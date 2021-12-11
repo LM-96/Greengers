@@ -39,22 +39,22 @@ object PotNetCoreCoreCoreController {
     init {
         runBlocking {
 
-            //1. Load DNS for resolving main server name
-            loadDNS()
-
-            //2. Enstablish connection to main server
-            SERVER_CONNECTION = enstablishConnection()
-
-            //3. Attach reconnector
-            RECONNECTOR = attachReconnector()
-
-            //4. Send name to the server
-            SERVER_CONNECTION.sendAsyncCommunication(BuiltInCommunicationType.WHOAMI, LocalPotDNS.getApplicationName())
-
-            //5. Polling Jobs
+            //1. Polling Jobs
             startPollingJobs()
 
-            //5. Manage application shutdown
+            //2. Load DNS for resolving main server name
+            loadDNS()
+
+            //3. Enstablish connection to main server
+            SERVER_CONNECTION = enstablishConnection()
+
+            //4. Attach reconnector
+            RECONNECTOR = attachReconnector()
+
+            //5. Send name to the server
+            SERVER_CONNECTION.sendAsyncCommunication(BuiltInCommunicationType.WHOAMI, LocalPotDNS.getApplicationName())
+
+            //6. Manage application shutdown
             addShutdownHook()
         }
     }

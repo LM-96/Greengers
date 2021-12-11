@@ -1,0 +1,14 @@
+2021-12-11 12:29:42.726 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - 
+PotNetCore | DNS CONFIGURATION *******************************
+2021-12-11 12:29:42.735 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotNetCore | Loading DNS...
+2021-12-11 12:29:42.849 [main] ERROR it.greengers.potconnectors.dns.LocalPotDNS - java.nio.file.NoSuchFileException: conf\dns.config
+2021-12-11 12:29:42.853 [main] INFO  it.greengers.potconnectors.dns.LocalPotDNS - Generated default configuration SerializableDNS(APPLICATION_NAME='unknown', ADDRESSES={})
+2021-12-11 12:29:42.884 [main] INFO  it.greengers.potconnectors.dns.LocalPotDNS - Written actual DNS configuration into config file [conf\dns.config]
+2021-12-11 12:29:42.894 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotNetCore | Central Server address is not into DNS. Will be used the default configuration
+2021-12-11 12:29:43.012 [main] INFO  it.greengers.potconnectors.dns.LocalPotDNS - Added entry ["main-server"-{www.greengerspot.it:5555}] to local DNS
+2021-12-11 12:29:43.013 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotNetCore | Added default central server address and port to the DNS
+2021-12-11 12:29:43.023 [main] INFO  it.greengers.potconnectors.dns.LocalPotDNS - Written actual DNS configuration into config file [conf\dns.config]
+2021-12-11 12:29:43.024 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotNetCore | DNS backup successfully done
+2021-12-11 12:29:43.025 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotNetCore | DNS Loaded. Central server address: [Value[www.greengerspot.it:5555]
+2021-12-11 12:29:43.026 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - 
+PotCore | CONNECTION TO CENTRAL SERVER ********************
