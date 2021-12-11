@@ -1,34 +1,34 @@
-2021-12-11 15:55:18.829 [DefaultDispatcher-worker-1] INFO  it.greengers.potnetcore.sensors.polling.AbstractPollingJob - AbstractPollingJob[BRIGHT0] | Started coroutine StandaloneCoroutine{Active}@1ea9130e
-2021-12-11 15:55:18.829 [DefaultDispatcher-worker-2] INFO  it.greengers.potnetcore.sensors.polling.AbstractPollingJob - AbstractPollingJob[TEMP0] | Started coroutine StandaloneCoroutine{Active}@62e9838c
-2021-12-11 15:55:18.829 [DefaultDispatcher-worker-3] INFO  it.greengers.potnetcore.sensors.polling.AbstractPollingJob - AbstractPollingJob[HUMIDITY0] | Started coroutine StandaloneCoroutine{Active}@6fd48ab7
-2021-12-11 15:55:18.837 [DefaultDispatcher-worker-2] INFO  it.greengers.potnetcore.sensors.polling.AbstractPollingJob - AbstractPollingJob[TEMP0] | Start polling
-2021-12-11 15:55:18.837 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotNetCore | temperature monitoring system started
-2021-12-11 15:55:18.838 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotNetCore | humidity monitoring system started
-2021-12-11 15:55:18.838 [DefaultDispatcher-worker-1] INFO  it.greengers.potnetcore.sensors.polling.AbstractPollingJob - AbstractPollingJob[HUMIDITY0] | Start polling
-2021-12-11 15:55:18.838 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotNetCore | brightness monitoring system started
-2021-12-11 15:55:18.840 [DefaultDispatcher-worker-5] INFO  it.greengers.potnetcore.sensors.polling.AbstractPollingJob - AbstractPollingJob[BRIGHT0] | Start polling
-2021-12-11 15:55:18.842 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - 
+2021-12-11 17:07:44.593 [DefaultDispatcher-worker-1] INFO  it.greengers.potnetcore.sensors.polling.AbstractPollingJob - AbstractPollingJob[HUMIDITY0] | Started coroutine StandaloneCoroutine{Active}@1a7e5aa2
+2021-12-11 17:07:44.593 [DefaultDispatcher-worker-3] INFO  it.greengers.potnetcore.sensors.polling.AbstractPollingJob - AbstractPollingJob[BRIGHT0] | Started coroutine StandaloneCoroutine{Active}@74e34e72
+2021-12-11 17:07:44.593 [DefaultDispatcher-worker-2] INFO  it.greengers.potnetcore.sensors.polling.AbstractPollingJob - AbstractPollingJob[TEMP0] | Started coroutine StandaloneCoroutine{Active}@4c8c17b2
+2021-12-11 17:07:44.602 [DefaultDispatcher-worker-2] INFO  it.greengers.potnetcore.sensors.polling.AbstractPollingJob - AbstractPollingJob[TEMP0] | Start polling
+2021-12-11 17:07:44.602 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotNetCore | temperature monitoring system started
+2021-12-11 17:07:44.603 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotNetCore | humidity monitoring system started
+2021-12-11 17:07:44.603 [DefaultDispatcher-worker-1] INFO  it.greengers.potnetcore.sensors.polling.AbstractPollingJob - AbstractPollingJob[HUMIDITY0] | Start polling
+2021-12-11 17:07:44.604 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotNetCore | brightness monitoring system started
+2021-12-11 17:07:44.604 [DefaultDispatcher-worker-3] INFO  it.greengers.potnetcore.sensors.polling.AbstractPollingJob - AbstractPollingJob[BRIGHT0] | Start polling
+2021-12-11 17:07:44.607 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - 
 PotNetCore | DNS CONFIGURATION *******************************
-2021-12-11 15:55:18.843 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotNetCore | Loading DNS...
-2021-12-11 15:55:18.913 [main] ERROR it.greengers.potconnectors.dns.LocalPotDNS - java.lang.RuntimeException: Failed to invoke public java.net.SocketAddress() with no args
-2021-12-11 15:55:18.914 [main] INFO  it.greengers.potconnectors.dns.LocalPotDNS - Generated default configuration SerializableDNS(APPLICATION_NAME='unknown', ADDRESSES={})
-2021-12-11 15:55:18.921 [main] INFO  it.greengers.potconnectors.dns.LocalPotDNS - Written actual DNS configuration into config file [conf\dns.config]
-2021-12-11 15:55:18.924 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotNetCore | Central Server address is not into DNS. Will be used the default configuration
-2021-12-11 15:55:19.029 [main] INFO  it.greengers.potconnectors.dns.LocalPotDNS - Added entry ["main-server"-{potnet.ddns.net/3.142.167.4:5555}] to local DNS
-2021-12-11 15:55:19.029 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotNetCore | Added default central server address and port to the DNS
-2021-12-11 15:55:19.033 [main] INFO  it.greengers.potconnectors.dns.LocalPotDNS - Written actual DNS configuration into config file [conf\dns.config]
-2021-12-11 15:55:19.034 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotNetCore | DNS backup successfully done
-2021-12-11 15:55:19.034 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotNetCore | DNS Loaded. Central server address: [Value[potnet.ddns.net/3.142.167.4:5555]
-2021-12-11 15:55:19.036 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - 
+2021-12-11 17:07:44.607 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotNetCore | Loading DNS...
+2021-12-11 17:07:44.682 [main] ERROR it.greengers.potconnectors.dns.LocalPotDNS - java.lang.RuntimeException: Failed to invoke public java.net.SocketAddress() with no args
+2021-12-11 17:07:44.683 [main] INFO  it.greengers.potconnectors.dns.LocalPotDNS - Generated default configuration SerializableDNS(APPLICATION_NAME='unknown', ADDRESSES={})
+2021-12-11 17:07:44.693 [main] INFO  it.greengers.potconnectors.dns.LocalPotDNS - Written actual DNS configuration into config file [conf\dns.config]
+2021-12-11 17:07:44.696 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotNetCore | Central Server address is not into DNS. Will be used the default configuration
+2021-12-11 17:07:44.772 [main] INFO  it.greengers.potconnectors.dns.LocalPotDNS - Added entry ["main-server"-{potnet.ddns.net/13.58.157.220:5555}] to local DNS
+2021-12-11 17:07:44.772 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotNetCore | Added default central server address and port to the DNS
+2021-12-11 17:07:44.776 [main] INFO  it.greengers.potconnectors.dns.LocalPotDNS - Written actual DNS configuration into config file [conf\dns.config]
+2021-12-11 17:07:44.776 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotNetCore | DNS backup successfully done
+2021-12-11 17:07:44.778 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotNetCore | DNS Loaded. Central server address: [Value[potnet.ddns.net/13.58.157.220:5555]
+2021-12-11 17:07:44.778 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - 
 PotCore | CONNECTION TO CENTRAL SERVER ********************
-2021-12-11 15:55:19.220 [main] INFO  it.greengers.potconnectors.connection.ConnectionManager - Opened connection [AbstractPotConnection(destinationName='main-server', type=KTOR, connectedAddress=null)]
-2021-12-11 15:55:19.221 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotCore | Instantiated connection to the central server
-2021-12-11 15:55:19.221 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotCore | Message listener attached
-2021-12-11 15:55:19.222 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotCore | Trying to connect...
-2021-12-11 15:55:19.223 [main] INFO  it.greengers.potconnectors.connection.KtorPotConnection - Connecting to [potnet.ddns.net/3.142.167.4:5555]
-2021-12-11 15:55:23.827 [DefaultDispatcher-worker-2] ERROR it.greengers.potnetcore.sensors.polling.AbstractPollingJob - java.lang.Error: java.io.IOException: Cannot run program "python3": CreateProcess error=2, Impossibile trovare il file specificato
-2021-12-11 15:55:23.832 [DefaultDispatcher-worker-2] ERROR it.greengers.potnetcore.sensors.polling.AbstractPollingJob - java.lang.Error: java.io.IOException: Cannot run program "python3": CreateProcess error=2, Impossibile trovare il file specificato
-2021-12-11 15:55:23.837 [DefaultDispatcher-worker-1] ERROR it.greengers.potnetcore.sensors.polling.AbstractPollingJob - java.lang.Error: java.io.IOException: Cannot run program "python3": CreateProcess error=2, Impossibile trovare il file specificato
-2021-12-11 15:55:28.821 [DefaultDispatcher-worker-5] ERROR it.greengers.potnetcore.sensors.polling.AbstractPollingJob - java.lang.Error: java.io.IOException: Cannot run program "python3": CreateProcess error=2, Impossibile trovare il file specificato
-2021-12-11 15:55:28.833 [DefaultDispatcher-worker-5] ERROR it.greengers.potnetcore.sensors.polling.AbstractPollingJob - java.lang.Error: java.io.IOException: Cannot run program "python3": CreateProcess error=2, Impossibile trovare il file specificato
-2021-12-11 15:55:28.839 [DefaultDispatcher-worker-2] ERROR it.greengers.potnetcore.sensors.polling.AbstractPollingJob - java.lang.Error: java.io.IOException: Cannot run program "python3": CreateProcess error=2, Impossibile trovare il file specificato
+2021-12-11 17:07:44.946 [main] INFO  it.greengers.potconnectors.connection.ConnectionManager - Opened connection [AbstractPotConnection(destinationName='main-server', type=KTOR, connectedAddress=null)]
+2021-12-11 17:07:44.946 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotCore | Instantiated connection to the central server
+2021-12-11 17:07:44.946 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotCore | Message listener attached
+2021-12-11 17:07:44.947 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotCore | Trying to connect...
+2021-12-11 17:07:44.949 [main] INFO  it.greengers.potconnectors.connection.KtorPotConnection - Connecting to [potnet.ddns.net/13.58.157.220:5555]
+2021-12-11 17:07:49.581 [DefaultDispatcher-worker-3] INFO  it.greengers.potnetcore.sensors.polling.AbstractPollingJob - AbstractPollingJob[TEMP0] | Polling value: Value[1.0]
+2021-12-11 17:07:49.589 [DefaultDispatcher-worker-1] INFO  it.greengers.potnetcore.sensors.polling.AbstractPollingJob - AbstractPollingJob[HUMIDITY0] | Polling value: Value[1.0]
+2021-12-11 17:07:49.590 [DefaultDispatcher-worker-1] INFO  it.greengers.potnetcore.sensors.polling.AbstractPollingJob - AbstractPollingJob[BRIGHT0] | Polling value: Value[1.0]
+2021-12-11 17:07:54.575 [DefaultDispatcher-worker-2] INFO  it.greengers.potnetcore.sensors.polling.AbstractPollingJob - AbstractPollingJob[TEMP0] | Polling value: Value[1.0]
+2021-12-11 17:07:54.590 [DefaultDispatcher-worker-2] INFO  it.greengers.potnetcore.sensors.polling.AbstractPollingJob - AbstractPollingJob[HUMIDITY0] | Polling value: Value[1.0]
+2021-12-11 17:07:54.590 [DefaultDispatcher-worker-1] INFO  it.greengers.potnetcore.sensors.polling.AbstractPollingJob - AbstractPollingJob[BRIGHT0] | Polling value: Value[1.0]

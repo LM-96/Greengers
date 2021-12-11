@@ -4,85 +4,90 @@ import it.greengers.potconnectors.utils.withExceptionToError
 import it.greengers.potnetcore.sensors.SensorType
 import it.greengers.potserver.plants.*
 import kotlinx.coroutines.sync.Mutex
-import kotlinx.coroutines.sync.withLock
 import java.nio.file.Files
 import java.nio.file.Paths
 import java.nio.file.StandardOpenOption
 
 object CurrentPlant {
-    @JvmStatic private val CURRENT_PLANT_FILE = Paths.get("current_plant.json")
+    private val CURRENT_PLANT_FILE = Paths.get("current_plant.json")
 
-    @JvmStatic lateinit var CURRENT_PLANT : Plant
+    var CURRENT_PLANT : Plant = loadCurrentPlant()
         private set
     val STATE : PlantState = PlantState()
-    private val mutex = Mutex()
+    val mutex = Mutex()
 
-    @JvmStatic
+
     suspend fun withSafeCurrentPlant(action : (Plant) -> Unit) {
-        mutex.withLock {
+        mutex.lock()
+        try {
             action.invoke(CURRENT_PLANT)
+        } finally {
+            mutex.unlock()
         }
     }
 
-    @JvmStatic
     suspend fun <T> safeProduceWithCurrentPlant(action : (Plant) -> T) : T {
-        mutex.withLock {
+        mutex.lock()
+        try {
             return action.invoke(CURRENT_PLANT)
-        }
+        } finally {mutex.unlock()}
     }
 
-    @JvmStatic
     suspend fun withSafeState(action : (PlantState) -> Unit) {
-        mutex.withLock {
+        mutex.lock()
+        try {
             action.invoke(STATE)
-        }
+        } finally {mutex.unlock()}
     }
 
-    @JvmStatic
     suspend fun <T> safeProduteWithState(action : (PlantState) -> T) : T {
-        mutex.withLock {
+        mutex.lock()
+        try {
             return action.invoke(STATE)
-        }
+        } finally { mutex.unlock() }
     }
 
-    @JvmStatic
     suspend fun <T> updateState(valueType: SensorType, value : T) {
-        mutex.withLock {
+        mutex.lock()
+        try {
             when(valueType) {
-                SensorType.TEMPERATURE -> STATE.temperature = (value as Double)
-                SensorType.HUMIDITY -> STATE.humidity = (value as Double)
-                SensorType.BRIGHTNESS -> STATE.brightness = (value as Double)
+                SensorType.TEMPERATURE -> STATE.temperature = value as Double
+                SensorType.HUMIDITY -> STATE.humidity = value as Double
+                SensorType.BRIGHTNESS -> STATE.brightness = value as Double
             }
+        } finally {
+            mutex.unlock()
         }
     }
 
-    @JvmStatic
-    suspend fun loadCurrentPlant() {
-        mutex.withLock {
-            if(Files.exists(CURRENT_PLANT_FILE)) {
-                CURRENT_PLANT = try {
-                    GSON.fromJson(Files.newBufferedReader(CURRENT_PLANT_FILE), Plant::class.java)
-                } catch (e : Exception) {
-                    EMPTY_PLANT
-                }
+    fun loadCurrentPlant() : Plant{
+        if(Files.exists(CURRENT_PLANT_FILE)) {
+            return try {
+                GSON.fromJson(Files.newBufferedReader(CURRENT_PLANT_FILE), Plant::class.java)
+            } catch (e : Exception) {
+                EMPTY_PLANT
             }
-            CURRENT_PLANT = EMPTY_PLANT
         }
+        return EMPTY_PLANT
     }
 
-    @JvmStatic
     suspend fun changeCurrentPlant(plant: Plant) {
-        mutex.withLock {
+        mutex.lock()
+        try {
             CURRENT_PLANT = plant
             STATE.reset()
             doPersist()
+        } finally {
+            mutex.unlock()
         }
     }
 
-    @JvmStatic
     suspend fun persist() : Error? {
-        mutex.withLock {
+        mutex.lock()
+        try {
             return doPersist()
+        } finally {
+            mutex.unlock()
         }
     }
 
