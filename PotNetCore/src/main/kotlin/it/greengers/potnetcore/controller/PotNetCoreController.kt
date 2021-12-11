@@ -37,6 +37,7 @@ object PotNetCoreCoreCoreController {
     private val LOGGER = loggerOf(this::class.java)
 
     init {
+        welcome()
         runBlocking {
 
             //1. Polling Jobs

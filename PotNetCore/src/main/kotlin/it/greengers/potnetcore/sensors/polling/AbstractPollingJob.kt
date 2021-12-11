@@ -65,7 +65,13 @@ abstract class AbstractPollingJob<T>(val id: String, protected val scope : Corou
                             LOGGER.error(value.error!!)
                         } else {
                             LOGGER.info("AbstractPollingJob[$id] | Polling value: $value")
-                            onPolling.forEach { it.invoke(value.res!!) }
+                            onPolling.forEach {
+                                try {
+                                    it.invoke(value.res!!)
+                                } catch (e : Exception) {
+                                    LOGGER.error("AbstractPollingJob[$id] | Unable to invoke the callback [$it]: ${e.localizedMessage}")
+                                }
+                            }
                         }
 
                     }
