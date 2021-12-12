@@ -60,11 +60,16 @@ fun main() {
         println("Waiting for connection on ${server.localAddress}")
         while(true) {
             try {
-                server.accept().potConnect {
-                    ConnectionManager.register(it)
-                    it.removeFromManagerOnDisconnection()
-                    it.attachInitialHandler()
-                    println("PotCentral | Accepted connection [$it]")
+                server.accept().potConnect { res ->
+                    res.withValue {
+                        println("PotCentral | Incoming connection from ${it.getConnectedAdress()}")
+                        ConnectionManager.register(it)
+                        it.removeFromManagerOnDisconnection()
+                        it.attachInitialHandler()
+                        println("PotCentral | Accepted connection [$it]")
+                    }.withError {
+                        println("PotCentral | Error while PotConnect: $it")
+                    }
                 }
             } catch (e : Exception) {
                 println("Exception in potConnect:")

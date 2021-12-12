@@ -58,10 +58,11 @@ object ConnectionManager {
      *
      * @return a FunResult containing the opened connection or an error if fails
      */
-    suspend fun newConnection(destinationName : String, type : PotConnectionType = PotConnectionType.KTOR, scope : CoroutineScope = SCOPE) : PotConnection {
+    suspend fun newConnection(destinationName : String, type : PotConnectionType = PotConnectionType.KTOR, scope : CoroutineScope = SCOPE, vararg args : String) : PotConnection {
         val res : PotConnection  = when(type) {
             PotConnectionType.KTOR -> KtorPotConnection(destinationName, scope)
             PotConnectionType.SOCKET_IO -> SocketIOPotConnection(destinationName, scope)
+            PotConnectionType.WEBSOCKET -> WebsocketPotConnection(destinationName, args[0], scope)
         }
 
         MUTEX.withLock { CONNECTIONS[destinationName] = res }

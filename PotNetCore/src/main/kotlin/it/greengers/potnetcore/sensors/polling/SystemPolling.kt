@@ -3,14 +3,24 @@ package it.greengers.potnetcore.sensors.polling
 import it.greengers.potnetcore.controller.CurrentPlant
 import it.greengers.potnetcore.controller.PotNetCoreCoreCoreController
 import it.greengers.potnetcore.sensors.InputSensor
+import it.greengers.potnetcore.sensors.Sensor
 import it.greengers.potnetcore.sensors.SensorFactory
 import it.greengers.potnetcore.sensors.SensorType
 
 data class ManagedInputSensor<T>(
     val sensor : InputSensor<T>,
     val pollingJob : SensorPollingJob<T> = sensor.newPollingJob(),
-    val listener : PollingListener<T> = pollingJob.buildDefaultListener()
+    val listeners : MutableList<PollingListener<T>> = mutableListOf()
 ) {
+
+    init {
+        listeners.add(pollingJob.buildDefaultListener())
+    }
+
+    suspend fun addListener(producer : (pollingJob : SensorPollingJob<T>) -> PollingListener<T>) {
+        listeners.add(producer.invoke(pollingJob))
+    }
+
     suspend fun enableAndStart() : Error? {
         if(!sensor.isEnabled()) {
             val error = sensor.enable()

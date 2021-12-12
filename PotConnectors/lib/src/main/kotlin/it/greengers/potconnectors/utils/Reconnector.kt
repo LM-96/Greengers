@@ -23,7 +23,7 @@ class Reconnector(
         @JvmStatic val LOGGER = loggerOf(this::class.java)
         @JvmStatic private val SCOPE = CoroutineScope(EmptyCoroutineContext + CoroutineName(this.javaClass.simpleName))
 
-        @JvmStatatic fun tryReconnection(connection: PotConnection, connectTime: Long = 5000, alwaysReconnect: Boolean = false, scope: CoroutineScope = SCOPE) : Reconnector {
+        @JvmStatic fun tryReconnection(connection: PotConnection, connectTime: Long = 5000, alwaysReconnect: Boolean = false, scope: CoroutineScope = SCOPE) : Reconnector {
             return Reconnector(connection, connectTime, alwaysReconnect, scope)
         }
 

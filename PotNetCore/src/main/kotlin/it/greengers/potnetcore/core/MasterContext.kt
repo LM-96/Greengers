@@ -14,7 +14,7 @@ import kotlin.coroutines.EmptyCoroutineContext
 object MasterContext {
 
     private val LOGGER = logger("MasterContext")
-    private val SCOPE = CoroutineScope(EmptyCoroutineContext + CoroutineName(this::class.java.name))
+    val SCOPE = CoroutineScope(EmptyCoroutineContext + CoroutineName(this::class.java.name))
     private val MASTERS = mutableMapOf<String, SensorMaster>()
     private val MUTEX = Mutex()
     private val flow = MutableSharedFlow<MasterMessage>(replay = 0)

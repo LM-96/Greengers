@@ -57,6 +57,8 @@ dependencies {
 	//KTOR
     // https://mvnrepository.com/artifact/io.ktor/ktor-network
     implementation group: 'io.ktor', name: 'ktor-network', version: '1.6.5'
+    implementation group: 'io.ktor', name: 'ktor-client-websockets', version: '1.6.5'
+    implementation group: 'io.ktor', name: 'ktor-client-okhttp', version: '1.6.5'
 
     //QAK
     compile name: 'it.unibo.qakactor-2.4'

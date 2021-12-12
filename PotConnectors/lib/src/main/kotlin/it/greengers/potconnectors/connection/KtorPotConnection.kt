@@ -111,11 +111,6 @@ class KtorPotConnection(
             LOGGER.info("Disconnected from [$connectedAddress]")
         }
 
-        onDisconnection.forEach {
-            withLoggedException(LOGGER, "Error invoking onDisconnection callback method") {
-                it.invoke(reason)
-            }
-        }
         return err
     }
 

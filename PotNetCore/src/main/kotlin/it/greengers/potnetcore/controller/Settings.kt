@@ -61,6 +61,9 @@ object Settings {
         props.setProperty("battery-critical-level", "20")
         props.setProperty("main-server-address", "potnet.ddns.net")
         props.setProperty("main-server-port", "5555")
+        props.setProperty("ws-server-host", "prova-vaso-smart.herokuapp.com")
+        props.setProperty("ws-server-port", "8080")
+        props.setProperty("ws-server-path", "websocket")
         persist()
     }
 

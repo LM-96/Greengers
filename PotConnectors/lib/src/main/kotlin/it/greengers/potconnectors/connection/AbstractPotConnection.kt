@@ -89,6 +89,14 @@ abstract class AbstractPotConnection : PotConnection {
             }
         }
 
+        onDisconnection.forEach {
+            try {
+                it.invoke(reason)
+            } catch (e : Exception) {
+                e.printStackTrace()
+            }
+        }
+
         return null
     }
 
