@@ -25,7 +25,7 @@ class DDBRepository : QBRRepository {
     private val tableInfo = TableInfo.TABLE_INFO
 
     init {
-        val credentials = BasicAWSCredentials("AKIAYW2UX5MGVAFX4N56", "d2pADozXcuPHMvzZ6jiCXBmRbR0CqyJCUMutpwGH")
+        val credentials = BasicAWSCredentials("", "")
         client = AmazonDynamoDBClientBuilder
             .standard()
             .withCredentials(AWSStaticCredentialsProvider(credentials))
