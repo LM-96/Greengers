@@ -67,7 +67,7 @@ fun main() {
                     println("PotCentral | Accepted connection [$it]")
                 }
             } catch (e : Exception) {
-                println("Exception in potConmnect:")
+                println("Exception in potConnect:")
                 e.printStackTrace()
             }
         }

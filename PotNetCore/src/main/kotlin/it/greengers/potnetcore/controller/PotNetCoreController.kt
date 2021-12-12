@@ -73,7 +73,7 @@ object PotNetCoreCoreCoreController {
                 delay(2000)
             }
         }
-        LOGGER.info("PotCore | Connected to ${SERVER_CONNECTION.getConnectedAdress()}")
+        LOGGER.info("PotCore | Connected to ${conn.getConnectedAdress()}")
         return conn
     }
 

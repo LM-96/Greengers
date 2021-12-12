@@ -2,7 +2,7 @@
 #Sat Dec 11 15:55:18 CET 2021
 humidity-poll-time=5000
 battery-critical-level=20
-main-server-port=5555
+main-server-port=17169
 bright-poll-time=300000
 main-server-address=potnet.ddns.net
 temp-poll-time=5000

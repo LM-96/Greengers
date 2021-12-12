@@ -1,4 +1,4 @@
-package it.lm96.qbrtools.persistence
+package it.greengers.potnetalexa.persistence
 
 import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
@@ -12,17 +12,16 @@ data class TableInfo(
     val userMailColName : String,
 
     @SerializedName("br_addr_col")
-    val brAddressColName : String,
-
-    @SerializedName("br_port_col")
-    val brPortColName : String
+    val potIdColName : String,
 ) {
     companion object {
-        @JvmStatic private val PERSISTENCE_FILE = "Persistence.json"
-        @JvmStatic val TABLE_INFO : TableInfo
-        init {
+        private const val PERSISTENCE_FILE = "Persistence.json"
+        val TABLE_INFO : TableInfo = try {
             val reader = InputStreamReader(javaClass.classLoader.getResourceAsStream(PERSISTENCE_FILE))
-            TABLE_INFO = Gson().fromJson(reader, TableInfo::class.java)
+            Gson().fromJson(reader, TableInfo::class.java)
+        } catch (e : Exception) {
+            TableInfo("POTNETALEXATABLE", "USER_MAIL", "POT_ID")
         }
+
     }
 }

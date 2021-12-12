@@ -1,4 +1,4 @@
-package it.lm96.qbrtools.persistence
+package it.greengers.potnetalexa.persistence
 
 import com.amazonaws.auth.AWSStaticCredentialsProvider
 import com.amazonaws.auth.BasicAWSCredentials
@@ -14,10 +14,13 @@ import com.amazonaws.services.dynamodbv2.document.spec.ScanSpec
 import com.amazonaws.services.dynamodbv2.document.spec.UpdateItemSpec
 import com.amazonaws.services.dynamodbv2.document.utils.ValueMap
 import com.amazonaws.services.dynamodbv2.model.ReturnValue
+import it.lm96.qbrtools.persistence.PersistenceException
+import it.lm96.qbrtools.persistence.PotNetEntry
+import it.lm96.qbrtools.persistence.PotNetEntryRepository
 import java.util.*
 import kotlin.jvm.Throws
 
-class DDBRepository : QBRRepository {
+class DDBRepository : PotNetEntryRepository {
 
     private val client : AmazonDynamoDB
     private val ddb : DynamoDB
@@ -36,13 +39,12 @@ class DDBRepository : QBRRepository {
     }
 
     @Throws(PersistenceException::class)
-    override fun create(entry: QBREntry) {
+    override fun create(entry: PotNetEntry) {
         try {
             table.putItem(
                 Item()
                     .withPrimaryKey(tableInfo.userMailColName, entry.USER_MAIL)
-                    .withString(tableInfo.brAddressColName, entry.BASICROBOT_ADDRESS)
-                    .withInt(tableInfo.brPortColName, entry.BASICROBOT_PORT)
+                    .withString(tableInfo.potIdColName, entry.POT_ID)
             )
         } catch (e : Exception) {
             throw PersistenceException(e)
@@ -50,14 +52,14 @@ class DDBRepository : QBRRepository {
     }
 
     @Throws(PersistenceException::class)
-    override fun retrieve(userMail: String): Optional<QBREntry> {
+    override fun retrieve(userMail: String): Optional<PotNetEntry> {
         return try {
             val getItemSpec = GetItemSpec().withPrimaryKey(tableInfo.userMailColName, userMail)
             val item = table.getItem(getItemSpec)
 
             if(item == null)
                 Optional.empty()
-            else Optional.of(toQBREntry(item))
+            else Optional.of(toPotNetEntry(item))
 
         } catch (e : Exception) {
             throw PersistenceException(e)
@@ -65,12 +67,12 @@ class DDBRepository : QBRRepository {
     }
 
     @Throws(PersistenceException::class)
-    override fun update(entry: QBREntry) {
+    override fun update(entry: PotNetEntry) {
         try {
             val updateItemSpec = UpdateItemSpec()
                 .withPrimaryKey(tableInfo.userMailColName, entry.USER_MAIL)
-                .withUpdateExpression("set ${tableInfo.brAddressColName} = :a, ${tableInfo.brPortColName} = :p")
-                .withValueMap(ValueMap().withString(":a", entry.BASICROBOT_ADDRESS).withInt(":p", entry.BASICROBOT_PORT))
+                .withUpdateExpression("set ${tableInfo.potIdColName} = :a")
+                .withValueMap(ValueMap().withString(":a", entry.POT_ID))
                 .withReturnValues(ReturnValue.UPDATED_NEW)
 
             table.updateItem(updateItemSpec)
@@ -80,7 +82,7 @@ class DDBRepository : QBRRepository {
     }
 
     @Throws(PersistenceException::class)
-    override fun delete(userMail: String): Optional<QBREntry> {
+    override fun delete(userMail: String): Optional<PotNetEntry> {
         try {
             val deleteItemSpec = DeleteItemSpec()
                 .withPrimaryKey(tableInfo.userMailColName, userMail)
@@ -89,14 +91,14 @@ class DDBRepository : QBRRepository {
             val item = table.deleteItem(deleteItemSpec).item
             return if(item == null)
                 Optional.empty()
-            else Optional.of(toQBREntry(item))
+            else Optional.of(toPotNetEntry(item))
         } catch (e : Exception) {
             throw PersistenceException(e)
         }
     }
 
     @Throws(PersistenceException::class)
-    override fun createOrUpdate(entry: QBREntry) {
+    override fun createOrUpdate(entry: PotNetEntry) {
         val scanSpec = ScanSpec()
             .withFilterExpression("${tableInfo.userMailColName} = :m")
             .withValueMap(ValueMap().withString(":m", entry.USER_MAIL))
@@ -108,15 +110,14 @@ class DDBRepository : QBRRepository {
         }
     }
 
-    override fun getAll(): List<QBREntry> {
-        return table.scan().map { toQBREntry(it) }.toList()
+    override fun getAll(): List<PotNetEntry> {
+        return table.scan().map { toPotNetEntry(it) }.toList()
     }
 
-    private fun toQBREntry(item : Item) : QBREntry {
-        return QBREntry(
+    private fun toPotNetEntry(item : Item) : PotNetEntry {
+        return PotNetEntry(
             item.getString(tableInfo.userMailColName),
-            item.getString(tableInfo.brAddressColName),
-            item.getInt(tableInfo.brPortColName)
+            item.getString(tableInfo.potIdColName)
         )
     }
 }

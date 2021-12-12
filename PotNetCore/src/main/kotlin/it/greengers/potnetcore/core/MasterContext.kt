@@ -19,14 +19,6 @@ object MasterContext {
     private val MUTEX = Mutex()
     private val flow = MutableSharedFlow<MasterMessage>(replay = 0)
 
-    init {
-        Runtime.getRuntime().addShutdownHook(
-            thread {
-                SCOPE.cancel("Shutdown Hook")
-            }
-        )
-    }
-
     suspend fun newMasterFor(sensor : Sensor) : SensorMaster {
         val master : SensorMaster = OwnerSensorMaster(sensor, SCOPE, flow)
         MUTEX.withLock {
