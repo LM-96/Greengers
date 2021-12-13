@@ -56,9 +56,9 @@ class WebsocketPotConnection(
                                 }
                             }
                         }
-                    } catch (je : JsonSyntaxException) {
+                    } catch (e : Exception) {
                         LOGGER.warn("WebsocketPotConnection[$connectedAddress] | Error in JSON parsing for message $rawMsg")
-                        sendAsyncError(je)
+                        sendAsyncError(e)
                     }
                 } while (rawMsg != null)
 
@@ -84,6 +84,7 @@ class WebsocketPotConnection(
                     host = address.hostname,
                     port = address.port,
                     path = path)
+                launchListener()
                 LOGGER.info("WebsocketPotConnection[$connectedAddress] | WebSocketSession started")
             } catch (e : Exception) {
                 err = Error(e)

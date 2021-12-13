@@ -61,6 +61,11 @@ dependencies {
     // https://mvnrepository.com/artifact/io.ktor/ktor-network
     implementation group: 'io.ktor', name: 'ktor-network', version: '1.6.5'
     implementation group: 'io.ktor', name: 'ktor-client-websockets', version: '1.6.5'
+    implementation group: 'io.ktor', name: 'ktor-client-okhttp', version: '1.6.5'
+
+    //OKHTTP
+    // https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp
+    implementation group: 'com.squareup.okhttp3', name: 'okhttp', version: '4.9.3'
 
     //LOGGING
     // https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api-kotlin

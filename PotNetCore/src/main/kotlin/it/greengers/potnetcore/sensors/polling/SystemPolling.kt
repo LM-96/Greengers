@@ -1,21 +1,16 @@
 package it.greengers.potnetcore.sensors.polling
 
 import it.greengers.potnetcore.controller.CurrentPlant
-import it.greengers.potnetcore.controller.PotNetCoreCoreCoreController
 import it.greengers.potnetcore.sensors.InputSensor
 import it.greengers.potnetcore.sensors.Sensor
 import it.greengers.potnetcore.sensors.SensorFactory
 import it.greengers.potnetcore.sensors.SensorType
 
-data class ManagedInputSensor<T>(
+class ManagedInputSensor<T>(
     val sensor : InputSensor<T>,
     val pollingJob : SensorPollingJob<T> = sensor.newPollingJob(),
     val listeners : MutableList<PollingListener<T>> = mutableListOf()
 ) {
-
-    init {
-        listeners.add(pollingJob.buildDefaultListener())
-    }
 
     suspend fun addListener(producer : (pollingJob : SensorPollingJob<T>) -> PollingListener<T>) {
         listeners.add(producer.invoke(pollingJob))
@@ -44,7 +39,7 @@ val HUMIDIY_SENSOR : ManagedInputSensor<Double>? =
 val BRIGHTNESS_SENSOR : ManagedInputSensor<Double>? =
     (SensorFactory.getSensor(SensorType.BRIGHTNESS) as InputSensor<Double>?)?.autoManage()
 
-class DefaultSensorPollingListener<T>(
+/*class DefaultSensorPollingListener<T>(
    job : SensorPollingJob<T>, autoAttach : Boolean = true) : PollingListener<T>(job, autoAttach){
 
     private val sensorType = job.sensor.type
@@ -66,4 +61,4 @@ class DefaultSensorPollingListener<T>(
 
 fun <T> SensorPollingJob<T>.buildDefaultListener(autoAttach : Boolean = true) : DefaultSensorPollingListener<T> {
     return DefaultSensorPollingListener(this, autoAttach)
-}
+}*/

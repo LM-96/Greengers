@@ -8,12 +8,12 @@ object SensorFactory {
     private val sensors = mutableMapOf<String, Sensor>()
 
     init {
-        /*sensors["TEMP0"] = TemperatureSensor("TEMP0")
+        sensors["TEMP0"] = TemperatureSensor("TEMP0")
         sensors["BRIGHT0"] = BrightnessSensor("BRIGHT0")
-        sensors["HUMIDITY0"] = HumiditySensor("HUMIDITY0")*/
-        sensors["TEMP0"] = FakeSensor("TEMP0", "TEMP0", SensorType.TEMPERATURE)
+        sensors["HUMIDITY0"] = HumiditySensor("HUMIDITY0")
+        /*sensors["TEMP0"] = FakeSensor("TEMP0", "TEMP0", SensorType.TEMPERATURE)
         sensors["BRIGHT0"] = FakeSensor("BRIGHT0", "BRIGHT0", SensorType.BRIGHTNESS)
-        sensors["HUMIDITY0"] = FakeSensor("HUMIDITY0", "HUMIDITY0", SensorType.HUMIDITY)
+        sensors["HUMIDITY0"] = FakeSensor("HUMIDITY0", "HUMIDITY0", SensorType.HUMIDITY)*/
     }
 
     fun getSensor(id : String) : Sensor? {

@@ -6,13 +6,11 @@ import it.greengers.potconnectors.connection.PotConnectionType
 import it.greengers.potconnectors.dns.LocalPotDNS
 import it.greengers.potconnectors.messages.*
 import it.greengers.potconnectors.utils.withError
-import it.greengers.potnetcore.sensors.polling.TEMPERATURE_SENSOR
-import it.greengers.potnetcore.sensors.polling.WebSocketPollingListener
+import it.greengers.potnetcore.sensors.polling.*
 import it.greengers.potserver.plants.changeCurrentPlantFromJSON
 import it.greengers.potserver.plants.withStateToJSON
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import org.apache.logging.log4j.kotlin.loggerOf
@@ -25,21 +23,37 @@ object WebSocketController {
     val WEBSOCKET_MUTEX = Mutex()
     var WEBSOCKET_JOB : Job? = null
         private set
+    val CLOSE = Channel<Unit>()
 
     val LOGGER = loggerOf(this::class.java)
+    val ON_MESSAGE = this::onMessage
 
-    fun startAsync() {
-        WEBSOCKET_JOB = PotNetCoreCoreCoreController.CONTROLLER_SCOPE.launch {
+    fun welcome() {
+        println(" ________        _____ _____   __      _____     _________                     \n" +
+                " ___  __ \\______ __  /____  | / /_____ __  /_    __  ____/______ _____________ \n" +
+                " __  /_/ /_  __ \\_  __/__   |/ / _  _ \\_  __/    _  /     _  __ \\__  ___/_  _ \\\n" +
+                " _  ____/ / /_/ // /_  _  /|  /  /  __// /_      / /___   / /_/ /_  /    /  __/\n" +
+                " /_/      \\____/ \\__/  /_/ |_/   \\___/ \\__/      \\____/   \\____/ /_/     \\___/\n" +
+                "                                     ** WEBSOCKET ONLY ** "
+        )
+    }
+
+    fun startAsync(scope : CoroutineScope = GlobalScope) {
+        WEBSOCKET_JOB = scope.launch {
+            startPollingJobs()
+            LOGGER.info("PotNetCoreWS | Attempting to connect...")
             val wshost = Settings.getSetting("ws-server-host")
             val wsport = Settings.getSetting("ws-server-port")
             LocalPotDNS.registerOrUpdate("ws-heroku-server", InetSocketAddress(wshost, wsport.toInt()))
             val wspath = Settings.getSetting("ws-server-path")
+            LOGGER.info("PotNetCoreWS | Requesting connection to ConnectionManager")
             val conn = ConnectionManager.newConnection("ws-heroku-server", PotConnectionType.WEBSOCKET,
-                PotNetCoreCoreCoreController.CONTROLLER_SCOPE, wspath)
-            conn.addCallbackOnMessage(PotNetCoreCoreCoreController.ON_MESSAGE)
-            LOGGER.info("PotCore | Message listener attached")
+                scope, wspath)
+            LOGGER.info("PotNetCoreWS | Obtained connection $conn")
+            conn.addCallbackOnMessage(ON_MESSAGE)
+            LOGGER.info("PotNetCoreWS | Message listener attached")
             while(!conn.isConnected()) {
-                LOGGER.info("PotCore | Trying to connect...")
+                LOGGER.info("PotNetCoreWS| Trying to connect...")
                 withError(conn.connect()) {
                     LOGGER.error("----> Connection error: ${it.localizedMessage}")
                     delay(2000)
@@ -47,8 +61,25 @@ object WebSocketController {
             }
             WEBSOCKET_CONNECTION = conn
             LOGGER.info("PotCore | Connected to ${conn.getConnectedAdress()}")
-            TEMPERATURE_SENSOR?.addListener {
-                WebSocketPollingListener(it) }
+        }
+    }
+
+    private suspend fun startPollingJobs() {
+        startSensor(TEMPERATURE_SENSOR, "temperature")
+        startSensor(HUMIDIY_SENSOR, "humidity")
+        startSensor(BRIGHTNESS_SENSOR, "brightness")
+
+    }
+
+    private suspend fun startSensor(sensor : ManagedInputSensor<Double>?, monitoredValue : String) {
+        sensor?.addListener {
+            WebSocketPollingListener(it) }
+        if(sensor!= null) {
+            val err = sensor.enableAndStart()
+            if(err == null) LOGGER.info("PotNetCore | $monitoredValue monitoring system started")
+            else LOGGER.error("PotNetCore | Unable to start $monitoredValue monitoring system: $err")
+        } else {
+            LOGGER.warn("PotNetCore | Unable to start monitory system on $monitoredValue: no sensor found")
         }
     }
 
@@ -74,7 +105,11 @@ object WebSocketController {
 
     suspend fun safeSend(msg: PotMessage) {
         WEBSOCKET_MUTEX.withLock {
-            WEBSOCKET_CONNECTION?.sendAsyncMessage(msg) ?: LOGGER.error("Unable to send message [$msg]: job not started")
+            if(WEBSOCKET_CONNECTION == null) LOGGER.error("Unable to send message [$msg]: job not started")
+            else {
+                WEBSOCKET_CONNECTION!!.sendAsyncMessage(msg)
+                LOGGER.info("Sent message $msg")
+            }
         }
     }
 
@@ -118,5 +153,15 @@ object WebSocketController {
         LOGGER.info("PotNetCoreWs | Sent state to [${message.senderName}]")
     }
 
+    fun await() {
+        runBlocking {
+            CLOSE.receive()
+        }
+    }
 
+    fun close() {
+        runBlocking {
+            CLOSE.send(Unit)
+        }
+    }
 }

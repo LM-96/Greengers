@@ -1,4 +1,4 @@
-package it.greengers.potnetcore.controller
+/*package it.greengers.potnetcore.controller
 
 import it.greengers.potconnectors.concurrency.newCondition
 import it.greengers.potconnectors.connection.ConnectionManager
@@ -222,4 +222,4 @@ object PotNetCoreCoreCoreController {
                 " _  ____/ / /_/ // /_  _  /|  /  /  __// /_      / /___   / /_/ /_  /    /  __/\n" +
                 " /_/      \\____/ \\__/  /_/ |_/   \\___/ \\__/      \\____/   \\____/ /_/     \\___/ ")
     }
-}
+}*/

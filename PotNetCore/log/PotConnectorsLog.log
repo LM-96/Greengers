@@ -1,378 +1,69 @@
-2021-12-12 19:49:15.432 [DefaultDispatcher-worker-1] INFO  it.greengers.potnetcore.sensors.polling.AbstractPollingJob - AbstractPollingJob[TEMP0] | Started coroutine StandaloneCoroutine{Active}@1e33e453
-2021-12-12 19:49:15.432 [DefaultDispatcher-worker-2] INFO  it.greengers.potnetcore.sensors.polling.AbstractPollingJob - AbstractPollingJob[BRIGHT0] | Started coroutine StandaloneCoroutine{Active}@10ec9e7b
-2021-12-12 19:49:15.438 [DefaultDispatcher-worker-1] INFO  it.greengers.potnetcore.sensors.polling.AbstractPollingJob - AbstractPollingJob[TEMP0] | Start polling
-2021-12-12 19:49:15.432 [DefaultDispatcher-worker-3] INFO  it.greengers.potnetcore.sensors.polling.AbstractPollingJob - AbstractPollingJob[HUMIDITY0] | Started coroutine StandaloneCoroutine{Active}@691b48f1
-2021-12-12 19:49:15.438 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotNetCore | temperature monitoring system started
-2021-12-12 19:49:15.438 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotNetCore | humidity monitoring system started
-2021-12-12 19:49:15.438 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotNetCore | brightness monitoring system started
-2021-12-12 19:49:15.438 [DefaultDispatcher-worker-3] INFO  it.greengers.potnetcore.sensors.polling.AbstractPollingJob - AbstractPollingJob[HUMIDITY0] | Start polling
-2021-12-12 19:49:15.438 [DefaultDispatcher-worker-2] INFO  it.greengers.potnetcore.sensors.polling.AbstractPollingJob - AbstractPollingJob[BRIGHT0] | Start polling
-2021-12-12 19:49:15.444 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - 
-PotNetCore | DNS CONFIGURATION *******************************
-2021-12-12 19:49:15.444 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotNetCore | Loading DNS...
-2021-12-12 19:49:15.485 [main] ERROR it.greengers.potconnectors.dns.LocalPotDNS - java.lang.RuntimeException: Failed to invoke public java.net.SocketAddress() with no args
-2021-12-12 19:49:15.485 [main] INFO  it.greengers.potconnectors.dns.LocalPotDNS - Generated default configuration SerializableDNS(APPLICATION_NAME='unknown', ADDRESSES={})
-2021-12-12 19:49:15.501 [main] INFO  it.greengers.potconnectors.dns.LocalPotDNS - Written actual DNS configuration into config file [conf\dns.config]
-2021-12-12 19:49:15.501 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotNetCore | Central Server address is not into DNS. Will be used the default configuration
-2021-12-12 19:49:15.511 [main] INFO  it.greengers.potconnectors.dns.LocalPotDNS - Added entry ["main-server"-{potnet.ddns.net:5555}] to local DNS
-2021-12-12 19:49:15.511 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotNetCore | Added default central server address and port to the DNS
-2021-12-12 19:49:15.511 [main] INFO  it.greengers.potconnectors.dns.LocalPotDNS - Written actual DNS configuration into config file [conf\dns.config]
-2021-12-12 19:49:15.511 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotNetCore | DNS backup successfully done
-2021-12-12 19:49:15.511 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotNetCore | DNS Loaded. Central server address: [Value[potnet.ddns.net:5555]
-2021-12-12 19:49:15.522 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - 
-PotCore | CONNECTION TO CENTRAL SERVER ********************
-2021-12-12 19:49:15.522 [DefaultDispatcher-worker-2] INFO  it.greengers.potconnectors.dns.LocalPotDNS - Added entry ["ws-heroku-server"-{prova-vaso-smart.herokuapp.com:8080}] to local DNS
-2021-12-12 19:49:15.625 [main] INFO  it.greengers.potconnectors.connection.ConnectionManager - Opened connection [AbstractPotConnection(destinationName='main-server', type=KTOR, connectedAddress=null)]
-2021-12-12 19:49:15.625 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotCore | Instantiated connection to the central server
-2021-12-12 19:49:15.625 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotCore | Message listener attached
-2021-12-12 19:49:15.625 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotCore | Trying to connect...
-2021-12-12 19:49:15.625 [main] INFO  it.greengers.potconnectors.connection.KtorPotConnection - Connecting to [potnet.ddns.net:5555]
-2021-12-12 19:49:15.667 [main] ERROR it.greengers.potconnectors.connection.KtorPotConnection - java.nio.channels.UnresolvedAddressException
-	at java.base/sun.nio.ch.Net.checkAddress(Net.java:130)
-	at java.base/sun.nio.ch.SocketChannelImpl.connect(SocketChannelImpl.java:675)
-	at io.ktor.network.sockets.SocketImpl.connect$ktor_network(SocketImpl.kt:32)
-	at io.ktor.network.sockets.ConnectUtilsJvmKt.connect(ConnectUtilsJvm.kt:19)
-	at io.ktor.network.sockets.TcpSocketBuilder.connect(TcpSocketBuilder.kt:38)
-	at io.ktor.network.sockets.TcpSocketBuilder.connect$default(TcpSocketBuilder.kt:35)
-	at it.greengers.potconnectors.connection.KtorPotConnection.doConnect(KtorPotConnection.kt:57)
-	at it.greengers.potconnectors.connection.AbstractPotConnection.connect$suspendImpl(AbstractPotConnection.kt:70)
-	at it.greengers.potconnectors.connection.AbstractPotConnection.connect(AbstractPotConnection.kt)
-	at it.greengers.potconnectors.connection.PotConnection$DefaultImpls.connect$default(PotConnection.kt:66)
-	at it.greengers.potconnectors.connection.AbstractPotConnection.connect$suspendImpl(AbstractPotConnection.kt:46)
-	at it.greengers.potconnectors.connection.AbstractPotConnection.connect(AbstractPotConnection.kt)
-	at it.greengers.potconnectors.connection.AbstractPotConnection.connect$suspendImpl(AbstractPotConnection.kt:37)
-	at it.greengers.potconnectors.connection.AbstractPotConnection.connect(AbstractPotConnection.kt)
-	at it.greengers.potnetcore.controller.PotNetCoreCoreCoreController.enstablishConnection(PotNetCoreController.kt:77)
-	at it.greengers.potnetcore.controller.PotNetCoreCoreCoreController$1.invokeSuspend(PotNetCoreController.kt:56)
-	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
-	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:106)
-	at kotlinx.coroutines.EventLoopImplBase.processNextEvent(EventLoop.common.kt:277)
-	at kotlinx.coroutines.BlockingCoroutine.joinBlocking(Builders.kt:87)
-	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking(Builders.kt:61)
-	at kotlinx.coroutines.BuildersKt.runBlocking(Unknown Source)
-	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking$default(Builders.kt:40)
-	at kotlinx.coroutines.BuildersKt.runBlocking$default(Unknown Source)
-	at it.greengers.potnetcore.controller.PotNetCoreCoreCoreController.<clinit>(PotNetCoreController.kt:44)
-	at it.greengers.potnetcore.PotNetCoreApplKt.main(PotNetCoreAppl.kt:10)
-	at it.greengers.potnetcore.PotNetCoreApplKt.main(PotNetCoreAppl.kt)
-
-2021-12-12 19:49:15.676 [main] ERROR it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - ----> Connection error: java.nio.channels.UnresolvedAddressException
-	at java.base/sun.nio.ch.Net.checkAddress(Net.java:130)
-	at java.base/sun.nio.ch.SocketChannelImpl.connect(SocketChannelImpl.java:675)
-	at io.ktor.network.sockets.SocketImpl.connect$ktor_network(SocketImpl.kt:32)
-	at io.ktor.network.sockets.ConnectUtilsJvmKt.connect(ConnectUtilsJvm.kt:19)
-	at io.ktor.network.sockets.TcpSocketBuilder.connect(TcpSocketBuilder.kt:38)
-	at io.ktor.network.sockets.TcpSocketBuilder.connect$default(TcpSocketBuilder.kt:35)
-	at it.greengers.potconnectors.connection.KtorPotConnection.doConnect(KtorPotConnection.kt:57)
-	at it.greengers.potconnectors.connection.AbstractPotConnection.connect$suspendImpl(AbstractPotConnection.kt:70)
-	at it.greengers.potconnectors.connection.AbstractPotConnection.connect(AbstractPotConnection.kt)
-	at it.greengers.potconnectors.connection.PotConnection$DefaultImpls.connect$default(PotConnection.kt:66)
-	at it.greengers.potconnectors.connection.AbstractPotConnection.connect$suspendImpl(AbstractPotConnection.kt:46)
-	at it.greengers.potconnectors.connection.AbstractPotConnection.connect(AbstractPotConnection.kt)
-	at it.greengers.potconnectors.connection.AbstractPotConnection.connect$suspendImpl(AbstractPotConnection.kt:37)
-	at it.greengers.potconnectors.connection.AbstractPotConnection.connect(AbstractPotConnection.kt)
-	at it.greengers.potnetcore.controller.PotNetCoreCoreCoreController.enstablishConnection(PotNetCoreController.kt:77)
-	at it.greengers.potnetcore.controller.PotNetCoreCoreCoreController$1.invokeSuspend(PotNetCoreController.kt:56)
-	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
-	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:106)
-	at kotlinx.coroutines.EventLoopImplBase.processNextEvent(EventLoop.common.kt:277)
-	at kotlinx.coroutines.BlockingCoroutine.joinBlocking(Builders.kt:87)
-	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking(Builders.kt:61)
-	at kotlinx.coroutines.BuildersKt.runBlocking(Unknown Source)
-	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking$default(Builders.kt:40)
-	at kotlinx.coroutines.BuildersKt.runBlocking$default(Unknown Source)
-	at it.greengers.potnetcore.controller.PotNetCoreCoreCoreController.<clinit>(PotNetCoreController.kt:44)
-	at it.greengers.potnetcore.PotNetCoreApplKt.main(PotNetCoreAppl.kt:10)
-	at it.greengers.potnetcore.PotNetCoreApplKt.main(PotNetCoreAppl.kt)
-
-2021-12-12 19:49:17.693 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotCore | Trying to connect...
-2021-12-12 19:49:17.693 [main] INFO  it.greengers.potconnectors.connection.KtorPotConnection - Connecting to [potnet.ddns.net:5555]
-2021-12-12 19:49:17.693 [main] ERROR it.greengers.potconnectors.connection.KtorPotConnection - java.nio.channels.UnresolvedAddressException
-	at java.base/sun.nio.ch.Net.checkAddress(Net.java:130)
-	at java.base/sun.nio.ch.SocketChannelImpl.connect(SocketChannelImpl.java:675)
-	at io.ktor.network.sockets.SocketImpl.connect$ktor_network(SocketImpl.kt:32)
-	at io.ktor.network.sockets.ConnectUtilsJvmKt.connect(ConnectUtilsJvm.kt:19)
-	at io.ktor.network.sockets.TcpSocketBuilder.connect(TcpSocketBuilder.kt:38)
-	at io.ktor.network.sockets.TcpSocketBuilder.connect$default(TcpSocketBuilder.kt:35)
-	at it.greengers.potconnectors.connection.KtorPotConnection.doConnect(KtorPotConnection.kt:57)
-	at it.greengers.potconnectors.connection.AbstractPotConnection.connect$suspendImpl(AbstractPotConnection.kt:70)
-	at it.greengers.potconnectors.connection.AbstractPotConnection.connect(AbstractPotConnection.kt)
-	at it.greengers.potconnectors.connection.PotConnection$DefaultImpls.connect$default(PotConnection.kt:66)
-	at it.greengers.potconnectors.connection.AbstractPotConnection.connect$suspendImpl(AbstractPotConnection.kt:46)
-	at it.greengers.potconnectors.connection.AbstractPotConnection.connect(AbstractPotConnection.kt)
-	at it.greengers.potconnectors.connection.AbstractPotConnection.connect$suspendImpl(AbstractPotConnection.kt:37)
-	at it.greengers.potconnectors.connection.AbstractPotConnection.connect(AbstractPotConnection.kt)
-	at it.greengers.potnetcore.controller.PotNetCoreCoreCoreController.enstablishConnection(PotNetCoreController.kt:77)
-	at it.greengers.potnetcore.controller.PotNetCoreCoreCoreController$enstablishConnection$1.invokeSuspend(PotNetCoreController.kt)
-	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
-	at kotlinx.coroutines.DispatchedTaskKt.resume(DispatchedTask.kt:235)
-	at kotlinx.coroutines.DispatchedTaskKt.dispatch(DispatchedTask.kt:167)
-	at kotlinx.coroutines.CancellableContinuationImpl.dispatchResume(CancellableContinuationImpl.kt:406)
-	at kotlinx.coroutines.CancellableContinuationImpl.resumeImpl(CancellableContinuationImpl.kt:440)
-	at kotlinx.coroutines.CancellableContinuationImpl.resumeImpl$default(CancellableContinuationImpl.kt:429)
-	at kotlinx.coroutines.CancellableContinuationImpl.resumeUndispatched(CancellableContinuationImpl.kt:527)
-	at kotlinx.coroutines.EventLoopImplBase$DelayedResumeTask.run(EventLoop.common.kt:497)
-	at kotlinx.coroutines.EventLoopImplBase.processNextEvent(EventLoop.common.kt:277)
-	at kotlinx.coroutines.BlockingCoroutine.joinBlocking(Builders.kt:87)
-	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking(Builders.kt:61)
-	at kotlinx.coroutines.BuildersKt.runBlocking(Unknown Source)
-	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking$default(Builders.kt:40)
-	at kotlinx.coroutines.BuildersKt.runBlocking$default(Unknown Source)
-	at it.greengers.potnetcore.controller.PotNetCoreCoreCoreController.<clinit>(PotNetCoreController.kt:44)
-	at it.greengers.potnetcore.PotNetCoreApplKt.main(PotNetCoreAppl.kt:10)
-	at it.greengers.potnetcore.PotNetCoreApplKt.main(PotNetCoreAppl.kt)
-
-2021-12-12 19:49:17.693 [main] ERROR it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - ----> Connection error: java.nio.channels.UnresolvedAddressException
-	at java.base/sun.nio.ch.Net.checkAddress(Net.java:130)
-	at java.base/sun.nio.ch.SocketChannelImpl.connect(SocketChannelImpl.java:675)
-	at io.ktor.network.sockets.SocketImpl.connect$ktor_network(SocketImpl.kt:32)
-	at io.ktor.network.sockets.ConnectUtilsJvmKt.connect(ConnectUtilsJvm.kt:19)
-	at io.ktor.network.sockets.TcpSocketBuilder.connect(TcpSocketBuilder.kt:38)
-	at io.ktor.network.sockets.TcpSocketBuilder.connect$default(TcpSocketBuilder.kt:35)
-	at it.greengers.potconnectors.connection.KtorPotConnection.doConnect(KtorPotConnection.kt:57)
-	at it.greengers.potconnectors.connection.AbstractPotConnection.connect$suspendImpl(AbstractPotConnection.kt:70)
-	at it.greengers.potconnectors.connection.AbstractPotConnection.connect(AbstractPotConnection.kt)
-	at it.greengers.potconnectors.connection.PotConnection$DefaultImpls.connect$default(PotConnection.kt:66)
-	at it.greengers.potconnectors.connection.AbstractPotConnection.connect$suspendImpl(AbstractPotConnection.kt:46)
-	at it.greengers.potconnectors.connection.AbstractPotConnection.connect(AbstractPotConnection.kt)
-	at it.greengers.potconnectors.connection.AbstractPotConnection.connect$suspendImpl(AbstractPotConnection.kt:37)
-	at it.greengers.potconnectors.connection.AbstractPotConnection.connect(AbstractPotConnection.kt)
-	at it.greengers.potnetcore.controller.PotNetCoreCoreCoreController.enstablishConnection(PotNetCoreController.kt:77)
-	at it.greengers.potnetcore.controller.PotNetCoreCoreCoreController$enstablishConnection$1.invokeSuspend(PotNetCoreController.kt)
-	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
-	at kotlinx.coroutines.DispatchedTaskKt.resume(DispatchedTask.kt:235)
-	at kotlinx.coroutines.DispatchedTaskKt.dispatch(DispatchedTask.kt:167)
-	at kotlinx.coroutines.CancellableContinuationImpl.dispatchResume(CancellableContinuationImpl.kt:406)
-	at kotlinx.coroutines.CancellableContinuationImpl.resumeImpl(CancellableContinuationImpl.kt:440)
-	at kotlinx.coroutines.CancellableContinuationImpl.resumeImpl$default(CancellableContinuationImpl.kt:429)
-	at kotlinx.coroutines.CancellableContinuationImpl.resumeUndispatched(CancellableContinuationImpl.kt:527)
-	at kotlinx.coroutines.EventLoopImplBase$DelayedResumeTask.run(EventLoop.common.kt:497)
-	at kotlinx.coroutines.EventLoopImplBase.processNextEvent(EventLoop.common.kt:277)
-	at kotlinx.coroutines.BlockingCoroutine.joinBlocking(Builders.kt:87)
-	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking(Builders.kt:61)
-	at kotlinx.coroutines.BuildersKt.runBlocking(Unknown Source)
-	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking$default(Builders.kt:40)
-	at kotlinx.coroutines.BuildersKt.runBlocking$default(Unknown Source)
-	at it.greengers.potnetcore.controller.PotNetCoreCoreCoreController.<clinit>(PotNetCoreController.kt:44)
-	at it.greengers.potnetcore.PotNetCoreApplKt.main(PotNetCoreAppl.kt:10)
-	at it.greengers.potnetcore.PotNetCoreApplKt.main(PotNetCoreAppl.kt)
-
-2021-12-12 19:49:19.699 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotCore | Trying to connect...
-2021-12-12 19:49:19.699 [main] INFO  it.greengers.potconnectors.connection.KtorPotConnection - Connecting to [potnet.ddns.net:5555]
-2021-12-12 19:49:19.699 [main] ERROR it.greengers.potconnectors.connection.KtorPotConnection - java.nio.channels.UnresolvedAddressException
-	at java.base/sun.nio.ch.Net.checkAddress(Net.java:130)
-	at java.base/sun.nio.ch.SocketChannelImpl.connect(SocketChannelImpl.java:675)
-	at io.ktor.network.sockets.SocketImpl.connect$ktor_network(SocketImpl.kt:32)
-	at io.ktor.network.sockets.ConnectUtilsJvmKt.connect(ConnectUtilsJvm.kt:19)
-	at io.ktor.network.sockets.TcpSocketBuilder.connect(TcpSocketBuilder.kt:38)
-	at io.ktor.network.sockets.TcpSocketBuilder.connect$default(TcpSocketBuilder.kt:35)
-	at it.greengers.potconnectors.connection.KtorPotConnection.doConnect(KtorPotConnection.kt:57)
-	at it.greengers.potconnectors.connection.AbstractPotConnection.connect$suspendImpl(AbstractPotConnection.kt:70)
-	at it.greengers.potconnectors.connection.AbstractPotConnection.connect(AbstractPotConnection.kt)
-	at it.greengers.potconnectors.connection.PotConnection$DefaultImpls.connect$default(PotConnection.kt:66)
-	at it.greengers.potconnectors.connection.AbstractPotConnection.connect$suspendImpl(AbstractPotConnection.kt:46)
-	at it.greengers.potconnectors.connection.AbstractPotConnection.connect(AbstractPotConnection.kt)
-	at it.greengers.potconnectors.connection.AbstractPotConnection.connect$suspendImpl(AbstractPotConnection.kt:37)
-	at it.greengers.potconnectors.connection.AbstractPotConnection.connect(AbstractPotConnection.kt)
-	at it.greengers.potnetcore.controller.PotNetCoreCoreCoreController.enstablishConnection(PotNetCoreController.kt:77)
-	at it.greengers.potnetcore.controller.PotNetCoreCoreCoreController$enstablishConnection$1.invokeSuspend(PotNetCoreController.kt)
-	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
-	at kotlinx.coroutines.DispatchedTaskKt.resume(DispatchedTask.kt:235)
-	at kotlinx.coroutines.DispatchedTaskKt.dispatch(DispatchedTask.kt:167)
-	at kotlinx.coroutines.CancellableContinuationImpl.dispatchResume(CancellableContinuationImpl.kt:406)
-	at kotlinx.coroutines.CancellableContinuationImpl.resumeImpl(CancellableContinuationImpl.kt:440)
-	at kotlinx.coroutines.CancellableContinuationImpl.resumeImpl$default(CancellableContinuationImpl.kt:429)
-	at kotlinx.coroutines.CancellableContinuationImpl.resumeUndispatched(CancellableContinuationImpl.kt:527)
-	at kotlinx.coroutines.EventLoopImplBase$DelayedResumeTask.run(EventLoop.common.kt:497)
-	at kotlinx.coroutines.EventLoopImplBase.processNextEvent(EventLoop.common.kt:277)
-	at kotlinx.coroutines.BlockingCoroutine.joinBlocking(Builders.kt:87)
-	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking(Builders.kt:61)
-	at kotlinx.coroutines.BuildersKt.runBlocking(Unknown Source)
-	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking$default(Builders.kt:40)
-	at kotlinx.coroutines.BuildersKt.runBlocking$default(Unknown Source)
-	at it.greengers.potnetcore.controller.PotNetCoreCoreCoreController.<clinit>(PotNetCoreController.kt:44)
-	at it.greengers.potnetcore.PotNetCoreApplKt.main(PotNetCoreAppl.kt:10)
-	at it.greengers.potnetcore.PotNetCoreApplKt.main(PotNetCoreAppl.kt)
-
-2021-12-12 19:49:19.699 [main] ERROR it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - ----> Connection error: java.nio.channels.UnresolvedAddressException
-	at java.base/sun.nio.ch.Net.checkAddress(Net.java:130)
-	at java.base/sun.nio.ch.SocketChannelImpl.connect(SocketChannelImpl.java:675)
-	at io.ktor.network.sockets.SocketImpl.connect$ktor_network(SocketImpl.kt:32)
-	at io.ktor.network.sockets.ConnectUtilsJvmKt.connect(ConnectUtilsJvm.kt:19)
-	at io.ktor.network.sockets.TcpSocketBuilder.connect(TcpSocketBuilder.kt:38)
-	at io.ktor.network.sockets.TcpSocketBuilder.connect$default(TcpSocketBuilder.kt:35)
-	at it.greengers.potconnectors.connection.KtorPotConnection.doConnect(KtorPotConnection.kt:57)
-	at it.greengers.potconnectors.connection.AbstractPotConnection.connect$suspendImpl(AbstractPotConnection.kt:70)
-	at it.greengers.potconnectors.connection.AbstractPotConnection.connect(AbstractPotConnection.kt)
-	at it.greengers.potconnectors.connection.PotConnection$DefaultImpls.connect$default(PotConnection.kt:66)
-	at it.greengers.potconnectors.connection.AbstractPotConnection.connect$suspendImpl(AbstractPotConnection.kt:46)
-	at it.greengers.potconnectors.connection.AbstractPotConnection.connect(AbstractPotConnection.kt)
-	at it.greengers.potconnectors.connection.AbstractPotConnection.connect$suspendImpl(AbstractPotConnection.kt:37)
-	at it.greengers.potconnectors.connection.AbstractPotConnection.connect(AbstractPotConnection.kt)
-	at it.greengers.potnetcore.controller.PotNetCoreCoreCoreController.enstablishConnection(PotNetCoreController.kt:77)
-	at it.greengers.potnetcore.controller.PotNetCoreCoreCoreController$enstablishConnection$1.invokeSuspend(PotNetCoreController.kt)
-	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
-	at kotlinx.coroutines.DispatchedTaskKt.resume(DispatchedTask.kt:235)
-	at kotlinx.coroutines.DispatchedTaskKt.dispatch(DispatchedTask.kt:167)
-	at kotlinx.coroutines.CancellableContinuationImpl.dispatchResume(CancellableContinuationImpl.kt:406)
-	at kotlinx.coroutines.CancellableContinuationImpl.resumeImpl(CancellableContinuationImpl.kt:440)
-	at kotlinx.coroutines.CancellableContinuationImpl.resumeImpl$default(CancellableContinuationImpl.kt:429)
-	at kotlinx.coroutines.CancellableContinuationImpl.resumeUndispatched(CancellableContinuationImpl.kt:527)
-	at kotlinx.coroutines.EventLoopImplBase$DelayedResumeTask.run(EventLoop.common.kt:497)
-	at kotlinx.coroutines.EventLoopImplBase.processNextEvent(EventLoop.common.kt:277)
-	at kotlinx.coroutines.BlockingCoroutine.joinBlocking(Builders.kt:87)
-	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking(Builders.kt:61)
-	at kotlinx.coroutines.BuildersKt.runBlocking(Unknown Source)
-	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking$default(Builders.kt:40)
-	at kotlinx.coroutines.BuildersKt.runBlocking$default(Unknown Source)
-	at it.greengers.potnetcore.controller.PotNetCoreCoreCoreController.<clinit>(PotNetCoreController.kt:44)
-	at it.greengers.potnetcore.PotNetCoreApplKt.main(PotNetCoreAppl.kt:10)
-	at it.greengers.potnetcore.PotNetCoreApplKt.main(PotNetCoreAppl.kt)
-
-2021-12-12 19:49:20.429 [DefaultDispatcher-worker-3] INFO  it.greengers.potnetcore.sensors.polling.AbstractPollingJob - AbstractPollingJob[TEMP0] | Polling value: Value[1.0]
-2021-12-12 19:49:20.456 [DefaultDispatcher-worker-3] INFO  it.greengers.potnetcore.sensors.polling.AbstractPollingJob - AbstractPollingJob[HUMIDITY0] | Polling value: Value[1.0]
-2021-12-12 19:49:20.456 [DefaultDispatcher-worker-1] INFO  it.greengers.potnetcore.sensors.polling.AbstractPollingJob - AbstractPollingJob[BRIGHT0] | Polling value: Value[1.0]
-2021-12-12 19:49:21.722 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotCore | Trying to connect...
-2021-12-12 19:49:21.722 [main] INFO  it.greengers.potconnectors.connection.KtorPotConnection - Connecting to [potnet.ddns.net:5555]
-2021-12-12 19:49:21.723 [main] ERROR it.greengers.potconnectors.connection.KtorPotConnection - java.nio.channels.UnresolvedAddressException
-	at java.base/sun.nio.ch.Net.checkAddress(Net.java:130)
-	at java.base/sun.nio.ch.SocketChannelImpl.connect(SocketChannelImpl.java:675)
-	at io.ktor.network.sockets.SocketImpl.connect$ktor_network(SocketImpl.kt:32)
-	at io.ktor.network.sockets.ConnectUtilsJvmKt.connect(ConnectUtilsJvm.kt:19)
-	at io.ktor.network.sockets.TcpSocketBuilder.connect(TcpSocketBuilder.kt:38)
-	at io.ktor.network.sockets.TcpSocketBuilder.connect$default(TcpSocketBuilder.kt:35)
-	at it.greengers.potconnectors.connection.KtorPotConnection.doConnect(KtorPotConnection.kt:57)
-	at it.greengers.potconnectors.connection.AbstractPotConnection.connect$suspendImpl(AbstractPotConnection.kt:70)
-	at it.greengers.potconnectors.connection.AbstractPotConnection.connect(AbstractPotConnection.kt)
-	at it.greengers.potconnectors.connection.PotConnection$DefaultImpls.connect$default(PotConnection.kt:66)
-	at it.greengers.potconnectors.connection.AbstractPotConnection.connect$suspendImpl(AbstractPotConnection.kt:46)
-	at it.greengers.potconnectors.connection.AbstractPotConnection.connect(AbstractPotConnection.kt)
-	at it.greengers.potconnectors.connection.AbstractPotConnection.connect$suspendImpl(AbstractPotConnection.kt:37)
-	at it.greengers.potconnectors.connection.AbstractPotConnection.connect(AbstractPotConnection.kt)
-	at it.greengers.potnetcore.controller.PotNetCoreCoreCoreController.enstablishConnection(PotNetCoreController.kt:77)
-	at it.greengers.potnetcore.controller.PotNetCoreCoreCoreController$enstablishConnection$1.invokeSuspend(PotNetCoreController.kt)
-	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
-	at kotlinx.coroutines.DispatchedTaskKt.resume(DispatchedTask.kt:235)
-	at kotlinx.coroutines.DispatchedTaskKt.dispatch(DispatchedTask.kt:167)
-	at kotlinx.coroutines.CancellableContinuationImpl.dispatchResume(CancellableContinuationImpl.kt:406)
-	at kotlinx.coroutines.CancellableContinuationImpl.resumeImpl(CancellableContinuationImpl.kt:440)
-	at kotlinx.coroutines.CancellableContinuationImpl.resumeImpl$default(CancellableContinuationImpl.kt:429)
-	at kotlinx.coroutines.CancellableContinuationImpl.resumeUndispatched(CancellableContinuationImpl.kt:527)
-	at kotlinx.coroutines.EventLoopImplBase$DelayedResumeTask.run(EventLoop.common.kt:497)
-	at kotlinx.coroutines.EventLoopImplBase.processNextEvent(EventLoop.common.kt:277)
-	at kotlinx.coroutines.BlockingCoroutine.joinBlocking(Builders.kt:87)
-	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking(Builders.kt:61)
-	at kotlinx.coroutines.BuildersKt.runBlocking(Unknown Source)
-	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking$default(Builders.kt:40)
-	at kotlinx.coroutines.BuildersKt.runBlocking$default(Unknown Source)
-	at it.greengers.potnetcore.controller.PotNetCoreCoreCoreController.<clinit>(PotNetCoreController.kt:44)
-	at it.greengers.potnetcore.PotNetCoreApplKt.main(PotNetCoreAppl.kt:10)
-	at it.greengers.potnetcore.PotNetCoreApplKt.main(PotNetCoreAppl.kt)
-
-2021-12-12 19:49:21.725 [main] ERROR it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - ----> Connection error: java.nio.channels.UnresolvedAddressException
-	at java.base/sun.nio.ch.Net.checkAddress(Net.java:130)
-	at java.base/sun.nio.ch.SocketChannelImpl.connect(SocketChannelImpl.java:675)
-	at io.ktor.network.sockets.SocketImpl.connect$ktor_network(SocketImpl.kt:32)
-	at io.ktor.network.sockets.ConnectUtilsJvmKt.connect(ConnectUtilsJvm.kt:19)
-	at io.ktor.network.sockets.TcpSocketBuilder.connect(TcpSocketBuilder.kt:38)
-	at io.ktor.network.sockets.TcpSocketBuilder.connect$default(TcpSocketBuilder.kt:35)
-	at it.greengers.potconnectors.connection.KtorPotConnection.doConnect(KtorPotConnection.kt:57)
-	at it.greengers.potconnectors.connection.AbstractPotConnection.connect$suspendImpl(AbstractPotConnection.kt:70)
-	at it.greengers.potconnectors.connection.AbstractPotConnection.connect(AbstractPotConnection.kt)
-	at it.greengers.potconnectors.connection.PotConnection$DefaultImpls.connect$default(PotConnection.kt:66)
-	at it.greengers.potconnectors.connection.AbstractPotConnection.connect$suspendImpl(AbstractPotConnection.kt:46)
-	at it.greengers.potconnectors.connection.AbstractPotConnection.connect(AbstractPotConnection.kt)
-	at it.greengers.potconnectors.connection.AbstractPotConnection.connect$suspendImpl(AbstractPotConnection.kt:37)
-	at it.greengers.potconnectors.connection.AbstractPotConnection.connect(AbstractPotConnection.kt)
-	at it.greengers.potnetcore.controller.PotNetCoreCoreCoreController.enstablishConnection(PotNetCoreController.kt:77)
-	at it.greengers.potnetcore.controller.PotNetCoreCoreCoreController$enstablishConnection$1.invokeSuspend(PotNetCoreController.kt)
-	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
-	at kotlinx.coroutines.DispatchedTaskKt.resume(DispatchedTask.kt:235)
-	at kotlinx.coroutines.DispatchedTaskKt.dispatch(DispatchedTask.kt:167)
-	at kotlinx.coroutines.CancellableContinuationImpl.dispatchResume(CancellableContinuationImpl.kt:406)
-	at kotlinx.coroutines.CancellableContinuationImpl.resumeImpl(CancellableContinuationImpl.kt:440)
-	at kotlinx.coroutines.CancellableContinuationImpl.resumeImpl$default(CancellableContinuationImpl.kt:429)
-	at kotlinx.coroutines.CancellableContinuationImpl.resumeUndispatched(CancellableContinuationImpl.kt:527)
-	at kotlinx.coroutines.EventLoopImplBase$DelayedResumeTask.run(EventLoop.common.kt:497)
-	at kotlinx.coroutines.EventLoopImplBase.processNextEvent(EventLoop.common.kt:277)
-	at kotlinx.coroutines.BlockingCoroutine.joinBlocking(Builders.kt:87)
-	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking(Builders.kt:61)
-	at kotlinx.coroutines.BuildersKt.runBlocking(Unknown Source)
-	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking$default(Builders.kt:40)
-	at kotlinx.coroutines.BuildersKt.runBlocking$default(Unknown Source)
-	at it.greengers.potnetcore.controller.PotNetCoreCoreCoreController.<clinit>(PotNetCoreController.kt:44)
-	at it.greengers.potnetcore.PotNetCoreApplKt.main(PotNetCoreAppl.kt:10)
-	at it.greengers.potnetcore.PotNetCoreApplKt.main(PotNetCoreAppl.kt)
-
-2021-12-12 19:49:23.732 [main] INFO  it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - PotCore | Trying to connect...
-2021-12-12 19:49:23.733 [main] INFO  it.greengers.potconnectors.connection.KtorPotConnection - Connecting to [potnet.ddns.net:5555]
-2021-12-12 19:49:23.734 [main] ERROR it.greengers.potconnectors.connection.KtorPotConnection - java.nio.channels.UnresolvedAddressException
-	at java.base/sun.nio.ch.Net.checkAddress(Net.java:130)
-	at java.base/sun.nio.ch.SocketChannelImpl.connect(SocketChannelImpl.java:675)
-	at io.ktor.network.sockets.SocketImpl.connect$ktor_network(SocketImpl.kt:32)
-	at io.ktor.network.sockets.ConnectUtilsJvmKt.connect(ConnectUtilsJvm.kt:19)
-	at io.ktor.network.sockets.TcpSocketBuilder.connect(TcpSocketBuilder.kt:38)
-	at io.ktor.network.sockets.TcpSocketBuilder.connect$default(TcpSocketBuilder.kt:35)
-	at it.greengers.potconnectors.connection.KtorPotConnection.doConnect(KtorPotConnection.kt:57)
-	at it.greengers.potconnectors.connection.AbstractPotConnection.connect$suspendImpl(AbstractPotConnection.kt:70)
-	at it.greengers.potconnectors.connection.AbstractPotConnection.connect(AbstractPotConnection.kt)
-	at it.greengers.potconnectors.connection.PotConnection$DefaultImpls.connect$default(PotConnection.kt:66)
-	at it.greengers.potconnectors.connection.AbstractPotConnection.connect$suspendImpl(AbstractPotConnection.kt:46)
-	at it.greengers.potconnectors.connection.AbstractPotConnection.connect(AbstractPotConnection.kt)
-	at it.greengers.potconnectors.connection.AbstractPotConnection.connect$suspendImpl(AbstractPotConnection.kt:37)
-	at it.greengers.potconnectors.connection.AbstractPotConnection.connect(AbstractPotConnection.kt)
-	at it.greengers.potnetcore.controller.PotNetCoreCoreCoreController.enstablishConnection(PotNetCoreController.kt:77)
-	at it.greengers.potnetcore.controller.PotNetCoreCoreCoreController$enstablishConnection$1.invokeSuspend(PotNetCoreController.kt)
-	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
-	at kotlinx.coroutines.DispatchedTaskKt.resume(DispatchedTask.kt:235)
-	at kotlinx.coroutines.DispatchedTaskKt.dispatch(DispatchedTask.kt:167)
-	at kotlinx.coroutines.CancellableContinuationImpl.dispatchResume(CancellableContinuationImpl.kt:406)
-	at kotlinx.coroutines.CancellableContinuationImpl.resumeImpl(CancellableContinuationImpl.kt:440)
-	at kotlinx.coroutines.CancellableContinuationImpl.resumeImpl$default(CancellableContinuationImpl.kt:429)
-	at kotlinx.coroutines.CancellableContinuationImpl.resumeUndispatched(CancellableContinuationImpl.kt:527)
-	at kotlinx.coroutines.EventLoopImplBase$DelayedResumeTask.run(EventLoop.common.kt:497)
-	at kotlinx.coroutines.EventLoopImplBase.processNextEvent(EventLoop.common.kt:277)
-	at kotlinx.coroutines.BlockingCoroutine.joinBlocking(Builders.kt:87)
-	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking(Builders.kt:61)
-	at kotlinx.coroutines.BuildersKt.runBlocking(Unknown Source)
-	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking$default(Builders.kt:40)
-	at kotlinx.coroutines.BuildersKt.runBlocking$default(Unknown Source)
-	at it.greengers.potnetcore.controller.PotNetCoreCoreCoreController.<clinit>(PotNetCoreController.kt:44)
-	at it.greengers.potnetcore.PotNetCoreApplKt.main(PotNetCoreAppl.kt:10)
-	at it.greengers.potnetcore.PotNetCoreApplKt.main(PotNetCoreAppl.kt)
-
-2021-12-12 19:49:23.735 [main] ERROR it.greengers.potnetcore.controller.PotNetCoreCoreCoreController - ----> Connection error: java.nio.channels.UnresolvedAddressException
-	at java.base/sun.nio.ch.Net.checkAddress(Net.java:130)
-	at java.base/sun.nio.ch.SocketChannelImpl.connect(SocketChannelImpl.java:675)
-	at io.ktor.network.sockets.SocketImpl.connect$ktor_network(SocketImpl.kt:32)
-	at io.ktor.network.sockets.ConnectUtilsJvmKt.connect(ConnectUtilsJvm.kt:19)
-	at io.ktor.network.sockets.TcpSocketBuilder.connect(TcpSocketBuilder.kt:38)
-	at io.ktor.network.sockets.TcpSocketBuilder.connect$default(TcpSocketBuilder.kt:35)
-	at it.greengers.potconnectors.connection.KtorPotConnection.doConnect(KtorPotConnection.kt:57)
-	at it.greengers.potconnectors.connection.AbstractPotConnection.connect$suspendImpl(AbstractPotConnection.kt:70)
-	at it.greengers.potconnectors.connection.AbstractPotConnection.connect(AbstractPotConnection.kt)
-	at it.greengers.potconnectors.connection.PotConnection$DefaultImpls.connect$default(PotConnection.kt:66)
-	at it.greengers.potconnectors.connection.AbstractPotConnection.connect$suspendImpl(AbstractPotConnection.kt:46)
-	at it.greengers.potconnectors.connection.AbstractPotConnection.connect(AbstractPotConnection.kt)
-	at it.greengers.potconnectors.connection.AbstractPotConnection.connect$suspendImpl(AbstractPotConnection.kt:37)
-	at it.greengers.potconnectors.connection.AbstractPotConnection.connect(AbstractPotConnection.kt)
-	at it.greengers.potnetcore.controller.PotNetCoreCoreCoreController.enstablishConnection(PotNetCoreController.kt:77)
-	at it.greengers.potnetcore.controller.PotNetCoreCoreCoreController$enstablishConnection$1.invokeSuspend(PotNetCoreController.kt)
-	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
-	at kotlinx.coroutines.DispatchedTaskKt.resume(DispatchedTask.kt:235)
-	at kotlinx.coroutines.DispatchedTaskKt.dispatch(DispatchedTask.kt:167)
-	at kotlinx.coroutines.CancellableContinuationImpl.dispatchResume(CancellableContinuationImpl.kt:406)
-	at kotlinx.coroutines.CancellableContinuationImpl.resumeImpl(CancellableContinuationImpl.kt:440)
-	at kotlinx.coroutines.CancellableContinuationImpl.resumeImpl$default(CancellableContinuationImpl.kt:429)
-	at kotlinx.coroutines.CancellableContinuationImpl.resumeUndispatched(CancellableContinuationImpl.kt:527)
-	at kotlinx.coroutines.EventLoopImplBase$DelayedResumeTask.run(EventLoop.common.kt:497)
-	at kotlinx.coroutines.EventLoopImplBase.processNextEvent(EventLoop.common.kt:277)
-	at kotlinx.coroutines.BlockingCoroutine.joinBlocking(Builders.kt:87)
-	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking(Builders.kt:61)
-	at kotlinx.coroutines.BuildersKt.runBlocking(Unknown Source)
-	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking$default(Builders.kt:40)
-	at kotlinx.coroutines.BuildersKt.runBlocking$default(Unknown Source)
-	at it.greengers.potnetcore.controller.PotNetCoreCoreCoreController.<clinit>(PotNetCoreController.kt:44)
-	at it.greengers.potnetcore.PotNetCoreApplKt.main(PotNetCoreAppl.kt:10)
-	at it.greengers.potnetcore.PotNetCoreApplKt.main(PotNetCoreAppl.kt)
-
+2021-12-13 13:19:08.345 [main] INFO  it.greengers.potconnectors.dns.LocalPotDNS - Loaded application DNS name: "potnet_1234567"
+2021-12-13 13:19:08.355 [main] WARN  it.greengers.potconnectors.dns.LocalPotDNS - Name is already set to "potnet_1234567": unable to change this name
+2021-12-13 13:19:09.251 [DefaultDispatcher-worker-2] INFO  it.greengers.potnetcore.sensors.polling.AbstractPollingJob - AbstractPollingJob[TEMP0] | Started coroutine StandaloneCoroutine{Active}@4a17fcfe
+2021-12-13 13:19:09.253 [DefaultDispatcher-worker-3] INFO  it.greengers.potnetcore.sensors.polling.AbstractPollingJob - AbstractPollingJob[HUMIDITY0] | Started coroutine StandaloneCoroutine{Active}@590f77af
+2021-12-13 13:19:09.254 [DefaultDispatcher-worker-3] INFO  it.greengers.potnetcore.sensors.polling.AbstractPollingJob - AbstractPollingJob[BRIGHT0] | Started coroutine StandaloneCoroutine{Active}@57c882fe
+2021-12-13 13:19:09.320 [DefaultDispatcher-worker-1] INFO  it.greengers.potnetcore.controller.WebSocketController - PotNetCore | temperature monitoring system started
+2021-12-13 13:19:09.321 [DefaultDispatcher-worker-3] INFO  it.greengers.potnetcore.sensors.polling.AbstractPollingJob - AbstractPollingJob[TEMP0] | Start polling
+2021-12-13 13:19:09.321 [DefaultDispatcher-worker-1] INFO  it.greengers.potnetcore.controller.WebSocketController - PotNetCore | humidity monitoring system started
+2021-12-13 13:19:09.321 [DefaultDispatcher-worker-4] INFO  it.greengers.potnetcore.sensors.polling.AbstractPollingJob - AbstractPollingJob[HUMIDITY0] | Start polling
+2021-12-13 13:19:09.323 [DefaultDispatcher-worker-1] INFO  it.greengers.potnetcore.controller.WebSocketController - PotNetCore | brightness monitoring system started
+2021-12-13 13:19:09.323 [DefaultDispatcher-worker-5] INFO  it.greengers.potnetcore.sensors.polling.AbstractPollingJob - AbstractPollingJob[BRIGHT0] | Start polling
+2021-12-13 13:19:09.324 [DefaultDispatcher-worker-1] INFO  it.greengers.potnetcore.controller.WebSocketController - PotNetCoreWS | Attempting to connect...
+2021-12-13 13:19:09.401 [DefaultDispatcher-worker-1] INFO  it.greengers.potconnectors.dns.LocalPotDNS - Added entry ["ws-heroku-server"-{prova-vaso-smart.herokuapp.com/54.228.42.199:80}] to local DNS
+2021-12-13 13:19:09.403 [DefaultDispatcher-worker-1] INFO  it.greengers.potnetcore.controller.WebSocketController - PotNetCoreWS | Requesting connection to ConnectionManager
+2021-12-13 13:19:09.404 [DefaultDispatcher-worker-1] INFO  it.greengers.potconnectors.connection.ConnectionManager - newConnection(ws-heroku-server, WEBSOCKET, kotlinx.coroutines.GlobalScope@6baaf5b3, [Ljava.lang.String;@4ef698f1)
+2021-12-13 13:19:09.582 [DefaultDispatcher-worker-1] INFO  it.greengers.potconnectors.connection.ConnectionManager - Opened connection [AbstractPotConnection(destinationName='ws-heroku-server', type=WEBSOCKET, connectedAddress=null)]
+2021-12-13 13:19:09.582 [DefaultDispatcher-worker-1] INFO  it.greengers.potnetcore.controller.WebSocketController - PotNetCoreWS | Obtained connection AbstractPotConnection(destinationName='ws-heroku-server', type=WEBSOCKET, connectedAddress=null)
+2021-12-13 13:19:09.583 [DefaultDispatcher-worker-1] INFO  it.greengers.potnetcore.controller.WebSocketController - PotNetCoreWS | Message listener attached
+2021-12-13 13:19:09.584 [DefaultDispatcher-worker-1] INFO  it.greengers.potnetcore.controller.WebSocketController - PotNetCoreWS| Trying to connect...
+2021-12-13 13:19:11.758 [DefaultDispatcher-worker-4] INFO  it.greengers.potconnectors.connection.WebsocketPotConnection - Listener for [null] started
+2021-12-13 13:19:11.758 [DefaultDispatcher-worker-1] INFO  it.greengers.potconnectors.connection.WebsocketPotConnection - WebsocketPotConnection[null] | WebSocketSession started
+2021-12-13 13:19:11.759 [DefaultDispatcher-worker-1] INFO  it.greengers.potconnectors.dns.LocalPotDNS - Added entry ["ws-heroku-server"-{prova-vaso-smart.herokuapp.com/54.228.42.199:80}] to local DNS
+2021-12-13 13:19:11.760 [DefaultDispatcher-worker-1] INFO  it.greengers.potnetcore.controller.WebSocketController - PotCore | Connected to prova-vaso-smart.herokuapp.com/54.228.42.199:80
+2021-12-13 13:19:11.760 [DefaultDispatcher-worker-1] INFO  it.greengers.potconnectors.connection.WebsocketPotConnection - Listener for [prova-vaso-smart.herokuapp.com/54.228.42.199:80] started
+2021-12-13 13:19:11.762 [DefaultDispatcher-worker-4] INFO  it.greengers.potconnectors.connection.WebsocketPotConnection - WebsocketPotConnection[prova-vaso-smart.herokuapp.com/54.228.42.199:80] | received message: Messaggio test per verificare connessione
+2021-12-13 13:19:11.765 [DefaultDispatcher-worker-4] WARN  it.greengers.potconnectors.connection.WebsocketPotConnection - WebsocketPotConnection[prova-vaso-smart.herokuapp.com/54.228.42.199:80] | Error in JSON parsing for message Messaggio test per verificare connessione
+2021-12-13 13:19:11.773 [DefaultDispatcher-worker-4] INFO  it.greengers.potconnectors.connection.WebsocketPotConnection - WebsocketPotConnection[prova-vaso-smart.herokuapp.com/54.228.42.199:80] | Sent message [PotMessage(destinationName='ws-heroku-server', senderName='potnet_1234567', type=ERROR)]
+2021-12-13 13:19:14.250 [DefaultDispatcher-worker-4] INFO  it.greengers.potnetcore.sensors.polling.AbstractPollingJob - AbstractPollingJob[TEMP0] | Polling value: Value[1.0]
+2021-12-13 13:19:14.255 [DefaultDispatcher-worker-3] INFO  it.greengers.potnetcore.sensors.polling.AbstractPollingJob - AbstractPollingJob[HUMIDITY0] | Polling value: Value[1.0]
+2021-12-13 13:19:14.256 [DefaultDispatcher-worker-1] INFO  it.greengers.potnetcore.sensors.polling.AbstractPollingJob - AbstractPollingJob[BRIGHT0] | Polling value: Value[1.0]
+2021-12-13 13:19:14.258 [DefaultDispatcher-worker-4] INFO  it.greengers.potconnectors.connection.WebsocketPotConnection - WebsocketPotConnection[prova-vaso-smart.herokuapp.com/54.228.42.199:80] | Sent message [CommunicationMessage(communicationType='TEMPERATURE', communication='1.0') PotMessage(destinationName='ws-heroku-server', senderName='potnet_1234567', type=COMMUNICATION)]
+2021-12-13 13:19:14.258 [DefaultDispatcher-worker-4] INFO  it.greengers.potnetcore.controller.WebSocketController - Sent message CommunicationMessage(communicationType='TEMPERATURE', communication='1.0') PotMessage(destinationName='ws-heroku-server', senderName='potnet_1234567', type=COMMUNICATION)
+2021-12-13 13:19:14.260 [DefaultDispatcher-worker-4] INFO  it.greengers.potnetcore.sensors.polling.WebSocketPollingListener - Sent value to websocket
+2021-12-13 13:19:14.260 [DefaultDispatcher-worker-4] INFO  it.greengers.potconnectors.connection.WebsocketPotConnection - WebsocketPotConnection[prova-vaso-smart.herokuapp.com/54.228.42.199:80] | Sent message [CommunicationMessage(communicationType='HUMIDITY', communication='1.0') PotMessage(destinationName='ws-heroku-server', senderName='potnet_1234567', type=COMMUNICATION)]
+2021-12-13 13:19:14.261 [DefaultDispatcher-worker-4] INFO  it.greengers.potnetcore.controller.WebSocketController - Sent message CommunicationMessage(communicationType='HUMIDITY', communication='1.0') PotMessage(destinationName='ws-heroku-server', senderName='potnet_1234567', type=COMMUNICATION)
+2021-12-13 13:19:14.261 [DefaultDispatcher-worker-4] INFO  it.greengers.potnetcore.sensors.polling.WebSocketPollingListener - Sent value to websocket
+2021-12-13 13:19:14.261 [DefaultDispatcher-worker-1] INFO  it.greengers.potconnectors.connection.WebsocketPotConnection - WebsocketPotConnection[prova-vaso-smart.herokuapp.com/54.228.42.199:80] | Sent message [CommunicationMessage(communicationType='BRIGHTNESS', communication='1.0') PotMessage(destinationName='ws-heroku-server', senderName='potnet_1234567', type=COMMUNICATION)]
+2021-12-13 13:19:14.262 [DefaultDispatcher-worker-1] INFO  it.greengers.potnetcore.controller.WebSocketController - Sent message CommunicationMessage(communicationType='BRIGHTNESS', communication='1.0') PotMessage(destinationName='ws-heroku-server', senderName='potnet_1234567', type=COMMUNICATION)
+2021-12-13 13:19:14.262 [DefaultDispatcher-worker-1] INFO  it.greengers.potnetcore.sensors.polling.WebSocketPollingListener - Sent value to websocket
+2021-12-13 13:19:14.263 [DefaultDispatcher-worker-1] INFO  it.greengers.potconnectors.connection.WebsocketPotConnection - WebsocketPotConnection[prova-vaso-smart.herokuapp.com/54.228.42.199:80] | Sent message [CommunicationMessage(communicationType='TEMPERATURE', communication='1.0') PotMessage(destinationName='ws-heroku-server', senderName='potnet_1234567', type=COMMUNICATION)]
+2021-12-13 13:19:14.263 [DefaultDispatcher-worker-1] INFO  it.greengers.potnetcore.controller.WebSocketController - Sent message CommunicationMessage(communicationType='TEMPERATURE', communication='1.0') PotMessage(destinationName='ws-heroku-server', senderName='potnet_1234567', type=COMMUNICATION)
+2021-12-13 13:19:14.264 [DefaultDispatcher-worker-1] INFO  it.greengers.potnetcore.sensors.polling.WebSocketPollingListener - Sent value to websocket
+2021-12-13 13:19:14.264 [DefaultDispatcher-worker-1] INFO  it.greengers.potconnectors.connection.WebsocketPotConnection - WebsocketPotConnection[prova-vaso-smart.herokuapp.com/54.228.42.199:80] | Sent message [CommunicationMessage(communicationType='HUMIDITY', communication='1.0') PotMessage(destinationName='ws-heroku-server', senderName='potnet_1234567', type=COMMUNICATION)]
+2021-12-13 13:19:14.264 [DefaultDispatcher-worker-1] INFO  it.greengers.potnetcore.controller.WebSocketController - Sent message CommunicationMessage(communicationType='HUMIDITY', communication='1.0') PotMessage(destinationName='ws-heroku-server', senderName='potnet_1234567', type=COMMUNICATION)
+2021-12-13 13:19:14.265 [DefaultDispatcher-worker-1] INFO  it.greengers.potnetcore.sensors.polling.WebSocketPollingListener - Sent value to websocket
+2021-12-13 13:19:14.265 [DefaultDispatcher-worker-1] INFO  it.greengers.potconnectors.connection.WebsocketPotConnection - WebsocketPotConnection[prova-vaso-smart.herokuapp.com/54.228.42.199:80] | Sent message [CommunicationMessage(communicationType='BRIGHTNESS', communication='1.0') PotMessage(destinationName='ws-heroku-server', senderName='potnet_1234567', type=COMMUNICATION)]
+2021-12-13 13:19:14.266 [DefaultDispatcher-worker-1] INFO  it.greengers.potnetcore.controller.WebSocketController - Sent message CommunicationMessage(communicationType='BRIGHTNESS', communication='1.0') PotMessage(destinationName='ws-heroku-server', senderName='potnet_1234567', type=COMMUNICATION)
+2021-12-13 13:19:14.267 [DefaultDispatcher-worker-1] INFO  it.greengers.potnetcore.sensors.polling.WebSocketPollingListener - Sent value to websocket
+2021-12-13 13:19:19.240 [DefaultDispatcher-worker-1] INFO  it.greengers.potnetcore.sensors.polling.AbstractPollingJob - AbstractPollingJob[TEMP0] | Polling value: Value[1.0]
+2021-12-13 13:19:19.242 [DefaultDispatcher-worker-1] INFO  it.greengers.potconnectors.connection.WebsocketPotConnection - WebsocketPotConnection[prova-vaso-smart.herokuapp.com/54.228.42.199:80] | Sent message [CommunicationMessage(communicationType='TEMPERATURE', communication='1.0') PotMessage(destinationName='ws-heroku-server', senderName='potnet_1234567', type=COMMUNICATION)]
+2021-12-13 13:19:19.245 [DefaultDispatcher-worker-1] INFO  it.greengers.potnetcore.controller.WebSocketController - Sent message CommunicationMessage(communicationType='TEMPERATURE', communication='1.0') PotMessage(destinationName='ws-heroku-server', senderName='potnet_1234567', type=COMMUNICATION)
+2021-12-13 13:19:19.245 [DefaultDispatcher-worker-1] INFO  it.greengers.potnetcore.sensors.polling.WebSocketPollingListener - Sent value to websocket
+2021-12-13 13:19:19.246 [DefaultDispatcher-worker-1] INFO  it.greengers.potconnectors.connection.WebsocketPotConnection - WebsocketPotConnection[prova-vaso-smart.herokuapp.com/54.228.42.199:80] | Sent message [CommunicationMessage(communicationType='TEMPERATURE', communication='1.0') PotMessage(destinationName='ws-heroku-server', senderName='potnet_1234567', type=COMMUNICATION)]
+2021-12-13 13:19:19.246 [DefaultDispatcher-worker-1] INFO  it.greengers.potnetcore.controller.WebSocketController - Sent message CommunicationMessage(communicationType='TEMPERATURE', communication='1.0') PotMessage(destinationName='ws-heroku-server', senderName='potnet_1234567', type=COMMUNICATION)
+2021-12-13 13:19:19.246 [DefaultDispatcher-worker-1] INFO  it.greengers.potnetcore.sensors.polling.WebSocketPollingListener - Sent value to websocket
+2021-12-13 13:19:19.253 [DefaultDispatcher-worker-1] INFO  it.greengers.potnetcore.sensors.polling.AbstractPollingJob - AbstractPollingJob[HUMIDITY0] | Polling value: Value[1.0]
+2021-12-13 13:19:19.253 [DefaultDispatcher-worker-1] INFO  it.greengers.potconnectors.connection.WebsocketPotConnection - WebsocketPotConnection[prova-vaso-smart.herokuapp.com/54.228.42.199:80] | Sent message [CommunicationMessage(communicationType='HUMIDITY', communication='1.0') PotMessage(destinationName='ws-heroku-server', senderName='potnet_1234567', type=COMMUNICATION)]
+2021-12-13 13:19:19.254 [DefaultDispatcher-worker-1] INFO  it.greengers.potnetcore.controller.WebSocketController - Sent message CommunicationMessage(communicationType='HUMIDITY', communication='1.0') PotMessage(destinationName='ws-heroku-server', senderName='potnet_1234567', type=COMMUNICATION)
+2021-12-13 13:19:19.254 [DefaultDispatcher-worker-1] INFO  it.greengers.potnetcore.sensors.polling.WebSocketPollingListener - Sent value to websocket
+2021-12-13 13:19:19.254 [DefaultDispatcher-worker-1] INFO  it.greengers.potconnectors.connection.WebsocketPotConnection - WebsocketPotConnection[prova-vaso-smart.herokuapp.com/54.228.42.199:80] | Sent message [CommunicationMessage(communicationType='HUMIDITY', communication='1.0') PotMessage(destinationName='ws-heroku-server', senderName='potnet_1234567', type=COMMUNICATION)]
+2021-12-13 13:19:19.254 [DefaultDispatcher-worker-1] INFO  it.greengers.potnetcore.controller.WebSocketController - Sent message CommunicationMessage(communicationType='HUMIDITY', communication='1.0') PotMessage(destinationName='ws-heroku-server', senderName='potnet_1234567', type=COMMUNICATION)
+2021-12-13 13:19:19.254 [DefaultDispatcher-worker-1] INFO  it.greengers.potnetcore.sensors.polling.WebSocketPollingListener - Sent value to websocket
+2021-12-13 13:19:19.255 [DefaultDispatcher-worker-3] INFO  it.greengers.potnetcore.sensors.polling.AbstractPollingJob - AbstractPollingJob[BRIGHT0] | Polling value: Value[1.0]
+2021-12-13 13:19:19.255 [DefaultDispatcher-worker-3] INFO  it.greengers.potconnectors.connection.WebsocketPotConnection - WebsocketPotConnection[prova-vaso-smart.herokuapp.com/54.228.42.199:80] | Sent message [CommunicationMessage(communicationType='BRIGHTNESS', communication='1.0') PotMessage(destinationName='ws-heroku-server', senderName='potnet_1234567', type=COMMUNICATION)]
+2021-12-13 13:19:19.255 [DefaultDispatcher-worker-3] INFO  it.greengers.potnetcore.controller.WebSocketController - Sent message CommunicationMessage(communicationType='BRIGHTNESS', communication='1.0') PotMessage(destinationName='ws-heroku-server', senderName='potnet_1234567', type=COMMUNICATION)
+2021-12-13 13:19:19.255 [DefaultDispatcher-worker-3] INFO  it.greengers.potnetcore.sensors.polling.WebSocketPollingListener - Sent value to websocket
+2021-12-13 13:19:19.256 [DefaultDispatcher-worker-3] INFO  it.greengers.potconnectors.connection.WebsocketPotConnection - WebsocketPotConnection[prova-vaso-smart.herokuapp.com/54.228.42.199:80] | Sent message [CommunicationMessage(communicationType='BRIGHTNESS', communication='1.0') PotMessage(destinationName='ws-heroku-server', senderName='potnet_1234567', type=COMMUNICATION)]
+2021-12-13 13:19:19.256 [DefaultDispatcher-worker-3] INFO  it.greengers.potnetcore.controller.WebSocketController - Sent message CommunicationMessage(communicationType='BRIGHTNESS', communication='1.0') PotMessage(destinationName='ws-heroku-server', senderName='potnet_1234567', type=COMMUNICATION)
+2021-12-13 13:19:19.256 [DefaultDispatcher-worker-3] INFO  it.greengers.potnetcore.sensors.polling.WebSocketPollingListener - Sent value to websocket
