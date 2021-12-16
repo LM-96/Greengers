@@ -1,20 +1,18 @@
 \section{Funzionamento del prodotto}
 
-Andiamo ora ad analizzare più nel dettaglio il funzionamento del prodotto e quali sono le tecnologie software e dispositivi hardware necessari per i prodotti.
+PotNet è dal punto di vista tecnologico un prodotto relativamente semplice da realizzare e che non richiedere particolari tecnologie hardware o software. \\Infatti, il prototipo fisico realizzato, prevede l'utilizzo dei seguenti componenti:
 
-Il dispositivo fisico, realizzato come prototipo, prevedeva l'utilizzo dei seguenti componenti:
 \begin{itemize}
-	\item Raspberry PI 2 Model B[30€]: board per la lettura dei sensori, mantenimento dello stato e comunicazione con il server centrale
-	\item DHT11[1.5€]: sensore di temperatura e umidità ambientale
-	\item Fotoresistore[0.5€]: sensore di luminosità ambientale
-	\item Batteria da 5000mAh[5€]: necessario per poter utilizzare il dispositivo senza doverlo tenere sempre collegato alla corrente
+	\item \textbf{Raspberry PI 2 Model B[30€]:} microcontrollore per la lettura dei sensori, mantenimento dello stato e comunicazione con il server centrale
+	\item \textbf{DHT11[1.5€]:} sensore di temperatura e umidità ambientale
+	\item \textbf{Fotoresistore[0.5€]:} sensore di luminosità ambientale
+	\item \textbf{Batteria da 5000mAh[5€]:} per poter utilizzare il dispositivo senza doverlo tenere sempre collegato alla corrente
 \end{itemize}
 
-Per il prodotto destinato alla vendita non utilizzeremo più una Raspberry PI, la quale ha un costo, funzionalità e un consumo decisamente più alti di quelli a noi necessari. Si renderebbe quindi necessaria la progettazione e realizzazione di una board ad hoc con i sensori già integrati in essa. In questo modo si andrebbero a ridurre notevolmente i costi di produzione, l'ingombro e il consumo energetico. A sua volta quindi sarebbe possibile diminuire la capacità della batteria utilizzata andando a ridurre ancora di più le dimensioni, il peso e il costo del prodotto le quali sarebbero circa la metà di quelle del prototipo, con un'autonomia stimata di circa 10-14 giorni.
+Per il prodotto destinato alla vendita non utilizzeremo più una Raspberry PI, la quale ha un costo, funzionalità e un consumo decisamente più alti di quelli a noi necessari. Si renderebbe quindi necessaria la progettazione e realizzazione di una board ad hoc con i sensori già integrati in essa. In questo modo si andrebbero a ridurre notevolmente i costi di produzione, l'ingombro e il consumo energetico. A sua volta, anche la capacità della batteria potrebbe essere ridotta, contenendo ancor di più le dimensioni, il peso e il costo del prodotto. Il prodotto finale risulterebbe grande meno della metà del prototipo, un peso inferiore ai 200g e con un'autonomia stimata di circa 10-14 giorni. \\
 
-Il software presente sul prodotto, si connette ad un server centrale il quale si occupa di fare da tramite tra i dispositivi e le varie interfacce tramite cui l'utente può tenersi informato sullo stato della piante (Bot Telegram, Alexa, Web UI).
- 
-Quest'ultima parte di struttura software risiederà su un servizio come ad esempio Amazon AWS. Questo ci permetterà di avere un servizio affidabile e scalabile. In questo modo potremmo risparmiare soprattutto nella fase iniziale del progetto, in cui sarebbe insostenibile economicamente creare una nostra infrastruttura, ma senza rinunciare ad avere un servizio di qualità.
+A livello software, quello presente sul prodotto, rileva i dati dei sensori ad intervalli prestabiliti e ne mantiene lo storico in memoria. Inoltre, si connette al server centrale il quale si occupa di fare da tramite tra i dispositivi e le varie interfacce tramite cui l'utente può tenersi informato sullo stato della piante (Bot Telegram, Alexa, Web UI).\\ Il software del server centrale, risiederà su un servizio come ad esempio Amazon AWS. Questo ci permetterà di avere un servizio affidabile e scalabile e di risparmiare soprattutto nella fase iniziale del progetto in cui sarebbe insostenibile economicamente creare una nostra infrastruttura, ma senza rinunciare ad avere un servizio di qualità.
 
-In futuro, sarebbe anche possibile creare ulteriori versioni del prodotto che prevedano ulteriori sensori rispetto a quelli già previsti (ad esempio umidità del terreno, quantità di fertilizzante) andando quindi ad ampliare la line-up di prodotti venduti e raggiungendo così anche target di clienti con esigenze e budget maggiori.
-Anche le funzionalità e i servizi offerti potranno essere ampliati, infatti il software è stato scritto in modo da poter essere facilmente e velocemente espandibile in futuro. Alcuni esempi potrebbero essere il supporto di diversi assistenti vocali oltre ad Alexa, lo sviluppo di un'app apposita per Android e iOS e l'aggiunta di ulteriori piante supportate.
+Il software necessario al funzionamento di PotNetBot, della skill di Alexa e della Web UI comunica con il server centrale per acquisire i dati richiesti dall'utente e permette al server centrale di notificare rapidamente l'utente in caso di valori fuori soglia. Queste parti, sono state sviluppate in modo da essere facilmente estendibili in futuro, sarà quindi possibile aggiungere sempre più funzionalità in modo semplice e veloce migliorando così l'esperienza offerta all'utente senza la necessità di dover produrre una nuova versione del prodotto.
+
+In futuro, saranno sicuramente sviluppate e prodotte ulteriori versioni del prodotto che prevedano un numero maggiore di sensori rispetto a quelli già previsti (ad esempio umidità del terreno, quantità di fertilizzante) andando quindi ad ampliare la line-up di prodotti venduti e raggiungendo così un target di clienti con esigenze e budget maggiori. \\Anche i servizi offerti potranno essere ampliati, infatti il software è stato scritto in modo da poter essere facilmente e velocemente espandibile ed integrabile con altri servizi in futuro. Alcuni esempi potrebbero essere il supporto di diversi assistenti vocali oltre ad Alexa, lo sviluppo di un'app apposita per Android e iOS, l'aggiunta di ulteriori piante supportate e il miglioramento dei consigli e delle informazioni fornite dal bot Telegram.
