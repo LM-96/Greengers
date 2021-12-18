@@ -1,10 +1,20 @@
+\newcolumntype{l}{>{\hsize=.3\hsize}X}
+\newcolumntype{d}{>{\hsize=.18\hsize}X}
+\newcolumntype{s}{>{\hsize=.14\hsize}X}
+
+\newcolumntype{L}{>{\centering\arraybackslash}l}
+\newcolumntype{D}{>{\centering\arraybackslash}d}
+\newcolumntype{S}{>{\centering\arraybackslash}s}
+
+\renewcommand\tabularxcolumn[1]{m{#1}}
+
 \section{Analisi del settore (analisi competitiva)}
 
-Dopo aver svolto un’attenta analisi sulle dinamiche della nostra start-up innovativa e dopo aver avuto anche un riscontro da parte dell’ISTAT, si è arrivati alla conclusione che il nostro settore di riferimento è quello delle attività di ricerca e sviluppo sperimentale nel campo delle scienze naturali e dell’ingegneria. Svolgendo delle ricerche usando la banca dati AIDA si è visto come questo sia un settore che, in Italia, conta all’attivo 5081 tra grandi aziende e altre start-up innovative. Tra queste, 432 aziende operano sul suolo emiliano e 73 si trovano a Bologna.
+Dopo aver svolto un'attenta analisi sulle dinamiche della nostra start-up innovativa e dopo aver avuto anche un riscontro da parte dell'ISTAT, si è arrivati alla conclusione che il nostro settore di riferimento è quello delle attività di ricerca e sviluppo sperimentale nel campo delle scienze naturali e dell'ingegneria. Svolgendo delle ricerche usando la banca dati AIDA si è visto come questo sia un settore che, in Italia, conta all'attivo 5081 tra grandi aziende e altre start-up innovative. Tra queste, 432 aziende operano sul suolo emiliano e 73 si trovano a Bologna.
 
 \subsection{Redditività del settore}
 
-Utilizzando i dati estrapolati dalla sopracitata ricerca nel database AIDA si è riscontrato che nel 2020 il settore della ricerca e sviluppo sperimentale nel campo delle scienze naturali e dell’ingegneria ha prodotto un ricavato pari ad 1,8 miliardi di euro, registrando nel periodo che va dal 2016 ad oggi una crescita cumulata annua del 4,66\%.
+Utilizzando i dati estrapolati dalla sopracitata ricerca nel database AIDA si è riscontrato che nel 2020 il settore della ricerca e sviluppo sperimentale nel campo delle scienze naturali e dell'ingegneria ha prodotto un ricavato pari ad 1,8 miliardi di euro, registrando nel periodo che va dal 2016 ad oggi una crescita cumulata annua del 4,66\%.
 
 Le aziende leader di questo settore sono:
 \begin{itemize}
@@ -28,28 +38,33 @@ Le aziende leader di questo settore sono:
 Queste aziende possiedono il 28\% della fetta di mercato, indice che il settore delle attività di ricerca e sviluppo sperimentale nel campo delle scienze naturali e dell’ingegneria è abbastanza frammentato.
 
 \subsection{Principali competitors}
-\begin{longtable}{@{}ccccc@{}}
-	\toprule
-	\textbf{AZIENDA} &
-	\textbf{PRODOTTO} &
-	\textbf{COSTO} &
-	\textbf{FUNZIONALIT\`A} &
-	\textbf{LIMITI} \\* \midrule
-	\endfirsthead
-	%
-	\endhead
-	%
-	Xiaomi &
-	\begin{tabular}[c]{@{}c@{}}Mi Flower Care\\ Plant Sensor\end{tabular} &
-	19,95 &
-	\begin{tabular}[c]{@{}c@{}}- Monitoraggio di umidità e fertilità del terreno, temperatura e luce solare;\\ - Dispone di un’applicazione mobile per visionare i dati raccolti;\\ - Database con 6000+ piante;\\ - Storico dei valori della pianta;\\ - Integrabile con sistemi di Smart Home.\end{tabular} &
-	\begin{tabular}[c]{@{}c@{}}- Non ha un sistema di notifiche integrato quando i valori raggiungono dei threshold;\\ - Non è possibile accedere ai dati tramite PC.\end{tabular} \\
-	Wanfei &
-	\begin{tabular}[c]{@{}c@{}}Flower Care\\ Soil Tester\end{tabular} &
-	32,99 &
-	\begin{tabular}[c]{@{}c@{}}- Monitoraggio di umidità e fertilità del terreno, temperatura e luce solare;\\ - Compatibile con l’app ‘Flower Care’;\\ - Connettività al dispositivo mobile tramite Bluetooth;\end{tabular} &
-	\begin{tabular}[c]{@{}c@{}}- Non ha un sistema di notifiche integrato\\ - Non dispone di connettività Wi-Fi\\ - Si può accedere ai dati solo tramite app mobile\\ - Prezzo più elevato rispetto la concorrenza\end{tabular} \\* \bottomrule
-\end{longtable}
+\begin{center}
+\begin{tabularx}{\textwidth}{| S | D | S | L | L |}
+  \hline
+  \textbf{AZIENDA} &
+  \textbf{PRODOTTO} &
+  \textbf{COSTO} &
+  \textbf{FUNZIONALIT\`A} &
+  \textbf{LIMITI} \\	
+  \hline
+ Xiaomi & Mi Flower Care Plant Sensor & 19,95€ &
+- Monitoraggio di umidità e fertilità del terreno, temperatura e luce solare;\newline
+- Dispone di un’applicazione mobile per visionare i dati raccolti;\newline
+- Database con 6000+ piante;\newline
+- Storico dei valori della pianta;\newline
+- Integrabile con sistemi di Smart Home & 
+- Non ha un sistema di notifiche integrato quando i valori raggiungono dei threshold;\newline
+- Non è possibile accedere ai dati tramite PC \\	\hline
+ Wanfei & Flower Care Soil Tester & 32,99€ &
+- Monitoraggio di umidità e fertilità del terreno, temperatura e luce solare;\newline
+- Compatibile con l’app ‘Flower Care’;\newline
+- Connettività al dispositivo mobile tramite Bluetooth; &
+- Non ha un sistema di notifiche integrato;\newline
+- Non dispone di connettività Wi-Fi;\newline
+- Si può accedere ai dati solo tramite app mobile;\newline
+- Prezzo più elevato rispetto la concorrenza \\	\hline
+\end{tabularx}
+\end{center}
 
 \subsection{Potenziali entranti}
 
