@@ -1,42 +1,44 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (MiKTeX 21.7) (preloaded format=pdflatex 2021.7.24)  20 DEC 2021 12:06
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 21.12) (preloaded format=pdflatex 2021.12.14)  20 DEC 2021 21:38
 entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
 **./Report.tex
 (Report.tex
-LaTeX2e <2021-06-01> patch level 1
-L3 programming layer <2021-07-12>
-(C:\Users\Luca\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
-Document Class: article 2021/02/12 v1.4n Standard LaTeX document class
-(C:\Users\Luca\AppData\Local\Programs\MiKTeX\tex/latex/base\size12.clo
-File: size12.clo 2021/02/12 v1.4n Standard LaTeX file (size option)
+LaTeX2e <2021-11-15> patch level 1
+L3 programming layer <2021-11-22>
+(C:\Users\mazzo\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
+Document Class: article 2021/10/04 v1.4n Standard LaTeX document class
+(C:\Users\mazzo\AppData\Local\Programs\MiKTeX\tex/latex/base\size12.clo
+File: size12.clo 2021/10/04 v1.4n Standard LaTeX file (size option)
 )
-\c@part=\count182
-\c@section=\count183
-\c@subsection=\count184
-\c@subsubsection=\count185
-\c@paragraph=\count186
-\c@subparagraph=\count187
-\c@figure=\count188
-\c@table=\count189
+\c@part=\count183
+\c@section=\count184
+\c@subsection=\count185
+\c@subsubsection=\count186
+\c@paragraph=\count187
+\c@subparagraph=\count188
+\c@figure=\count189
+\c@table=\count190
 \abovecaptionskip=\skip47
 \belowcaptionskip=\skip48
 \bibindent=\dimen138
 )
-(C:\Users\Luca\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.sty
+(C:\Users\mazzo\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.sty
 Package: geometry 2020/01/02 v5.9 Page Geometry
 
-(C:\Users\Luca\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval.sty
+(C:\Users\mazzo\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval.sty
 Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
 \KV@toks@=\toks16
 )
-(C:\Users\Luca\AppData\Local\Programs\MiKTeX\tex/generic/iftex\ifvtex.sty
+(C:\Users\mazzo\AppData\Local\Programs\MiKTeX\tex/generic/iftex\ifvtex.sty
 Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 
-(C:\Users\Luca\AppData\Local\Programs\MiKTeX\tex/generic/iftex\iftex.sty
+(C:\Users\mazzo\AppData\Local\Programs\MiKTeX\tex/generic/iftex\iftex.sty
 Package: iftex 2020/03/06 v1.0d TeX engine tests
 ))
-\Gm@cnth=\count190
-\Gm@cntv=\count191
-\c@Gm@tempcnt=\count192
+\Gm@cnth=\count191
+\Gm@cntv=\count192
+\c@Gm@tempcnt=\count193
 \Gm@bindingoffset=\dimen139
 \Gm@wd@mp=\dimen140
 \Gm@odd@mp=\dimen141
@@ -47,75 +49,71 @@ Package: iftex 2020/03/06 v1.0d TeX engine tests
 \Gm@layoutvoffset=\dimen146
 \Gm@dimlist=\toks17
 
-(C:\Users\Luca\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.cfg))
-(C:\Users\Luca\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphicx.sty
-Package: graphicx 2020/12/05 v1.2c Enhanced LaTeX Graphics (DPC,SPQR)
+(C:\Users\mazzo\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.cfg))
+(C:\Users\mazzo\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphicx.sty
+Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
 
-(C:\Users\Luca\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphics.sty
+(C:\Users\mazzo\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphics.sty
 Package: graphics 2021/03/04 v1.4d Standard LaTeX Graphics (DPC,SPQR)
 
-(C:\Users\Luca\AppData\Local\Programs\MiKTeX\tex/latex/graphics\trig.sty
-Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+(C:\Users\mazzo\AppData\Local\Programs\MiKTeX\tex/latex/graphics\trig.sty
+Package: trig 2021/08/11 v1.11 sin cos tan (DPC)
 )
-(C:\Users\Luca\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\graphics.cf
-g
+(C:\Users\mazzo\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\graphics.c
+fg
 File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: pdftex.def on input line 107.
 
-(C:\Users\Luca\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\pdftex.def
+(C:\Users\mazzo\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\pdftex.def
 File: pdftex.def 2020/10/05 v1.2a Graphics/color driver for pdftex
 ))
 \Gin@req@height=\dimen147
 \Gin@req@width=\dimen148
-) (C:\Users\Luca\AppData\Local\Programs\MiKTeX\tex/latex/base\fontenc.sty
+) (C:\Users\mazzo\AppData\Local\Programs\MiKTeX\tex/latex/base\fontenc.sty
 Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
 )
-(C:\Users\Luca\AppData\Local\Programs\MiKTeX\tex/latex/base\inputenc.sty
+(C:\Users\mazzo\AppData\Local\Programs\MiKTeX\tex/latex/base\inputenc.sty
 Package: inputenc 2021/02/14 v1.3d Input encoding file
 \inpenc@prehook=\toks18
 \inpenc@posthook=\toks19
 )
-(C:\Users\Luca\AppData\Local\Programs\MiKTeX\tex/generic/babel\babel.sty
-Package: babel 2021/06/28 3.61 The Babel package
-
-(C:\Users\Luca\AppData\Local\Programs\MiKTeX\tex/generic/babel\babel.def
-File: babel.def 2021/06/28 3.61 Babel common definitions
-\babel@savecnt=\count193
+(C:\Users\mazzo\AppData\Local\Programs\MiKTeX\tex/generic/babel\babel.sty
+Package: babel 2021/11/29 3.67 The Babel package
+\babel@savecnt=\count194
 \U@D=\dimen149
 \l@unhyphenated=\language79
 
-(C:\Users\Luca\AppData\Local\Programs\MiKTeX\tex/generic/babel\txtbabel.def)
+(C:\Users\mazzo\AppData\Local\Programs\MiKTeX\tex/generic/babel\txtbabel.def)
 \bbl@readstream=\read2
-)
-\bbl@dirlevel=\count194
+\bbl@dirlevel=\count195
 
 *************************************
 * Local config file bblopts.cfg used
 *
-(C:\Users\Luca\AppData\Local\Programs\MiKTeX\tex/latex/arabi\bblopts.cfg
+(C:\Users\mazzo\AppData\Local\Programs\MiKTeX\tex/latex/arabi\bblopts.cfg
 File: bblopts.cfg 2005/09/08 v0.1 add Arabic and Farsi to "declared" options of
  babel
 )
-(C:\Users\Luca\AppData\Local\Programs\MiKTeX\tex/latex/babel-italian\italian.ld
-f
+(C:\Users\mazzo\AppData\Local\Programs\MiKTeX\tex/latex/babel-italian\italian.l
+df
 Language: italian 2020/05/21 v.1.4.04 Italian support for the babel system
-\it@lettering=\count195
-\it@doublequoteactive=\count196
-\it@ISOcompliance=\count197
+\it@lettering=\count196
+\it@doublequoteactive=\count197
+\it@ISOcompliance=\count198
 ))
-(C:\Users\Luca\AppData\Local\Programs\MiKTeX\tex/latex/etoolbox\etoolbox.sty
+(C:\Users\mazzo\AppData\Local\Programs\MiKTeX\tex/latex/etoolbox\etoolbox.sty
 Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count198
+\etb@tempcnta=\count199
 )
-(C:\Users\Luca\AppData\Local\Programs\MiKTeX\tex/latex/xurl\xurl.sty
+(C:\Users\mazzo\AppData\Local\Programs\MiKTeX\tex/latex/xurl\xurl.sty
 Package: xurl 2020/12/30 v 0.09a modify URL breaks
 
-(C:\Users\Luca\AppData\Local\Programs\MiKTeX\tex/latex/url\url.sty
+(C:\Users\mazzo\AppData\Local\Programs\MiKTeX\tex/latex/url\url.sty
 \Urlmuskip=\muskip16
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 ))
-(C:\Users\Luca\AppData\Local\Programs\MiKTeX\tex/latex/booktabs\booktabs.sty
+(C:\Users\mazzo\AppData\Local\Programs\MiKTeX\tex/latex/booktabs\booktabs.sty
 Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
 \heavyrulewidth=\dimen150
 \lightrulewidth=\dimen151
@@ -127,19 +125,19 @@ Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
 \cmidrulesep=\dimen157
 \cmidrulekern=\dimen158
 \defaultaddspace=\dimen159
-\@cmidla=\count199
-\@cmidlb=\count266
+\@cmidla=\count266
+\@cmidlb=\count267
 \@aboverulesep=\dimen160
 \@belowrulesep=\dimen161
-\@thisruleclass=\count267
-\@lastruleclass=\count268
+\@thisruleclass=\count268
+\@lastruleclass=\count269
 \@thisrulewidth=\dimen162
 )
-(C:\Users\Luca\AppData\Local\Programs\MiKTeX\tex/latex/tools\tabularx.sty
+(C:\Users\mazzo\AppData\Local\Programs\MiKTeX\tex/latex/tools\tabularx.sty
 Package: tabularx 2020/01/15 v2.11c `tabularx' package (DPC)
 
-(C:\Users\Luca\AppData\Local\Programs\MiKTeX\tex/latex/tools\array.sty
-Package: array 2021/04/20 v2.5e Tabular extension package (FMi)
+(C:\Users\mazzo\AppData\Local\Programs\MiKTeX\tex/latex/tools\array.sty
+Package: array 2021/10/04 v2.5f Tabular extension package (FMi)
 \col@sep=\dimen163
 \ar@mcellbox=\box50
 \extrarowheight=\dimen164
@@ -153,28 +151,27 @@ Package: array 2021/04/20 v2.5e Tabular extension package (FMi)
 \TX@old@col=\dimen167
 \TX@target=\dimen168
 \TX@delta=\dimen169
-\TX@cols=\count269
+\TX@cols=\count270
 \TX@ftn=\toks21
 )
-(C:\Users\Luca\AppData\Local\Programs\MiKTeX\tex/latex/wrapfig\wrapfig.sty
+(C:\Users\mazzo\AppData\Local\Programs\MiKTeX\tex/latex/wrapfig\wrapfig.sty
 \wrapoverhang=\dimen170
 \WF@size=\dimen171
-\c@WF@wrappedlines=\count270
+\c@WF@wrappedlines=\count271
 \WF@box=\box52
 \WF@everypar=\toks22
 Package: wrapfig 2003/01/31  v 3.6
 )
-(C:\Users\Luca\AppData\Local\Programs\MiKTeX\tex/latex/tex-gyre\tgtermes.sty
+(C:\Users\mazzo\AppData\Local\Programs\MiKTeX\tex/latex/tex-gyre\tgtermes.sty
 Package: tgtermes 2009/09/27 v1.2 TeX Gyre Termes as default roman family
 
-(C:\Users\Luca\AppData\Local\Programs\MiKTeX\tex/latex/kvoptions\kvoptions.sty
+(C:\Users\mazzo\AppData\Local\Programs\MiKTeX\tex/latex/kvoptions\kvoptions.sty
 Package: kvoptions 2020-10-07 v3.14 Key value format for package options (HO)
-
-(C:\Users\Luca\AppData\Local\Programs\MiKTeX\tex/generic/ltxcmds\ltxcmds.sty
+(C:\Users\mazzo\AppData\Local\Programs\MiKTeX\tex/generic/ltxcmds\ltxcmds.sty
 Package: ltxcmds 2020-05-10 v1.25 LaTeX kernel commands for general use (HO)
 )
-(C:\Users\Luca\AppData\Local\Programs\MiKTeX\tex/generic/kvsetkeys\kvsetkeys.st
-y
+(C:\Users\mazzo\AppData\Local\Programs\MiKTeX\tex/generic/kvsetkeys\kvsetkeys.s
+ty
 Package: kvsetkeys 2019/12/15 v1.18 Key value parser (HO)
 )))
 \@indexfile=\write3
@@ -184,13 +181,13 @@ Package: kvsetkeys 2019/12/15 v1.18 Key value parser (HO)
 Writing index file Report.idx
 LaTeX Font Info:    Trying to load font information for T1+qtm on input line 26
 .
-(C:\Users\Luca\AppData\Local\Programs\MiKTeX\tex/latex/tex-gyre\t1qtm.fd
+(C:\Users\mazzo\AppData\Local\Programs\MiKTeX\tex/latex/tex-gyre\t1qtm.fd
 File: t1qtm.fd 2009/09/25 v1.2 font definition file for T1/qtm
 )
-(C:\Users\Luca\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdft
-ex.def
-File: l3backend-pdftex.def 2021-07-12 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count271
+(C:\Users\mazzo\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdf
+tex.def
+File: l3backend-pdftex.def 2021-10-18 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count272
 \l__pdf_internal_box=\box53
 ) (Report.aux
 
@@ -249,29 +246,29 @@ LaTeX Font Info:    ... okay on input line 26.
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 
-(C:\Users\Luca\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mki
-i
+(C:\Users\mazzo\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mk
+ii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count272
+\scratchcounter=\count273
 \scratchdimen=\dimen172
 \scratchbox=\box54
-\nofMPsegments=\count273
-\nofMParguments=\count274
+\nofMPsegments=\count274
+\nofMParguments=\count275
 \everyMPshowfont=\toks23
-\MPscratchCnt=\count275
+\MPscratchCnt=\count276
 \MPscratchDim=\dimen173
-\MPnumerator=\count276
-\makeMPintoPDFobject=\count277
+\MPnumerator=\count277
+\makeMPintoPDFobject=\count278
 \everyMPtoPDFconversion=\toks24
 )
-(C:\Users\Luca\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-ba
-se.sty
+(C:\Users\mazzo\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-b
+ase.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 85.
 
-(C:\Users\Luca\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys.cf
-g
+(C:\Users\mazzo\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys.c
+fg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
 LaTeX Info: Redefining \it@ocap on input line 26.
@@ -281,6 +278,9 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 27.
  (section/1_executive_summary.tex) (section/2_problem_definition.tex
+[1
+
+{C:/Users/mazzo/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}]
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <12> on input line 3.
 LaTeX Font Info:    External font `cmex10' loaded for size
@@ -292,11 +292,9 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 3
 .
 
-(C:\Users\Luca\AppData\Local\Programs\MiKTeX\tex/latex/base\t1cmtt.fd
+(C:\Users\mazzo\AppData\Local\Programs\MiKTeX\tex/latex/base\t1cmtt.fd
 File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
-) [1
-
-{C:/Users/Luca/AppData/Local/MiKTeX/pdftex/config/pdftex.map}]
+)
 Overfull \hbox (3.71912pt too wide) in paragraph at lines 5--6
 []\T1/qtm/m/n/12 Questa in-no-va-zio-ne tec-no-lo-gi-ca, per-lo-me-no ini-zial-
 men-te, ha in-te-res-sa-to spe-cial-men-te le \T1/qtm/m/it/12 gran-
@@ -324,19 +322,17 @@ File: images/c3_rule.png Graphic file (type png)
 <use images/c3_rule.png>
 Package pdftex.def Info: images/c3_rule.png  used on input line 26.
 (pdftex.def)             Requested size: 227.62206pt x 128.02927pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
+[3 <./images/potnet.png>]
 LaTeX Font Info:    Trying to load font information for TS1+qtm on input line 3
 3.
-(C:\Users\Luca\AppData\Local\Programs\MiKTeX\tex/latex/tex-gyre\ts1qtm.fd
+
+(C:\Users\mazzo\AppData\Local\Programs\MiKTeX\tex/latex/tex-gyre\ts1qtm.fd
 File: ts1qtm.fd 2009/09/25 v1.2 font definition file for TS1/qtm
 )
-[3 <./images/potnet.png>]
-<images/value_proposition.png, id=23, 708.39656pt x 396.7322pt>
+<images/value_proposition.png, id=20, 708.39656pt x 396.7322pt>
 File: images/value_proposition.png Graphic file (type png)
 <use images/value_proposition.png>
-Package pdftex.def Info: images/value_proposition.png  used on input line 52.
+Package pdftex.def Info: images/value_proposition.png  used on input line 51.
 (pdftex.def)             Requested size: 455.24411pt x 254.96106pt.
 
 
@@ -347,17 +343,17 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 Package array Warning: Redefining primitive column l on input line 1.
 
 [4 <./images/c3_rule.png>]
-Overfull \hbox (2.91217pt too wide) in paragraph at lines 66--66
+Overfull \hbox (2.91217pt too wide) in paragraph at lines 67--67
  []|\T1/qtm/b/n/12 AZIENDA| 
  []
 
 
-Overfull \hbox (1.77005pt too wide) in paragraph at lines 66--66
+Overfull \hbox (1.77005pt too wide) in paragraph at lines 67--67
  []|\T1/qtm/b/n/12 PRODOTTO| 
  []
 
 
-Underfull \hbox (badness 10000) in alignment at lines 66--66
+Underfull \hbox (badness 10000) in alignment at lines 67--67
 [][][][][] 
  []
 
@@ -401,28 +397,27 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 4077 strings out of 478870
- 61445 string characters out of 2849310
- 391841 words of memory out of 3000000
- 21895 multiletter control sequences out of 15000+600000
+ 4458 strings out of 478659
+ 74563 string characters out of 2845919
+ 396102 words of memory out of 3000000
+ 22468 multiletter control sequences out of 15000+600000
  446202 words of font info for 57 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 57i,8n,66p,853b,396s stack positions out of 5000i,500n,10000p,200000b,80000s
-{C:/Users/Luca/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/tex-gyre/q-ts1.e
-nc}{C:/Users/Luca/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/tex-gyre/q-ec.e
-nc}{C:/Users/Luca/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/cm-super/cm-sup
-er-t1.enc}<C:/Users/Luca/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfo
-nts/cm/cmr10.pfb><C:/Users/Luca/AppData/Local/Programs/MiKTeX/fonts/type1/publi
-c/amsfonts/cm/cmr8.pfb><C:/Users/Luca/AppData/Local/Programs/MiKTeX/fonts/type1
-/public/tex-gyre/qtmb.pfb><C:/Users/Luca/AppData/Local/Programs/MiKTeX/fonts/ty
-pe1/public/tex-gyre/qtmbi.pfb><C:/Users/Luca/AppData/Local/Programs/MiKTeX/font
-s/type1/public/tex-gyre/qtmr.pfb><C:/Users/Luca/AppData/Local/Programs/MiKTeX/f
-onts/type1/public/tex-gyre/qtmri.pfb><C:/Users/Luca/AppData/Local/Programs/MiKT
-eX/fonts/type1/public/cm-super/sftt1000.pfb><C:/Users/Luca/AppData/Local/Progra
-ms/MiKTeX/fonts/type1/public/cm-super/sftt1200.pfb>
-Output written on Report.pdf (12 pages, 1045975 bytes).
+ 55i,8n,62p,841b,398s stack positions out of 5000i,500n,10000p,200000b,80000s
+{C:/Users/mazzo/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/tex-gyre/q-ts1.
+enc}{C:/Users/mazzo/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/tex-gyre/q-ec
+.enc} <C:\Users\mazzo\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\e
+ctt1000.pk> <C:\Users\mazzo\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dp
+i600\ectt1200.pk><C:/Users/mazzo/AppData/Local/Programs/MiKTeX/fonts/type1/publ
+ic/amsfonts/cm/cmr10.pfb><C:/Users/mazzo/AppData/Local/Programs/MiKTeX/fonts/ty
+pe1/public/amsfonts/cm/cmr8.pfb><C:/Users/mazzo/AppData/Local/Programs/MiKTeX/f
+onts/type1/public/tex-gyre/qtmb.pfb><C:/Users/mazzo/AppData/Local/Programs/MiKT
+eX/fonts/type1/public/tex-gyre/qtmbi.pfb><C:/Users/mazzo/AppData/Local/Programs
+/MiKTeX/fonts/type1/public/tex-gyre/qtmr.pfb><C:/Users/mazzo/AppData/Local/Prog
+rams/MiKTeX/fonts/type1/public/tex-gyre/qtmri.pfb>
+Output written on Report.pdf (12 pages, 1004565 bytes).
 PDF statistics:
- 101 PDF objects out of 1000 (max. 8388607)
+ 161 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  36 words of extra memory for PDF output out of 10000 (max. 10000000)
 

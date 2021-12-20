@@ -12,12 +12,12 @@
 
 \subsection{Descrizione generale}
 
-La soluzione che proponiamo è \textbf{PotNet} ed è un \textbf{dispositivo intelligente che supporta gli utenti nella crescita delle proprie piante}. In figura \ref{fig:potnet} è possibile vedere un primo prototipo che mostra il principale punto di forza di PotNet: l'\textbf{adattabilità}, che ne fa un dispositivo assolutamente \textit{smart}, insieme con la facilità di utilizzo.
+La soluzione che proponiamo è \textbf{PotNet}, un \textbf{dispositivo intelligente che interagisce con l'utente e lo supporta durante il ciclo di vita della propria pianta}. In figura \ref{fig:potnet} è possibile vedere un primo prototipo che mostra il principale punto di forza di PotNet: l'\textbf{adattabilità}, a cui si uniscono il suo essere \textit{smart} e la sua facilità di utilizzo.
 
-PotNet, infatti, si infila nei vasi comunemente presenti nelle abitazioni e, una volta a contatto con il terriccio, inizia a \textbf{monitorare i parametri vitali della pianta} che controlla.
-Dopo averlo connesso ad internet, tramite la sua interfaccia web o grazie all'integrazione con Telegram è possibile informare PotNet su quale sia la pianta in crescita nel vaso: ha così inizio il monitoraggio e l'utente sarà avvisato nel caso in cui uno dei parametri vitali della pianta superi i valori di norma.
+PotNet, infatti, si aggancia ai vasi comunemente presenti nelle abitazioni e, una volta configurato, grazie ai suoi numerosi sensori inizia a \textbf{monitorare e controllare i parametri vitali della pianta}.
+Dopo averlo connesso ad internet, tramite la sua interfaccia web o grazie all'integrazione con Telegram, è necessario informare PotNet su quale sia il tipo di pianta presente nel vaso: inizierà così a monitorare la pianta e avviserà l'utente nel caso in cui uno o più parametri si discosti troppo dai valori ottimali.
 
-Quando si ha voglia, inoltre, è possibile chiedere a PotNet lo stato della sua pianta e ricevere suggerimenti per una corretta crescita.
+Sarà sempre possibile richiedere lo stato della pianta o consigli su come migliorare il suo stato di salute tramite le numerose interfacce disponibili (assistente vocale, telegram, web UI). Inoltre, PotNet, invierà brevi report periodici per informare l'utente sull'andamento di salute della pianta.
 
 \subsection{La regola del C$^3$}
 
@@ -33,16 +33,15 @@ PotNet segue la \textbf{regola del C$^3$}:
 	\item \textbf{Controllo}\\
 	PotNet monitora continuamente tutti i parametri vitali della pianta e si accorge subito di qualche variazione o cambiamento significativo. Per ora, si controllano:
 	\begin{itemize}
-		\item \textit{temperatura} dell'ambiente che circonda la pianta;
-		\item \textit{umidità} del terreno;
-		\item \textit{luminosità} che arriva alla pianta.
+		\item \textit{temperatura e umidità} dell'ambiente che circonda la pianta;
+		\item \textit{quantità di luce} che arriva alla pianta.
 	\end{itemize}
 	
 	\item \textbf{Consigli}\\
-	PotNet mostra all'utente alcuni consigli personalizzati utili per trattare correttamente la sua pianta in modo che questi possa prendersene cura nel migliore dei modi.
+	PotNet invia all'utente alcuni consigli personalizzati utili per far crescere correttamente la sua pianta.
 	
 	\item \textbf{Comunicazione}\\
-	PotNet comunica con l'utente grazie a \textit{Telegram}, inviando immediatamente delle notifiche qualora sia richiesto l'intervento dell'utente (ad esempio perché il terreno è troppo asciutto e la pianta necessita di acqua). Inoltre, PotNet estende questo tipo di interazione grazie al fatto che è perfettamente integrabile con gli assistenti vocali\footnote{Nella versione prototipale di PotNet è stata scelta Alexa, ma è prevista anche l'integrazione con l'assistente vocale \textit{Google}}.
+	PotNet comunica con l'utente grazie a \textit{Telegram}, inviando immediatamente delle notifiche qualora sia richiesto il suo l'intervento (ad esempio quando la pianta è in un ambiente troppo freddo o troppo caldo). Inoltre, PotNet estende questo tipo di interazione integrandosi con gli assistenti vocali\footnote{Nella versione prototipale di PotNet è stata scelta Alexa, ma è prevista anche l'integrazione con l'assistente vocale \textit{Google}}.
 \end{itemize}
 
 \subsection{Proposizione di valore}
