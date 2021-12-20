@@ -17,9 +17,34 @@ Per il prodotto destinato alla vendita non utilizzeremo più una Raspberry PI, l
 
 \subsection{Software}
 
-A livello software, il dispositivo rileva i dati dei sensori ad intervalli prestabiliti e ne mantiene lo storico in memoria. Inoltre, si connette al server centrale il quale si occupa di far da tramite tra i dispositivi e le varie interfacce tramite cui l'utente può tenersi informato sullo stato della piante (Bot Telegram, Alexa, Web UI).\newline\newline Il software del server centrale, risiederà su un servizio come ad esempio Amazon AWS. Questo ci permetterà di avere un servizio affidabile e scalabile e di risparmiare soprattutto nella fase iniziale del progetto, in cui sarebbe insostenibile economicamente creare una nostra infrastruttura, ma senza rinunciare ad avere un servizio di qualità.
+A livello software, il dispositivo rileva i dati dei sensori ad intervalli prestabiliti e ne mantiene lo storico in memoria. Inoltre, si connette al server centrale il quale si occupa di far da tramite tra i dispositivi e le varie interfacce tramite cui l'utente può tenersi informato sullo stato della piante (Bot Telegram, Alexa, Web UI).\newline\newline Il software del server centrale risiederà su un servizio come ad esempio Amazon AWS. Questo ci permetterà di avere un servizio affidabile e scalabile e di risparmiare soprattutto nella fase iniziale del progetto, in cui sarebbe insostenibile economicamente creare una nostra infrastruttura, ma senza rinunciare ad avere un servizio di qualità.
 
 Il software necessario al funzionamento di PotNetBot, della skill di Alexa e della Web UI comunica con il server centrale per acquisire i dati richiesti dall'utente e permette al server centrale di notificare rapidamente l'utente in caso di valori fuori soglia. 
+
+\subsection{Prima architettura logica}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{images/logical_arch.png}
+	\caption{Prima architettura logica del sistema software}
+	\label{fig:logical_arch}
+\end{figure}
+
+La figura \ref{fig:logical_arch} mostra la primissima architettura logica di riferimento del sistema software:
+\begin{itemize}
+	\item \textbf{PotNetCore}: insieme di servizi in esecuzione sul dispositivo PotNet del cliente;\\
+	\url{https://github.com/LM-96/Greengers/tree/main/PotNetCore}
+	
+	\item \textbf{PotNetCentral}: server centrale (\textit{middleware});\\
+	\url{https://github.com/LM-96/Greengers/tree/main/PotNetCentral}
+	\item \textbf{PotNetUI}: interfaccia utente (generica);
+	
+	\item \textbf{PotNetAlexaSkill}: servizio per le funzionalità Alexa;
+	
+	\item \textbf{PotNetBot}: servizio per le funzionalità del bot Telegram;
+	
+	\item \textbf{PotNetBotClient}: interfaccia utente per il bot Telegram.
+\end{itemize}
+Tale architettura logica varrà impiegata in fase di prototipazione, insieme con i codici iniziali, ma nulla vieta che in fase di espansione del progetto software siano apportate modifiche.
 
 \subsubsection{Modularità}
 
