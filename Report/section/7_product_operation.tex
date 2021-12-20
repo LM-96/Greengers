@@ -29,7 +29,7 @@ Il software necessario al funzionamento di PotNetBot, della skill di Alexa e del
 	\label{fig:logical_arch}
 \end{figure}
 
-La figura \ref{fig:logical_arch} mostra la primissima architettura logica di riferimento del sistema software:
+La figura \ref{fig:logical_arch} mostra la primissima architettura logica di riferimento del sistema software, composto da più parti:
 \begin{itemize}
 	\item \textbf{PotNetCore}: insieme di servizi in esecuzione sul dispositivo PotNet del cliente;\\
 	\url{https://github.com/LM-96/Greengers/tree/main/PotNetCore}
@@ -44,7 +44,9 @@ La figura \ref{fig:logical_arch} mostra la primissima architettura logica di rif
 	
 	\item \textbf{PotNetBotClient}: interfaccia utente per il bot Telegram.
 \end{itemize}
-Tale architettura logica varrà impiegata in fase di prototipazione, insieme con i codici iniziali, ma nulla vieta che in fase di espansione del progetto software siano apportate modifiche.
+Tale architettura logica varrà impiegata in fase di prototipazione, insieme con i codici iniziali (in Kotin e NodeJS), ma nulla vieta che in fase di espansione del progetto software siano apportate modifiche.
+
+Inoltre, per le parti di codice in Java/Kotlin, è stata pensata la libreria \textit{PotConnectors}\footnote{https://github.com/LM-96/Greengers/tree/main/PotConnectors} per la gestione delle connessioni e piccole funzioni di utilità: tale libreria è utilizzata nelle prime build di \textit{PotNetCore} e \textit{PotNetCentral}.
 
 \subsubsection{Modularità}
 
