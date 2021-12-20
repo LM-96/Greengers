@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (MiKTeX 21.7) (preloaded format=pdflatex 2021.7.24)  20 DEC 2021 11:46
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (MiKTeX 21.7) (preloaded format=pdflatex 2021.7.24)  20 DEC 2021 11:55
 entering extended mode
 **./Report.tex
 (Report.tex
@@ -386,7 +386,7 @@ File: images/logical_arch.png Graphic file (type png)
 Package pdftex.def Info: images/logical_arch.png  used on input line 27.
 (pdftex.def)             Requested size: 455.24411pt x 303.50006pt.
  [11 <./images/logical_arch.png>]) (section/8_wbs_gantt.tex
-Underfull \hbox (badness 10000) in paragraph at lines 53--1
+Underfull \hbox (badness 10000) in paragraph at lines 54--1
 
  []
 
@@ -420,7 +420,7 @@ s/type1/public/tex-gyre/qtmr.pfb><C:/Users/Luca/AppData/Local/Programs/MiKTeX/f
 onts/type1/public/tex-gyre/qtmri.pfb><C:/Users/Luca/AppData/Local/Programs/MiKT
 eX/fonts/type1/public/cm-super/sftt1000.pfb><C:/Users/Luca/AppData/Local/Progra
 ms/MiKTeX/fonts/type1/public/cm-super/sftt1200.pfb>
-Output written on Report.pdf (12 pages, 1042039 bytes).
+Output written on Report.pdf (12 pages, 1045975 bytes).
 PDF statistics:
  101 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
