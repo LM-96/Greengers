@@ -22,36 +22,35 @@ A livello software, il dispositivo rileva i dati dei sensori ad intervalli prest
 
 Il software necessario al funzionamento di PotNetBot, della skill di Alexa e della Web UI comunica con il server centrale per acquisire i dati richiesti dall'utente e permettendo un sistema di notifiche rapido nel caso di valori fuori soglia. 
 
+\newpage
 \subsection{Prima architettura logica}
 
 La figura \ref{fig:logical_arch} mostra una prima architettura logica di riferimento del sistema software, composto da più parti:
 \begin{itemize}
-	\item \textbf{PotNetCore}: insieme di servizi in esecuzione sul dispositivo PotNet;\\
-	\url{https://github.com/LM-96/Greengers/tree/main/PotNetCore}
+	\item \textbf{PotNetCore}: insieme di servizi in esecuzione sul dispositivo PotNet;\footnote{\url{https://github.com/LM-96/Greengers/tree/main/PotNetCore}}
 	
-	\item \textbf{PotNetCentral}: server centrale (\textit{middleware});\\
-	\url{https://github.com/LM-96/Greengers/tree/main/PotNetCentral}
+	\item \textbf{PotNetCentral}: server centrale (\textit{middleware});\footnote{\url{https://github.com/LM-96/Greengers/tree/main/PotNetCentral}}
 	\item \textbf{PotNetUI}: interfaccia utente (generica);
 	
 	\item \textbf{PotNetAlexaSkill}: servizio per le funzionalità Alexa;
 	
-	\item \textbf{PotNetBot}: servizio per le funzionalità del bot Telegram;\\
-	\url{https://github.com/m-dilorenzi/prova-vaso-smart}
+	\item \textbf{PotNetBot}: servizio per le funzionalità del bot Telegram;\footnote{\url{https://github.com/m-dilorenzi/prova-vaso-smart}}
 	
 	\item \textbf{PotNetBotClient}: interfaccia utente per il bot Telegram.
 \end{itemize}
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[scale=0.5]{images/logical_arch.pdf}
+	\includegraphics[scale=0.8]{images/logical_arch.pdf}
 	\caption{Prima architettura logica del sistema software}
 	\label{fig:logical_arch}
 \end{figure}
 
 Tale architettura logica verrà impiegata in fase di prototipazione, insieme ai sorgenti principali (in Kotin e NodeJS), senza precludere però la possibilità di successive modifiche in una fase più avanzata.
 
-Inoltre, per le parti di codice in Java/Kotlin, è stata pensata la libreria \textit{PotConnectors}\footnote{https://github.com/LM-96/Greengers/tree/main/PotConnectors} per la gestione delle connessioni e piccole funzioni di utilità: tale libreria è utilizzata nelle prime build di \textit{PotNetCore} e \textit{PotNetCentral}.
+Inoltre, per le parti di codice in Java/Kotlin, è stata pensata la libreria \textit{PotConnectors}\footnote{\url{https://github.com/LM-96/Greengers/tree/main/PotConnectors}} per la gestione delle connessioni e piccole funzioni di utilità: tale libreria è utilizzata nelle prime build di \textit{PotNetCore} e \textit{PotNetCentral}.
 
+\newpage
 \subsubsection{Modularità}
 
 Tutte le parti software sono state pensate e realizzate per essere modulari. In questo modo, il tempo per aggiungere, modificare o migliorare le funzionalità sarà il più breve possibile e permetterà al team di sviluppo di intervenire tempestivamente per risolvere eventuali problemi o introdurre funzionalità richieste dai clienti.
