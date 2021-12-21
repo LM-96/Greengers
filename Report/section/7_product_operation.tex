@@ -1,7 +1,7 @@
 \newpage
 \section{Funzionamento del prodotto}
 
-PotNet è dal punto di vista tecnologico un prodotto relativamente semplice da realizzare e che non richiede particolari tecnologie hardware o software. 
+Dal punto di vista tecnologico, PotNet è un prodotto relativamente semplice da realizzare e che non richiede particolari tecnologie hardware o software. 
 
 \subsection{Hardware}
 
@@ -14,11 +14,11 @@ Il prototipo fisico realizzato, ha previsto l'utilizzo dei seguenti componenti:
 	\item \textbf{Batteria da 5000mAh[5€]:} per poter utilizzare il dispositivo senza doverlo tenere sempre collegato alla corrente;
 \end{itemize}
 
-Per il prodotto destinato alla vendita non utilizzeremo più una Raspberry PI, la quale ha un costo, potenza computazionale e un consumo decisamente più alti di quelli a noi necessari. Si renderebbe quindi necessaria la progettazione e realizzazione di una board ad hoc con i sensori già integrati in essa. In questo modo si andrebbero a ridurre notevolmente i costi di produzione, l'ingombro e il consumo energetico. A sua volta, anche la capacità della batteria potrebbe essere ridotta, contenendo ancor di più le dimensioni, il peso e il costo del prodotto. PotNet risulterebbe grande meno della metà del prototipo (indicativamente 6 x 3 x 1.5 cm), un peso inferiore ai 200g e un'autonomia stimata di circa 14-20 giorni.
+Per il prodotto destinato alla vendita non utilizzeremo più una Raspberry PI, la quale ha un costo, potenza computazionale e un consumo decisamente più alti di quelli a noi necessari. Si renderebbe quindi indispensabile la progettazione e realizzazione di una board ad hoc con i sensori già integrati in essa. In questo modo si andrebbero a ridurre notevolmente i costi di produzione, l'ingombro e il consumo energetico. A sua volta, anche la capacità della batteria potrebbe essere ridotta, contenendo ancor di più le dimensioni, il peso e il costo del prodotto. PotNet risulterebbe grande meno della metà del prototipo (indicativamente 6 x 3 x 1.5 cm), con un peso inferiore ai 200g e un'autonomia stimata di circa 14-20 giorni.
 
 \subsection{Software}
 
-A livello software, il dispositivo rileva i dati dei sensori ad intervalli prestabiliti e ne mantiene lo storico in memoria. Inoltre, si connette al server centrale il quale si occupa di far da tramite tra i dispositivi e le varie interfacce tramite cui l'utente può tenersi informato sullo stato della pianta (Bot Telegram, Alexa, Web UI).\newline\newline Il software del server centrale risiederà su un servizio come ad esempio Amazon AWS. Questo ci permetterà di avere un servizio affidabile, scalabile e di risparmiare soprattutto nella fase iniziale del progetto, in cui sarebbe insostenibile economicamente creare una nostra infrastruttura, ma senza rinunciare ad avere un servizio di qualità.
+A livello software, il dispositivo rileva i dati dei sensori ad intervalli prestabiliti e ne mantiene lo storico in memoria. Inoltre, si connette al server centrale il quale si occupa di far da tramite tra i dispositivi e le varie interfacce attraverso cui l'utente può tenersi informato sullo stato della pianta (Bot Telegram, Alexa, Web UI).\newline\newline Il software del server centrale risiederà su un servizio come ad esempio Amazon AWS. Questa scelta ci permetterà di avere un servizio affidabile, scalabile e di risparmiare soprattutto nella fase iniziale del progetto (in cui la creazione di un'infrastruttura proprietaria sarebbe eccessivamente gravosa) ma senza rinunciare ad avere un servizio di qualità.
 
 Il software necessario al funzionamento di PotNetBot, della skill di Alexa e della Web UI comunica con il server centrale per acquisire i dati richiesti dall'utente e permettendo un sistema di notifiche rapido nel caso di valori fuori soglia. 
 
